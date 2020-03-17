@@ -2,6 +2,7 @@
 title: Tjingtjong kines var det du som fes?
 author: Jonathan Rittmo
 date: '2020-03-17'
+draft: true
 slug: tjingtjong-kines-var-det-du-som-fes
 categories: []
 tags: []
