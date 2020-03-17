@@ -1,0 +1,49 @@
+---
+authors:
+- admin
+bio: Broad interests from science to science communication to poetry.
+education:
+  courses:
+  - course: M.Sc. in Human Cognitive Neuropsychology
+    institution: Univeristy of Edinburgh
+    year: 2020
+  - course: B.Sc. (?) in Statistics
+    institution: University of Gothenburg
+    year: 2020
+  - course: B.Sc. in Cognitive Science
+    institution: University of Gothenburg
+    year: 2018
+email: ""
+interests:
+- Applied Statistics
+- Neuropsychology
+- Open Science
+- Methodology
+- Meta-Science
+name: Jonathan Rittmo
+organizations:
+- name: University of Edinburgh
+  url: ""
+role: M.Sc. Candidate in Human Cognitive Neuropsychology
+social:
+- icon: envelope
+  icon_pack: fas
+  link: '#contact'
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/AljosjaK
+#- icon: google-scholar
+#  icon_pack: ai
+#  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+- icon: github
+  icon_pack: fab
+  link: https://github.com/AljosjaK
+superuser: true
+user_groups:
+- Researchers
+- Visitors
+---
+
+The moon eats our ears and the void our eyes
+
+The flies had been lying dead for a long while after the spread of the virus.
