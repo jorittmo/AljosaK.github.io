@@ -24,7 +24,7 @@ name: Jonathan Rittmo
 organizations:
 - name: University of Edinburgh
   url: ""
-role: M.Sc. Candidate in Human Cognitive Neuropsychology
+role: M.Sc. in Human Cognitive Neuropsychology
 social:
 - icon: envelope
   icon_pack: fas

@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "225071192",
+    "hash" : "0",
     "id" : "B2175F47",
-    "lastKnownWriteTime" : 1584451613,
-    "last_content_update" : 1584451613378,
+    "lastKnownWriteTime" : 1584456425,
+    "last_content_update" : 1584456425156,
     "path" : "C:/Users/jritt/Google Drive/Website/AljosaK.github.io/content/post/2020-03-17-r-rmarkdown.Rmd",
     "project_path" : "content/post/2020-03-17-r-rmarkdown.Rmd",
     "properties" : {
-        "cursorPosition" : "4,11",
+        "cursorPosition" : "25,42",
         "scrollLine" : "0"
     },
     "read_only" : false,
