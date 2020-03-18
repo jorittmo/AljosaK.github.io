@@ -1,12 +1,12 @@
 ---
-abstract: 'The main research questions for this project are: which are the main statistical 
+abstract: The main research questions for this project are which are the main statistical 
   methods used in single-case studies over the last ten years? How do the methods compare and 
   what does their power curves look like? Can a multivariate approach to detecting dissociations 
   be developed and would a power advantage to its univariate counterpart be found? Would such 
   method more reliably measure the underlying contructs we believe to have found? To what extent 
   does the winner’s curse affect neuropsychology? How would the distribution of corrected effect 
-  sizes look? All the above form the basis of the more general question: how can we improve the 
-  validity of neuropsychology?' 
+  sizes look? All the above form the basis of the more general question how can we improve the 
+  validity of neuropsychology? 
 authors:
 - admin
 date: "2020-08-29T00:00:00Z"
