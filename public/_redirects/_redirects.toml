@@ -1,0 +1,3 @@
+https://jorittmo.netlify.com/* https://jorittmo.rbind.io/:splat 301!
+http://jorittmo.netlify.com/* https://jorittmo.rbind.io/:splat 301!
+http://jorittmo.rbind.io/*    https://jorittmo.rbind.io/:splat  301!
