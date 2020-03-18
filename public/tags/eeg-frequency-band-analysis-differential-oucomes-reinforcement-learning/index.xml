@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>EEG, Frequency band analysis, Differential Oucomes, Reinforcement Learning | Academic</title>
+    <link>/tags/eeg-frequency-band-analysis-differential-oucomes-reinforcement-learning/</link>
+      <atom:link href="/tags/eeg-frequency-band-analysis-differential-oucomes-reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>EEG, Frequency band analysis, Differential Oucomes, Reinforcement Learning</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>EEG, Frequency band analysis, Differential Oucomes, Reinforcement Learning</title>
+      <link>/tags/eeg-frequency-band-analysis-differential-oucomes-reinforcement-learning/</link>
+    </image>
+    
+    <item>
+      <title>Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect</title>
+      <link>/publication/cogdiss/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>/publication/cogdiss/</guid>
+      <description>&lt;p&gt;#&lt;div class=&#34;alert alert-note&#34;&gt;&lt;/p&gt;
+  &lt;div&gt;
+    #Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+#
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h1 id=&#34;supplementary-notes-can-be-added-here-including-code-and-mathhttpssourcethemescomacademicdocswriting-markdown-latex&#34;&gt;Supplementary notes can be added here, including 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;code and math&lt;/a&gt;.&lt;/h1&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

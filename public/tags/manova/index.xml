@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MANOVA | Jonathan Ö. Rittmo || Blog</title>
+    <link>/tags/manova/</link>
+      <atom:link href="/tags/manova/index.xml" rel="self" type="application/rss+xml" />
+    <description>MANOVA</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>MANOVA</title>
+      <link>/tags/manova/</link>
+    </image>
+    
+    <item>
+      <title>MANOVA and its contingencies: on the relation between power and correlation - Can the utilisation of multivariate analyses alleviate the power crisis in neuropsychology?</title>
+      <link>/publication/statthesis/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/statthesis/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

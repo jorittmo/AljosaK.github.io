@@ -1,13 +1,13 @@
 ---
 authors:
 - admin
-bio: Broad interests from science to science communication to poetry.
+bio: Interests spanning meta-science &rarr; normal science &rarr; science communication &rarr; poetry &rarr; absurdity.
 education:
   courses:
   - course: M.Sc. in Human Cognitive Neuropsychology
     institution: Univeristy of Edinburgh
     year: 2020
-  - course: B.Sc. (?) in Statistics
+  - course: B.Sc. in Statistics
     institution: University of Gothenburg
     year: 2020
   - course: B.Sc. in Cognitive Science
@@ -20,7 +20,8 @@ interests:
 - Open Science
 - Methodology
 - Meta-Science
-name: Jonathan Rittmo
+- Literature
+name: Jonathan Ö. Rittmo
 organizations:
 - name: University of Edinburgh
   url: ""
@@ -44,6 +45,7 @@ user_groups:
 - Visitors
 ---
 
-The moon eats our ears and the void our eyes
-
-The flies had been lying dead for a long while after the spread of the virus.
+Brain damaged brain student writing about methodological and statistical issues in cognitive neuroscience.
+As well as various other interesting topics. If I feel inclined I might write more technical 
+posts and if you're real unlucky there might even slip in some fiction reviews. I will only post
+about my mental fatigue when I have the energy. 

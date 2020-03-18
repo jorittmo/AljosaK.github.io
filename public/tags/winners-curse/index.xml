@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Winner&#39;s Curse | Academic</title>
+    <title>Winner&#39;s Curse | Jonathan Ö. Rittmo || Blog</title>
     <link>/tags/winners-curse/</link>
       <atom:link href="/tags/winners-curse/index.xml" rel="self" type="application/rss+xml" />
     <description>Winner&#39;s Curse</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 29 Aug 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Winner&#39;s Curse</title>
       <link>/tags/winners-curse/</link>
     </image>
+    
+    <item>
+      <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
+      <link>/publication/neuropsychdiss/</link>
+      <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/neuropsychdiss/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>The Curious Case of the Winner&#39;s Curse</title>
