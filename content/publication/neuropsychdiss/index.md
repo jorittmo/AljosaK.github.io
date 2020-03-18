@@ -9,7 +9,7 @@ abstract: The main research questions for this project are which are the main st
   validity of neuropsychology? 
 authors:
 - admin
-date: "2020-01-12T00:00:00Z"
+date: "2020-01-30T00:00:00Z"
 doi: ""
 featured: false
 links:
@@ -31,7 +31,7 @@ title: 'Single Case Neuropsychology: validity and reliability in a power-wise pi
 url_code: ""
 url_dataset: ""
 url_pdf: ""
-url_poster: ""
+url_poster: "poster.pdf"
 url_project: ""
 url_slides: ""
 url_source: ""

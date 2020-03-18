@@ -8,77 +8,22 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/7/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/dissociation/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/hottelings-t2/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/monte-carlo/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/monte-carlo-simulations/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/power/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/neuropsychdiss/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/winners-curse/</loc>
-    <lastmod>2020-08-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
+    <loc>/tags/monte-carlo/</loc>
+    <lastmod>2020-03-17T14:48:48+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
+    <lastmod>2020-03-17T14:48:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/power/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
@@ -93,8 +38,63 @@
   </url>
   
   <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-17T14:48:48+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/the-curious-case-of-the-winner-s-curse/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/winners-curse/</loc>
+    <lastmod>2020-03-17T14:48:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/7/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dissociation/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/hottelings-t2/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/monte-carlo-simulations/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/neuropsychdiss/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -143,6 +143,11 @@
   </url>
   
   <url>
+    <loc>/tags/emotional-contagion/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/forced-choice-task/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
@@ -153,12 +158,12 @@
   </url>
   
   <url>
-    <loc>/publication/cogdiss/</loc>
+    <loc>/tags/operant-learning/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/reinforcement-learning/</loc>
+    <loc>/publication/cogdiss/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications | Jonathan Ö. Rittmo || Blog</title>
+    <title>dissertations | Jonathan Ö. Rittmo || Blog</title>
     <link>/publication/</link>
       <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
-    <description>Publications</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 29 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <description>dissertations</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>Publications</title>
+      <title>dissertations</title>
       <link>/publication/</link>
     </image>
     
     <item>
       <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
       <link>/publication/neuropsychdiss/</link>
-      <pubDate>Sat, 29 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/publication/neuropsychdiss/</guid>
       <description></description>
     </item>

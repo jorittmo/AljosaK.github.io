@@ -40,8 +40,9 @@ tags:
 - EEG
 - Frequency band analysis
 - Differential Oucomes Effect
-- Reinforcement Learning
+- Operant Learning
 - Forced Choice task
+- Emotional Contagion
 title: Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect
 url_code: ""
 url_dataset: ""

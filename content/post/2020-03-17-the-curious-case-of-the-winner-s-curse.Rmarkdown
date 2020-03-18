@@ -32,7 +32,6 @@ library(tidyverse)
 ```
 
 
-
 ```{r standard-plot, out.width='100%', fig.cap='Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.', fig.align='left', fig.height=5, echo=FALSE}
 load("C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/wc_def_ncon5-70.RData")
 

@@ -46,6 +46,6 @@ user_groups:
 ---
 
 Brain damaged brain student writing about methodological and statistical issues in cognitive neuroscience, 
-as well as various other related topics. If I feel inclined I might write more technical 
-posts and if you're real unlucky there might even slip in some fiction reviews. I will only post
+as well as other related topics. If I feel inclined I might write more technical 
+posts and if you're real unlucky there might even slip in some fiction book reviews. I will only post
 about my mental fatigue when I have the energy. 
