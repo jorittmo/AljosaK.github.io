@@ -18,18 +18,18 @@ featured: no
 output:
   blogdown::html_page:
     dev: 'svg'
-image:
+image: 
   caption: ''
   focal_point: ''
   preview_only: no
 projects: []
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 options(knitr.table.format = "html") 
 library(tidyverse)
 ```
+
 
 
 ```{r standard-plot, out.width='100%', fig.cap='Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.', fig.align='left', fig.height=5, echo=FALSE}
@@ -51,3 +51,5 @@ ggplot(wc, aes(x = deficit, y = ave_over_est, color=ncon)) +
                      palette = 2,
                      direction = -1)
 ```
+
+
