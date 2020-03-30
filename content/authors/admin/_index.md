@@ -17,7 +17,7 @@ email: ""
 interests:
 - Applied Statistics
 - Neuropsychology
-- Open Science
+- Transparent Research
 - Methodology
 - Meta-Science
 - Literature
