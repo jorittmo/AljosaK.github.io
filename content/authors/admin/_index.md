@@ -4,10 +4,10 @@ authors:
 bio: Interests spanning meta-science &rarr; normal science &rarr; science communication &rarr; poetry &rarr; absurdity.
 education:
   courses:
-  - course: M.Sc. in Human Cognitive Neuropsychology
+  - course: M.Sc. in Human Cognitive Neuropsychology (Expected in August)
     institution: Univeristy of Edinburgh
     year: 2020
-  - course: B.Sc. in Statistics
+  - course: B.Sc. in Statistics (Recently applied)
     institution: University of Gothenburg
     year: 2020
   - course: B.Sc. in Cognitive Science

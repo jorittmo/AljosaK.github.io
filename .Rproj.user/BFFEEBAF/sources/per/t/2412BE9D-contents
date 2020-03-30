@@ -1,0 +1,147 @@
+rm(list=ls())
+library(tictoc)
+library(parallel)
+library(tidyverse)
+
+
+# win_sim <- function (nsim, def, ncon) {
+# 
+# deficit <- 0
+# for (i in 1:nsim){
+#   # Simulate obs
+#   x <- rnorm(ncon + 1)
+# 
+#   # Inflict deficit
+#   pat <- x[1]-def
+# 
+#   # Name the rest of them controls
+#   controls <- x[2:ncon+1]
+# 
+#   # Crawford & Howell (1998) formula to get t-value
+#   t.val <- (pat-mean(controls))/(sd(controls)*sqrt((length(controls)+1)/length(controls)))
+# 
+#   # Get probability from t dist
+#   p <- pt(t.val, df = length(controls)-1)
+# 
+#   # Save all case observations where a deficit has been detected
+#   deficit[i] <- ifelse(p<0.05, pat, NA)
+# }
+# 
+# # Get the average overestimation (median more reliable than mean bc skewness)
+# return(-def - median(deficit, na.rm = TRUE))
+# 
+# }
+
+
+win_sim_m <- function (nsim, def, ncon) {
+  
+  ranmat <- matrix(rnorm((ncon+1)*nsim), nrow= nsim, ncol = ncon +1)
+  
+  cl = makeCluster(4, type = "PSOCK")
+  on.exit(stopCluster(cl))
+  
+  med_def <- mean(parApply(cl, ranmat, 1, 
+                             function(x) { # Inflict deficit on first element and take the others as "controls"
+                               if (pt(((x[1]-def) - mean(x[2:ncon+1]))/(sd(x[2:ncon+1])*sqrt(length(x)/(length(x)-1))), df =  length(x)-2)<0.05) {
+                                 (x[1]-def)
+                               } else {
+                                 NA
+                               }
+                             }), 
+                    na.rm = TRUE) # Take the median of all significant deficits 
+  
+  return(- def -med_def) # Return average over estimation
+}
+
+
+
+sim_over_n <- function (nsim, def, min_ncon, max_ncon){
+  
+  med_oe <- 0
+  ncon <- seq(from = min_ncon, to = max_ncon, by =5)
+  for (i in 1:length(ncon)) {
+    
+    med_oe[i] <- win_sim_m(nsim, def, ncon[i])
+    
+  }
+  
+  return(med_oe)
+  
+}
+
+
+sim_over_def <- function (nsim, ncon, min_def, max_def){
+  
+  med_oe <- 0
+  def <- seq(from = min_def, to = max_def, length.out = 20)
+  for (i in 1:length(def)) {
+    
+    med_oe[i] <- win_sim_m(nsim, def[i], ncon)
+    
+  }
+  
+  return(med_oe)
+  
+}
+
+
+win_curse_def <- data.frame(deficit = seq(from = 1, to = 4, length.out = 20),
+                            ncon_5 = sim_over_def(10^4, ncon=  5, 1, 4),
+                            ncon_10 = sim_over_def(10^4, ncon = 10, 1, 4),
+                            ncon_15 = sim_over_def(10^4, ncon = 15, 1, 4),
+                            ncon_20 = sim_over_def(10^4, ncon = 20, 1, 4),
+                            ncon_25 = sim_over_def(10^4, ncon = 25, 1, 4))
+
+
+win_curse_tidy_def_hc <- win_curse_def %>% pivot_longer(-deficit,
+                                                 names_to = "ncon",
+                                                 values_to = "ave_over_est")
+
+
+ggplot(win_curse_tidy_def_hc, aes(x = deficit, y = ave_over_est, color=ncon)) +
+  geom_line(size = 1) +
+  labs(x = "Deficit (in SD)", y = "Average over-estimation") +
+  theme_light() +
+  theme(legend.position="top")+
+  scale_color_discrete(name = "Control sample size",
+                       limits = c("ncon_5", "ncon_10", "ncon_15", "ncon_20", "ncon_25"),
+                       labels = c("5", "10", "15", "20", "25"))
+
+
+
+
+
+winners_curse <- data.frame(controls = seq(from = 5, to = 100, by =5),
+                            sd_1 = sim_over_n(10^6, def=  1, 5, 100),
+                            sd_2 = sim_over_n(10^6, def = 2, 5, 100),
+                            sd_3 = sim_over_n(10^6, def = 3, 5, 100),
+                            sd_4 = sim_over_n(10^6, def = 4, 5, 100))
+  
+  
+
+win_curse_tidy <- winners_curse %>% pivot_longer(-controls,
+                                                names_to = "deficit",
+                                                values_to = "ave_over_est")
+
+ggplot(win_curse_tidy, aes(x = controls, y = ave_over_est, color=deficit)) +
+  geom_line(size = 1) +
+  labs(x = "Control sample size", y = "Average over estimation") +
+  theme_light() +
+  scale_color_discrete(name = "Deficit", labels = c("1 SD", "2 SD", "3 SD", "4 SD"))
+
+
+
+load("C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/wc_def_ncon5-70.RData")
+
+wc <- win_curse_tidy_def %>% filter(ncon == "ncon_5" | ncon == "ncon_15" | ncon == "ncon_25" | ncon == "ncon_70")   
+
+ggplot(wc, aes(x = deficit, y = ave_over_est, color=ncon)) +
+  geom_line(size = 0.8) +
+  labs(x = "Deficit (in SD)", y = "Average over-estimation (median)") +
+  theme_classic() +
+  theme(legend.position=c(0.5, 0.98),
+        legend.direction = "horizontal",
+        legend.box.spacing = unit(0, "cm")) +
+  scale_color_discrete(name = "Control sample size",
+                       limits = c("ncon_5", "ncon_15", "ncon_25", "ncon_70"),
+                       labels = c("5", "15", "25", "70"))
