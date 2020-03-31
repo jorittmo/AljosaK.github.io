@@ -2,16 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1585159914580.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3891114350",
+    "hash" : "0",
     "id" : "2412BE9D",
     "lastKnownWriteTime" : 1581532379,
-    "last_content_update" : 1581532379,
+    "last_content_update" : 1585642588027,
     "path" : "C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/Simple simulation of winners curse.R",
     "project_path" : null,
     "properties" : {
+        "cursorPosition" : "124,0",
+        "scrollLine" : "106"
     },
     "read_only" : false,
     "read_only_alternatives" : [

@@ -1,0 +1,1120 @@
+---
+title: 'Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task'
+author:
+  - name: Jonathan Rittmo
+    email: j.rittmo@gmail.com
+    affiliation: UOE
+  - name: Rickard Carlsson
+    email: rickard.carlsson90@gmail.com
+    affiliation: GU
+  - name: Pierre Gander
+    email: pierre.gander@ait.gu.se
+    affiliation: GU
+  - name: Robert Lowe
+    email: robert.lowe@ait.gu.se
+    affiliation: GU
+    footnote: 1
+address:
+  - code: UOE
+    address: School of Philosophy, Psychology and Language Sciences, University of Edinburgh, Edinburgh, UK
+  - code: GU
+    address: Department of Applied IT, University of Gothenburg, Gothenburg, Sweden
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+abstract: |
+  The findings of differential outcomes training procedures in controlled stimulusresponse learning settings have been explained through    theorizing two processes of response control. These processes concern: i) a stimulus-response route, and, ii) an outcome expectancy route through which valuations of stimuli (typically auditory or visual) may be represented. Critically, under certain contingencies of learning, the interaction of these two processes enables a transfer of knowledge. Transfer is hypothesized to occur via implicit inference for response selection given novel stimulus-response pairings. In this article, we test this transfer of knowledge, previously only examined in individual settings, in novel social settings. We find that participants are able to achieve transfer of knowledge and suggest they achieve this through vicariously learning the differential valuations of stimuli made by the (confederate) ‘other’ involved in the task. We test this effect under two experimental conditions through manipulation of the information made available to participants observing the confederate other’s choices. The results of EEG recordings are, additionally, evaluated and discussed in the context of social signalling and emotional and cognitive empathy. We also consider implications for clinical and technological social learning settings.
+  
+journal: "Acta Psychologica"
+date: "`r Sys.Date()`"
+bibliography: refs.bib
+#linenumbers: true
+numbersections: true
+appendix: appendix.tex
+csl: elsevier-harvard.csl
+link-citations: yes
+linkcolor: blue
+fig_caption: yes
+keywords: |
+  affect; differential outcomes training; inference; knowledge transfer
+header-includes: |
+  \usepackage [ table ]{ xcolor }
+  \usepackage{setspace}\onehalfspacing
+  \usepackage{hyperref}
+  \usepackage[utf8]{inputenc}
+  \def\tightlist{}
+  \usepackage{float}
+  \floatplacement{figure}{H}
+  \usepackage{graphicx}
+output: 
+  rticles::elsevier_article:
+        latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(tidyverse)
+library(lsr)
+library(rstatix)
+library(psych)
+
+# Get data from experiment 1 (hand written comments etc making set unstructured deleted by hand)
+exp1 <- readxl::read_excel("data/cleaned_exp1_data.xlsx")
+
+# Get performance/behavioural data from experiment 2, see the commented code below for complete data wrangling 
+load("data/perf_data.Rdata")
+
+# Get questionnaire data from experiment 2
+load("data/exp2_quest.Rdata")
+
+# Uncomment for complete data wrangling process of each participant of experiment 2
+
+# Below I set up the cleaning for the first participant to generate a dataframe to which each following particpant is binded 
+
+# readxl::read_excel(paste0("data/Subject 01.xls.xlsx")) %>%
+#   select(Condition, Stage, Trial, Outcome) %>%
+#   mutate(Outcome = ifelse(Outcome>0, 1, 0)) %>%
+#   filter(Stage !=2 & Trial<46 & Trial>15) %>%      # Filters out the first 5 of stage 3 and last 5 of stage 1 
+#   group_by(Condition, Stage) %>%
+#   summarise(Out_sum_f5 = sum(Outcome)) %>%         # Creates the sum of the last and the first 5 stages
+#   mutate(Subject = 1) -> last_first_five
+# 
+# sub <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", 10:33)
+# 
+  ## Below a loop does everything as for the  first participant and then bind the frames
+
+# for(i in 2:33) {
+#   
+#   x <- readxl::read_excel(paste0("data/Subject ",sub[i],".xls.xlsx"))
+#   
+#   x %>%
+#     select(Condition, Stage, Trial, Outcome) %>%
+#     mutate(Outcome = ifelse(Outcome>0, 1, 0)) %>%
+#     filter(Stage !=2 & Trial<46 & Trial>15) %>%
+#     group_by(Condition, Stage) %>%
+#     summarise(Out_sum_f5 = sum(Outcome)) %>%
+#     mutate(Subject = i)  -> x
+#   
+#   last_first_five <- rbind(last_first_five, x)
+#   
+#   rm(x)
+# }
+# 
+# last_first_five %>%
+#   mutate(type_task = ifelse(Condition <3, "Individual", "Social")) %>%
+#   mutate(type_out = ifelse(Condition ==1 | Condition == 3, "DOT", "NDOT")) -> last_first_five
+# 
+# #  Below the same principles are applied as above, but summarising the total score for each participant
+
+# readxl::read_excel(paste0("data/Subject 01.xls.xlsx")) %>%
+#   select(Condition, Stage, Outcome) %>%
+#   mutate(Outcome = ifelse(Outcome>0, 1, 0)) %>%
+#   filter(Stage !=2) %>%
+#   group_by(Condition, Stage) %>%
+#   summarise(Out_sum_tot = sum(Outcome)) %>%         # Creates the sum of all the trials
+#   mutate(Subject = 1) -> perf_data
+# 
+# for(i in 2:33) {
+#   
+#   x <- readxl::read_excel(paste0("data/Subject ",sub[i],".xls.xlsx"))
+#   
+#   x %>%
+#     select(Condition, Stage, Outcome) %>%
+#     mutate(Outcome = ifelse(Outcome>0, 1, 0)) %>%
+#     filter(Stage !=2) %>%
+#     group_by(Condition, Stage) %>%
+#     summarise(Out_sum_tot = sum(Outcome)) %>%
+#     mutate(Subject = i) -> x
+#   
+#   perf_data <- rbind(perf_data, x)
+#   
+#   rm(x)
+# }
+# 
+# perf_data <- right_join(last_first_five, perf_data) # Joining the dataset with the total score and the first/last five
+
+```
+
+Introduction
+==========================
+
+Differential outcomes training (DOT) is a well-studied procedure for evaluating the
+learning capabilities of humans and non-human animals on forced choice tasks and where
+rewarding outcomes differ according to the trial-specific preceding cue stimulus. 
+The procedure concerns presenting to subjects, on each trial, a stimulus 
+shortly followed bytwo or more behavioural response options for which the ‘correct’ response produces an
+outcome. However, in contrast to classical behavioural experiments whereby the same
+reinforcing outcome is presented following correct stimulus cued responses, DOT entails
+rewarding (or at least non-negative) outcomes specific (differential) to a given stimulusresponse
+‘pair’. An example of a DOT trial could be: i) the presentation of a picture
+showing a particular time of day, ii) a subsequent delay, and iii) then the presentation of
+two more pictures showing two different types of prescription drugs only one of which
+should be pointed to (correct response) in order to obtain iv) a differential rewarding
+outcome (see @plaza2018learning for similar procedure). Subjects that are trained by DOT
+typically learn more quickly than when the outcomes are non-differential (classical
+approach). This result is known as the differential outcomes effect [@trapold1970expectancies; @urcuioli2005behavioral]
+
+The differential outcomes effect has been studied with respect to child development
+[@esteban2014differential; @estevez2001differential; @lowe2014neural; @maki1995expectancies; @martinez2013effects], and has been found to provide a measure of, and ameliorate, clinical deficits in a number of neurological conditions such as Alzheimer’s [@carmona2019differential; @molina2015differential; @plaza2012improving], Autism [@addison_examination_2006; @mccormack2017differential] and Down syndrome [@estevez2003differential]. The effect has also been found to be robust to non-clinical adult training [@miller2002differential; @mok2009neural; @plaza2018learning].
+
+For an excellent meta-analysis on the various different methodologies (and applicable
+effect sizes) found that incorporate DOT (as applied to animals and clinical/non-clinical
+human children and adult participants) see @mccormack2019quantifying. The differential
+outcomes effect has been consistently found using an instrumental procedure consistingof 
+a number of independent repetitions (trials) where the stimulus-response-outcome (SR-O)
+contingencies remain the same throughout. An alternative application of DOT,
+however, has been to administer *three* stages of learning: Stage 1, instrumental (as for the
+standard DOT); Stage 2, Pavlovian (only stimuli and outcomes are presented, participants
+are passive during this stage, i.e. cannot produce a response); Stage 3, instrumental (test
+phase). In Stage 2 subjects are presented with novel stimuli that, through training, can
+come to be associated with those outcomes experienced in Stage 1, while in Stage 3,
+subjects are tested for their ability to transfer the knowledge gained over the first two
+stages to a test stage comprising the presentation of stimuli from Stage 2 and responses
+from Stage 1.
+
+The above so-called *transfer of control* (ToC) procedure has also been applied to children
+[@maki1995expectancies], non-clinical adults [@hall2003acquired] and non-human animals, e.g.
+pigeons [@meehan1999class; @peterson1980effects] demonstrating that differential
+outcomes training procedures as opposed to non- or same-outcome procedures yield
+transfer of instrumental knowledge to new instrumental contingencies. This has been
+explained (is predicted) by the Associative Two-Process theory [@lowe2016minimalist;
+@trapold1970expectancies; @urcuioli2005behavioral]. By this theory DOT is suggested to
+lead, in subjects, to the formation of differential expectations of outcomes that can be
+associated with stimuli and responses (‘prospective process’) whereas stimuli and responses
+can also be associated as per the standard instrumental learning theory (‘retrospective process’). 
+
+A typical ToC procedure is illustrated in Figure 1. Figure 1a shows (top) the S-R-O contingencies of
+each of the three stages of the procedure, and (bottom) the Associative Two-Process
+predictions that are made. The key point is that by the transfer test stage (Stage 3) when
+subjects are presented with the stimuli from Stage 2 and the responses from Stage 1
+subjects are able to draw on associative knowledge of differential Stimulus-(Outcome)-Expectation 
+(S-E) (from Stage 2) and Expectation-Response (E-R) pairings (from Stage
+1) that enable them to infer the correct response for those Stage 2 stimuli in the
+instrumental test (Stage 3) in spite of never previously having been presented with these
+particular Stimulus-Response pairs. By Associative Two-Process theory subjects have
+learned S-E and E-R associations, and that forms a *transitive bridge* from which to infer
+non-learned particular S-R pairings (Figure 1, right).
+
+\begin{figure}[h]
+\begin{minipage}[t]{0.60\linewidth}
+\resizebox{\textwidth}{!}{
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+ \text{Stage 1} & \text{Stage 2} & \text{Stage 3} \\
+ \text{(lnstrumental)} & \text{(Pavlovian)} & \text{(Instrumental Transfer Test)} \\
+\hline
+ \text{S1 $\rightarrow$ R1 $\rightarrow$ O1}  & \text{S3 $\rightarrow$ O1}  & \text{S3 $\rightarrow$(R1 vs R2)}  \\
+ \text{S2 $\rightarrow$  R2 $\rightarrow$  O2} & \text{S4 $\rightarrow$  O2}  & \text{S4 $\rightarrow$ (R1 vs R2)}  \\
+\hline
+\multicolumn{3}{|c|} {\text {Associative Two-Process Predictions}} \\
+\hline
+ \text{S1$\rightarrow$  \textcolor{gray}{E1$\rightarrow$  R1}}  &  \text{\textcolor{gray}{S3 $\rightarrow$  E1}}  &  \text{S3$\rightarrow$  E1 $\rightarrow$  R1}  \\
+\text{S2$\rightarrow$  \textcolor{gray}{E2$\rightarrow$  R2}}  & \text{\textcolor{gray}{S4 $\rightarrow$  E2}}  & S4 \text{$\rightarrow$  E2 $\rightarrow$  R2}  \\
+\hline
+\end{tabular}}
+\end{minipage}
+\hspace{0.2cm}
+\begin{minipage}[t]{0.30\linewidth}
+\vspace{-35pt}
+\includegraphics[width=\textwidth]{figure1.png}
+\end{minipage}
+\caption{Transfer of Control schema: Left) tabulation of stimulus-response (S-R) and outcome (O) presentations over the three stages (top) with the predicted associations learned according to Associative Two-Process theory (bottom; see Urcuioli, 2008). Right) schema of an Associative Two-Process whereby S-E and E-R associations (grey text) learned from Stage 1 and Stage 2 form a transitive bridge from which response selection (R2 in the example given here) can be inferred. Key: S1, S2, S3, S4 = Stimulus 1, Stimulus 2, etc.; R1, R2 = Response 1, Response 2; O1, O2 = Outcome 1, Outcome 2; E1, E2 = Outcome expectation 1, Outcome expectation 2; \o = no reward / incorrect response feedback.}
+\label{fig:fig1}
+\end{figure}
+
+
+
+The common finding of the Transfer of Control (ToC) version of Differential Outcomes
+training is that Associative Two-Process theory predicts performance in the instrumental
+test phase where subjects tend to select a particular response in the initial trials of this
+stage, relative to a control condition (in this case a shared-outcome condition), which
+suggests little or no learning is occurring but rather a form of associative (‘implicit’)
+inference.
+
+In spite of the numerous forms of ToC and the consistent result found in humans and 
+nonhuman animals performing as individual subjects/participants, to the best of the authors’
+knowledge, such training procedures have yet to be applied to human (or animal)
+participants in a social context. In @lowe2016minimalist we suggested that adapting the
+Pavlovian stage to a form of passive observation in a social context would allow to test
+hypotheses as to whether participants can transfer knowledge learned from their own
+instrumental experience (Stage 1) and that within the passive social context (Stage 2) to
+novel instrumental selection in the standard test phase (Stage 3). Drawing on a review of
+how value systems are represented for *self* and *other* in joint activities
+[@ruff2014neurobiology], we (in @lowe2016minimalist) hypothesized that participants would be
+able to vicariously learn the value observed for the other where the
+context is non-competitive. This is to say that participants experience the other’s stimuli and
+outcomes presentations as if they weretheir own and update their value function (differential
+reward outcome expectations) accordingly. 
+
+This is in contrast to the competing hypothesis that
+individuals represent the value of self and other in separate neural-psychological substrates
+[@ruff2014neurobiology]. In the latter case a separate value representation of other would not have
+been associated with the individual’s previously experienced responses (Stage 1) thereby
+prohibiting the formation of the above-discussed *transitive bridge*. 
+
+A presupposition here is that
+in cases where individuals are able to view the other participant in the task, in perceiving the
+expressive state, they may empathize with the expresser through *emotional contagion*
+[@hatfield1993emotional]. Emotional contagion may occur through facial feedback
+[@adelmann1989facial]– *emotional empathy*. But another means of emotion expression recognition 
+concerns cognitive emotion recognition [@drimalla2019face; @dziobek2011neuronal] – *cognitive empathy*. 
+In emotional empathy, this corresponds to a mimicry of the expresser leading to subconscious 
+emotion recognition (a vicarious feeling) as a result of
+mirror neuron activation (e.g. @wicker2003both; @singer2009social; @hess2013emotional). 
+In cognitive empathy, recognition entails inference of the expresser’s mental states
+based on the emotion expressed [@baron2004empathy] or imagined – the
+empathizer puts him/herself in the shoes of the emoter (vicarious inference).
+
+## The present study
+
+This article reports the method and findings of two experiments aimed at evaluating
+whether: a) transfer of control (ToC) effects based on a differential outcomes training
+procedure can apply in a social setting, b) such ToC effects, if found, owe to vicarious
+value learning. In relation to a), Experiment 1 manipulated social setting by way of a
+condition providing stimulus-outcome feedback to participants of the performance of a
+screen-recorded (but with no face visible) *other* (confederate) with only audio feedback
+and with response feedback hidden. Experiment 2 manipulated social setting by showing
+only stimulus-emotion expression feedback of the performance of a videoed other
+(confederate) with perceptible facial feedback but no audio or response feedback from
+the confederate and no explicit outcome feedback provided. In relation to b), Experiment
+1 thereby assessed a more conceptual/cognitive social setting to evaluate how sensitive
+the ToC effect might be to perceived social conditions (vicarious inference), whereas
+Experiment 2 assessed a more explicit/emotion expressed social setting with facial
+affective feedback substituting for the explicit outcome that the other participant received
+(vicarious feeling). From @lowe2016minimalist it is predicted that if participants represent
+the value of outcomes (reward-based) of the other according to separate neuralpsychological
+mechanisms, then the ToC effect should not occur. It is predicted that
+vicarious value learning is required for ToC effects to occur in a social context of the type
+that would not obviously benefit from tracking self and other performance 
+(i.e. is noncompetitive; see @lowe2016minimalist). Thus, it is hypothesized that for both
+Experiment 1 and 2, if participants produce ToC results in the experimental (differential outcomes)
+condition that differ from the non-differential outcomes control, vicarious value learning
+is occurring by either cognitive or emotional empathic means. Participants are
+hypothesized to transfer knowledge of outcomes learning in perceived others to their own
+instrumental responses. Manipulating the type of perceptible transfer contingencies of
+other – based on perceptible outcome (Experiment 1) and perceptible emotional
+expression (emotional contagion) from which to infer outcome (Experiment 2) – provided
+a means for assessing the robustness of the ToC to different controlled social contexts.
+Finally, for Experiment 2, we further hypothesized that, given vicarious value learning
+consistent results, EEG recordings would uncover mu suppression during the Pavlovian
+phase of the experiment, i.e. while the confederate was observable (via facial expressions)
+in the task. We base this hypothesis on evidence associating suppression of the EEG mu
+rhythm, a rhythm in the alpha frequency range (~8-12 Hz) over sensorimotor areas, with
+facial emotion processing [@enticott2008mirror]. This EEG measure provided us with a
+validation measure of participant social processing additional to subjective
+(questionnaire) feedback.
+
+Experiment 1
+============
+
+## Method
+
+### Participants
+
+An a-priori power analysis was performed for sample size estimation in the software
+package G*Power [@faul2007g] using the effect size specification option "as in
+SPSS", the effect size found specifically for the ToC procedure obtained via a metaanalysis
+study of @mccormack2019quantifying, $\eta^2$ = 0.33, power = .8, and $\alpha$ = .05 resulted in
+N = 20. The participants were students from the University of Gothenburg aged between
+20-44 years ($M_{age}$ = 27.74) with 9 males and 11 females. They participated in Experiment
+1 for the reward of a cinema ticket.
+
+### Design
+
+The experiment followed a 2x2 repeated measures design where the four conditions were
+as follows: i) Individual Differential Outcomes Training, ii) Individual Non-Differential
+Outcomes Training, iii) Social Differential Outcomes Training, iv) Social NonDifferential 
+Outcomes Training. Thus, there are two independent variables with two
+levels each: i) Differential vs Non-Differential Outcomes training, ii) Individual vs Social
+scenario. Each condition comprised a transfer of control (ToC) procedure consisting of 3
+stages of 20 trials each.
+
+### Materials and apparatus
+
+Each participant was required to carry out each condition on a computer monitor where
+they were to observe the presentation of stimuli and outcomes and produce mouse click
+responses on available options. Stimuli images were taken from the Snodgrass
+standardized image set [@snodgrass1980standardized] – six different images in each condition 
+(24 in total). Additionally, audio feedback was provided for correct and incorrect responses.
+We sampled sounds from the IADS (International Affective Digitized Sounds;
+@bradley2007international) commensurate with differential outcomes for such audio feedback –
+*positive* and *moderately positive* for correct feedback, *negative* for incorrect feedback.
+A depiction of the experimental set-up and interactive task materials is provided in Figure 2.
+
+```{r figure2, echo=FALSE, out.width='100%', fig.align="center", fig.cap="Experimental set-up. Left, the set-up as experienced by participants in the instrumental stages of the experiment including monitors, two mini audio speakers, one mouse (with mouse mat to reduce friction). Right, the set-up as experienced by participants in the Pavlovian stage (Stage 2) of the experiment for the social conditions (see text for more explanation). The bottom half of the *confederate monitor* (in brown) covered up the response choices made by the confederate so that only stimuli and outcomes were visible to the participant but not responses."}
+
+include_graphics("figure2.jpg")
+ 
+```
+
+### Procedure
+
+An example of a single trial on Stage 1 can be visualized in Figure 3.
+
+```{r figure3, echo=FALSE, out.width='60%', fig.align="center", fig.cap="Trial progression Stage 1/3. For each trial the participant was presented with a stimulus superimposed on a white panel (top right) for 1000ms, followed by a blank/white (stimulus) panel for a further 2000ms, then two response options were presented at the bottom of the screen for 2000ms. The participants were required to respond (click on one of the two options) within the 2000ms time limit or a timeout and ‘incorrect’ feedback were presented. A correct response yielded an image of money (coins) that was either small (low reward) or large (high reward) and concomitantly increased the score bar (left-side horizontal column). An incorrect response (or no response) yielded a ‘no reward’ image and a reduction of the score bar."}
+
+include_graphics("figure3.jpg")
+ 
+```
+
+Participants were given a pre-experiment warm-up phase to familiarize themselves with
+the task during and after which questions were permissible. Stimuli used in this warm-up
+phase were not used in the experimental conditions. Conditions were controlled for order
+effects: Social conditions before or after Individual conditions; DOT before or after 
+NonDOT conditions. Participants were not permitted to ask questions during the experimental
+procedure. They were given oral instructions before the experiment and instructions and
+prompts were also provided periodically on the monitor. Participants were informed that
+they would receive a cinema ticket for participation and an additional ticket if they
+achieved a sufficiently high score. The entire ToC procedure, including warm-up phase,
+took around 30 minutes to complete. Following completion of the experiment (all four
+conditions), participants were required to complete a questionnaire (see Appendix A).
+Below is provided a description of each of the three stages of the ToC procedure.
+
+All stimuli (images) presented to the participants were presented randomly, one per trial,
+but such that there was always an equal number of each stimulus presented per stage.
+
+### Stage 1 – Instrumental learning phase:
+
+Twenty trials: Participants were required to learn to associate 2 different images (stimuli)
+with appropriate responses (click on button option 1 or option 2) in order to get the
+rewarding outcome. In the DOT condition, participants were required to associate high
+reward with one stimulus (image) and low reward with the other stimulus. Incorrect
+answers received a punishment (‘money’ loss). Participants were required to learn to
+criterion here (4/5 correct responses by trial block 4): If participants did not learn at above
+chance levels (2.5/5 for random guessing) by this stage, Stage 3 (transfer of knowledge)
+was considered not applicable.
+
+### Stage 2 – Pavlovian learning phase:
+
+Twenty trials: Participants were required to learn to associate 4 new images (stimuli) with
+rewarding outcomes. Outcomes again were comprised of high or low reward (as in Stage
+1 where the same images and audio feedback were used for the differential outcomes). In
+the DOT condition different stimuli reliably predicted high or low reward. In the NonDOT
+condition different stimuli predicted reward but the reward could be either high or
+low (randomly generated). In the social condition, participants viewed a screen-capture
+and audio videoed performance (confederate) on a different monitor (see Figure 2
+*confederate monitor*) and were told to observe and learn from the other’s stimulus-outcome
+results. In the videoed performance the confederate responded incorrectly on the
+first trial (met with incorrect buzzer feedback) but responded correctly on the final 19
+trials. This was the case for both DOT and Non-DOT conditions. This approach was
+chosen to increase the credibility of the confederate though it meant that the social
+conditions’ Stage 2 was slightly more difficult than the individual conditions’ Stage 2
+(individual DOT and Non-DOT Stage 2 always provided correct stimulus-outcome
+pairings).
+
+### Stage 3 – Instrumental transfer test phase:
+
+Twenty trials: As for Stage 1 participants again were required to associate images
+(stimuli) with responses. But now it was required to associate the 4 images used in Stage
+2 to the response options in Stage 1. Note, this constituted a new set of associations for
+the participants to learn.
+
+
+### Ethics
+
+Participants were debriefed regarding their right to withdraw at any stage of the
+experiment and were required to sign a consent form regarding participation and
+anonymised publication of their data.
+
+## Results
+
+The analysis carried out concerns the two (instrumental) stages for which there were
+behavioural choice performance data, i.e. Stage 1 and Stage 3. In Stage 1 we evaluated
+performance (number of correct choices) for participants in the four conditions so as to
+assess whether a differential outcomes effect was obtained. In Stage 3 we evaluated
+performance to assess for transfer of control (ToC).
+
+#### Stage 1 
+
+In Figure 4 it is shown that, as a result of overlapping error bars, no differential outcomes
+effect is found in Stage 1. That is, there is no difference in performance by the end of
+Stage 1 in the differential outcomes training (DOT) versus the non-differential outcomes
+training (Non-DOT) conditions in either individual or social conditions. This is to be
+expected since Stage 1, based on our analysis of preceding pilot studies, was designed to
+be sufficiently non-challenging so that participants would score well above chance.
+Strong learning of instrumental contingencies in Stage 1 was a prerequisite for
+transferring knowledge to the test phase (Stage 3) of transfer of control. Above chance
+performance by individuals on Stage 3 who show no evidence of having learned on Stage
+1 may owe to ‘lucky guesses’. The absence of difference in the four conditions is desirable
+since differences in performance in the test phase (Stage 3) can more parsimoniously be attributed
+to learning in the Pavlovian stage (Stage 2) over conditions and the nonpossibility 
+of categorizing new stimuli presented in Stage 2 by common/same outcomes experienced in Stages 1 and 2.
+
+#### Stage 3 
+
+This instrumental stage tested the ability of participants to transfer knowledge gained
+from Stage 1 (Instrumental) and Stage 2 (Pavlovian). Differences in performance between
+DOT and Non-DOT conditions regarding transfer of control are summarized in the plots
+in Figure 4.
+
+```{r figure4, echo=FALSE, out.width='100%', fig.align="center", fig.cap="Transfer of control. Correct choice performance from the last block of trials of Stage 1 to the first block of trials in Stage 3 for non-social and social (DOT and Non-DOT) conditions. The more horizontal the line plots, the greater the transfer of control. Errorbars showing 1 SE."}
+
+exp1 %>% select(-unclear, -unclear2, - unclear3, -unclear4) %>% # Remove unnamed and unused columns
+  pivot_longer(-ID,                                             # Wraps dataframe into long format
+               names_sep = "_",
+               names_to = c("type_task", "type_out", "stage"),
+               values_to = "Out_sum") %>%
+  mutate(type_task = recode(type_task, Ind = "Individual ", Soc = "Social")) -> exp1_last5_first5
+
+
+ggplot(exp1_last5_first5, aes(x = factor(stage), y = Out_sum, shape = type_out)) +
+  facet_wrap(.~type_task) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+  stat_summary(fun="mean", geom="line", aes(group=factor(type_out), linetype = type_out)) +
+  stat_summary(fun.data = mean_se, geom = "point", size= 4) +
+  theme_bw() +
+  ylab("Number of correct responses") +
+  coord_cartesian(ylim = c(2.5, 5)) +
+  scale_x_discrete(labels = c("Stage 1 (last block)", "Stage 3 (first block)")) +
+  scale_linetype_manual(values = c(1, 5)) +
+  scale_shape_manual(values = c(1, 16)) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.background = element_rect(linetype = "solid", color = "black"),
+        legend.title = element_blank(),
+        legend.key.size = unit(1.5, "cm"),
+        legend.position = "top",
+        axis.title.x=element_blank(),
+        strip.background = element_rect(color="black",
+                                        fill="#ffffff"))
+ 
+```
+
+Each block consists of 5 trials and in Stage 3 there are four different stimuli presented.
+Chance performance, involving guess-work, would produce mean scores of 2.5 (0.5
+chance of getting the correct response per trial). However, since presentation of stimuli
+was randomized, participants were potentially presented several of the same stimuli
+within the first block. Nevertheless, performance on the first block of trials was
+considered to be the greatest indicator of transfer of control since *learning* effects (i.e. instrumental) 
+in subsequent blocks (rather than direct transfer of knowledge) would be more likely to bring to bear.
+
+```{r exp1_anova, echo=FALSE, include=FALSE}
+
+exp1 %>% 
+  select(-unclear, -unclear2, - unclear3, -unclear4, -ends_with("S1"), -ID) -> xp1    # Removes unused and unnamed cols
+
+# Creates design data frame below, for repeated measures ANOVA
+idataxp1 <- data.frame(type_task = c("Ind_", "Ind_", "Soc_", "Soc_"), type_out = c("DO_S3", "NDO_S3", "DO_S3", "NDO_S3"))
+
+
+xp1_f5mod <- lm(as.matrix(xp1) ~ 1)  # Consstruct null model
+
+xp1_ana <- car::Anova(xp1_f5mod, idata = idataxp1, idesign = ~type_task * type_out) # Run RM ANOVA 
+
+
+xp1stats <- heplots::etasq(xp1_ana, anova = TRUE, partial =TRUE)                    # Get ANOVA stats
+
+xp1 %>%                                                                             # Get descriptive stats
+  pivot_longer(everything(),
+               names_sep = "_",
+               names_to = c("type_task", "type_out", "stage"),
+               values_to = "Out_sum_f5")  %>%
+  convert_as_factor(type_out, type_task)  %>%
+  mutate(type_task = recode(type_task, Ind = "Individual ", Soc = "Social")) %>%
+  select(-stage) %>%
+  group_by(type_out) %>%
+  get_summary_stats()-> xp1_sum_out
+
+
+cd <- cohensD(xp1$Soc_DO_S3, xp1$Soc_NDO_S3,                                      # Get contrast effect size for social level
+        method = "paired")
+
+```
+
+
+A two-way repeated measures ANOVA was run with factors: *type of outcomes*
+(differential versus non-differential), and *type of task* (social versus non-social). The
+dependent variable was amount of correct responses (over the first block of 5 trials). A
+significant effect of *type of outcomes* was found, $F$(`r xp1stats["type_out", "num Df"]`, `r xp1stats["type_out", "den Df"]`) = `r xp1stats["type_out", "approx F"] %>% round(3)`, $p=$ `r xp1stats["type_out", "Pr(>F)"] %>% round(3)`, partial $\eta^2 =$ `r xp1stats["type_out", "eta^2"] %>% round(3)`, with the DOT condition giving $M =$ `r xp1_sum_out["1", "mean"] %>% round(2)`, $SD =$ `r xp1_sum_out["1", "sd"] %>% round(3)`, Non-DOT condition $M =$ `r xp1_sum_out["2", "mean"] %>% round(3)`, $SD =$ `r xp1_sum_out["2", "sd"] %>% round(3)`.
+No significant effect of *type of task* was found, $F$(`r xp1stats["type_task", "num Df"]`, `r xp1stats["type_task", "den Df"]`) = `r xp1stats["type_task", "approx F"] %>% round(3)`, $p =$ `r xp1stats["type_task", "Pr(>F)"] %>%round(3)`, partial $\eta^2 =$ `r xp1stats["type_task", "eta^2"] %>% round(3)`.
+Furthermore, no significant interaction was found $F$(`r xp1stats["type_task:type_out", "num Df"]`, `r xp1stats["type_task:type_out", "den Df"]`) = `r xp1stats["type_task:type_out", "approx F"] %>% round(3)`, $p =$ `r xp1stats["type_task:type_out", "Pr(>F)"] %>% round(3)`, partial $\eta^2 =$ `r xp1stats["type_task:type_out", "eta^2"] %>% round(3)`. Two participants’ data were removed for scoring only 3/5 on the last block of
+stage 1, which we considered to be at or around ‘chance’^[See previous description of ‘chance’ performance in relation to Stage 3.] performance.
+
+#### Subjective Report
+
+Questionnaires on a 5-point Likert scale were provided to participants to assess the extent
+of perceived emotional engagement in the task and also whether they experienced the
+presence of the confederate participant (social condition). Appendix A provides the
+results in full for the 11 questions administered and *t*-test statistical differences from the
+‘baseline’ score of 3. One participant failed to complete the questionnaire and so our
+analysis is based on 19 completed questionnaires.
+
+## Discussion
+
+The results presented above for Experiment 1 provide a proof of principle that the transfer
+of control effect obtained when using differential outcomes training can apply in a ‘social’
+setting and not just the non-social setting in which it has been previously studied. Stage
+2 in the social condition served as a stage where participants were able to learn from the
+video-presented stimulus-outcome pairings (Stimulus-Expectations; S-E) of a
+confederate and bring to bear that knowledge on their own outcome expectation-response
+(E-R) knowledge gained from Stage 1 forming thereby the *transitive bridge* hypothesized
+as an explanation for individualized ToC learning. The argument put forward by @lowe2016minimalist
+is that participants are able to learn from others according to a principle of
+*vicarious value learning*. That is, participants utilize the same value representations
+(reward outcome valuations of stimuli) for others as they do for themselves.
+
+Experiment 2
+============
+
+## Method
+
+### Participants
+
+Thirty-three students from the University of Gothenburg participated in each of the four
+conditions of Experiment 2 for the reward of a cinema ticket. The participants were aged
+between 22-46 years ($M_{age} = 26.6$) with 23 males and 10 females. One participant was
+excluded from the EEG analysis due to highly unreliable data not salvageable through the
+standardised processing steps used for all other participants. Calculating the effect of
+the contrast between differential and non-differential outcomes *within* the social level
+yielded Cohen's $d=$ `r round(cd)`. Utilising this simple effect in a sample size calculation 
+for a one-sided t-test (since our hypothesis is directional), with power $= .8$, $\alpha = .05$,
+resulted in N = 29. 
+
+### Design
+
+The design was the same as for Study 1 with the addition of measure of EEG. The
+dependent variable for the EEG activity was power spectral density over the mu
+frequency band, which was extracted using fast Fourier transform (FFT). That is
+amplitude in the 8-12Hz frequency obtained from C3 and C4, which is the typical site for
+mu detection since these locations are positioned over the motor cortex. Additionally,
+alpha band power over the frequencies 8-12Hz for all remaining electrodes was obtained
+and averaged. These were measured and compared during the outcome presentation in
+Stage 2 (Pavlovian phase) in the social and non-social conditions.
+
+### Materials and apparatus
+
+The materials were the same as for Experiment 1 with the exception of the stimuli in the
+social condition and the addition of three questions in the questionnaire as well as slight
+reformulations of the questions used in Experiment 1. In Stage 2 (Pavlovian phase), the
+participant was presented a video of either the face of another person (confederate)
+playing the game (social condition), or an animation (non-social condition). The function
+of the animation was to have a comparably complex and informative stimulus, but that
+would not be social and yet would keep participants focused during the inter-stimulus
+interval. The animation consisted of a randomly moving shape where the outcome images
+of Stage 1 were faded in at outcome presentation. In this way, the non-social video
+provided sufficient information for the participants to be able to perform the stimulus-outcome pairing task.
+
+### Objective measure of confederate emotional expression
+
+Two confederates were used to play the role of confederate during the Pavlovian phase
+for the social conditions. One was used in the warm-up stage and one in the experiment.
+Each confederate was instructed to express happiness at receiving the high reward and
+mild frustration at receiving low reward according to a pre-scheduled reward and cost
+(punishment) schedule. As a means of assessing objectively differential facial expressions
+we used the Noldus software FaceReader 8.0. Figure 5 shows this schedule for the
+confederate used in the experimental condition (see Figure 6 for example expressions)
+over the 20 trials (where high and low reward are generated by a random number
+generator in the program and the first trial always gave a negative reward/punishment).
+
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }
+    \hline
+  \text{Stimulus Trial} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20  \\ \hline
+  \text{High Reward} &  & \cellcolor{green!25}.82 &  & \cellcolor{red!25}-.04 &  &  &  &  & \cellcolor{green!25}.10 &  & \cellcolor{green!25}.45 &\cellcolor{green!25}.39 & \cellcolor{green!25}.44 &  & \cellcolor{green!25}.18 & \cellcolor{green!25}.82 &  & \cellcolor{green!25}.36 &  & \cellcolor{green!25}.19  \\ \hline
+  \text{Low Reward} &  &  & \cellcolor{red!25}-.33 &  & \cellcolor{red!25}-.41 & \cellcolor{red!25}-.24 & \cellcolor{red!25}-.20 & \cellcolor{red!25}-.28 &  & \cellcolor{red!25}-.07 &  &  &  & \cellcolor{red!25}-.29 &  &  & \cellcolor{red!25}-.16 &  & \cellcolor{red!25}-.57 &  \\ \hline
+  \text{Negative Reward} & \cellcolor{red!25}-.32 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &    \\
+    \hline
+\end{tabular}}
+\caption{\textbf{FaceReader valence evaluations of confederate facial expressions in response to differential rewarding outcomes.} Valence computations were in the range -1 to 1. The table shows the maximum values recorded in response to the outcome for each trial. Key: Green-filled tabulations indicate that FaceReader computed a positive valenced expression; Red-filled tabulations indicate that FaceReader computed a negative valenced expression. All readings to 2DP.}
+\label{fig:fig6}
+\end{figure}
+
+In all but one case (trial 4) the confederate expressed according to the correct valence as
+computed up by FaceReader (though the negative value in trial 4 is only slight in this case
+and less negative than for all low or negative reward outcomes). An independent samples
+*t*-test found a significant difference between low reward (including negative reward) vs
+high reward expressions, 95% CI[-.86, -.43], $t(18) = -6.36$, $p<.001$. Figure 7 shows
+example expressions taken from the 20 trial sequence for positive (Figure 6 left) and negative
+(Figure 6 right) valence, respectively.
+
+
+```{r figure6, echo=FALSE, out.width='80%', fig.align="center", fig.cap="FaceReader facial expression analysis visualization of confederate used in the Pavlovian social conditions. Left. The confederate expresses with positive valence. Right. The confederate expresses with negative valence. The outline box indicates the surface area over which FaceReader carries out the expression analysis. The numbered labels represent the Action Units that are expressed above baseline according to FaceReader."}
+
+include_graphics("figure7.jpg")
+ 
+```
+
+
+It was observed that Action Units (see @ekman_facial_2002) 12, or AU12 (Lip Corner Puller), for positively
+valenced expression and AU5 (Upper Lid Raiser) for negatively valenced expression
+were most typically used. In the case of the former, AU12 in the absence of expression
+of AU6 (cheek raiser) may be indicative of a non-Duchenne (social) smile or that
+FaceReader did not pick up all micro-expressions of the confederate. See Experiment 2
+Results Discussion sub-section for more detail.
+
+### Electroencephalogram Recordings
+
+The Electroencephalogram (EEG) acquisition system OpenBCI Cyton board was used.
+The Cyton board is an 8-channel neural interface, which samples data at 250Hz. Since
+the present study did not analyse any higher frequency than 25Hz, such sampling rate was
+deemed more than sufficient since only a sampling rate of 2.5 times that of the frequency
+is required for analysis [@cantor2013clinical]. The board communicates wirelessly to a
+computer via Bluetooth and the data was recorded using OpenBCI’s own graphical user
+interface.
+
+Further, the associated OpenBCI headset Mark IV was used. The headset is able to target
+35 electrode locations of the 10-20 system. The locations used in Experiment 2 are those
+of the original locations of the headset. After a pilot study using the device the original
+electrode placements were shown to generate superior contact compared to other
+locations and provided a coarse distributed signal across the scalp. The locations used
+were: Fp1, Fp2, C3, C4, P7, P8, O1 and O2 according to the 10-20 system. Fp1, Fp2, O1
+and O2 have previously been used for emotional detection [@musha1997feature]
+and C3 and C4 are common locations for detecting mu rhythmicity
+[@oberman2007human] the suppression in activity of which (in these central brain regions)
+being considered to reflect mirror neuron activity [@hobson2016mu; @oberman2007human].
+
+#### Data analysis
+
+To transform and interpret EEG data, MATLAB (MathWorks, Natick, MA, United
+States) and the EEGLAB toolbox [@delorme2004eeglab] were used. A semiautomatic
+pipeline consisting of MATLAB-scripts imported the EEG data alongside
+event markers (for events such as stimuli and outcome presentation for the various
+stages), filtered it (4-45 Hz including a notch between 48.5 and 52.5 Hz), ran independent
+component analysis, removed artefacts caused by eye-blinks or power line noise spikes
+(re-referenced affected channels) and extracted descriptive statistics of the stages for each
+participant.
+
+### Procedure
+
+The procedure used was similar to that of Experiment 1, with the difference that
+participants now wore the EEG headset providing a means to evaluate participants during
+the behaviourally passive Stage 2 (Pavlovian stage). Throughout the experiment, the
+participants were asked to sit as still as possible without feeling unnaturally hindered
+during the task. The main task-based difference between Experiment 1 and Experiment 2
+was the use of videos (visual) without audio in the Pavlovian phase (Stage 2) of the
+experiment. The social video was designed to: a) increase the sense of social presence, b)
+allow for emotional expressions to provide a means for vicarious value learning through
+emotional contagion. The explicit responses and outcomes of the confederate were not
+shown so participants were required to make stimulus-emotional expression associations
+(see Figure 7 for trial progression) that through emotional contagion might directly tap
+into the other’s (stimulus) value representation.
+
+```{r figure7, echo=FALSE, out.width='100%', fig.align="center", fig.cap="Trial progression Stage 2. Left. Non-social animated stimulus. Right. Social video stimulus (confederate). For each trial the participant was presented with a stimulus superimposed on the right white panel (top right) for 1000ms, followed by a blank/white (stimulus) panel for a further 2000ms. The video sequence in both social and non-social conditions endured for the whole trial (left white panel). The video stimulus substituted for explicit outcomes (see Figure 3) in the social condition so that the expression of the confederate provided the only cue as to the outcomes (high reward / low reward). All but the first trial was expressed as reward – the punishment/negative reward (shocked expression), as used in Experiment 1, was intended to increase believability in the confederate. In the non-social condition outcomes were made explicit (faded in, see left bottom screen). The animation video in this non-social condition was used to control for the fact that the social condition now also used a video. The score bar (left side of screen) remained at that which the participant had achieved in Stage 1."}
+
+include_graphics("figure8.jpg")
+ 
+```
+
+### Ethics
+
+The ethical considerations and procedure were as for those of Experiment 1. In addition,
+participants were informed prior to the study of the uncomfortableness of the EEG
+headset and that they may interrupt the study at any time.
+
+## Results
+
+The behavioural task performance results are presented in the same way and with the
+same logic as for Experiment 1, i.e. Stage 1 and Stage 3 analyses. Stage 2 is now analysed
+using EEG data: comparisons of mu and alpha band power is analysed for the social and
+non-social conditions.
+
+### Stage 1
+
+Figure 8 shows, as for Experiment 1, no differential outcomes effect (stage 1) in terms of
+differences in means between differential outcomes (DOT) and non-differential outcomes
+(Non-DOT) conditions. As for Experiment 1, this is desirable as we can then more
+reasonably attribute in Stage 3 differences between DOT and Non-DOT in transfer of
+control performance to the stages and the non-possibility of categorizing new stimuli
+presented in Stage 2 by common outcomes experienced in Stages 1 and 2.
+
+```{r figure9, echo=FALSE, out.width='100%', fig.align="center", fig.cap="Means and standard error bars for all Stage 1 conditions (all trials)."}
+
+# Commented out plot of stage 1 scores. Which are showed in next figure instead.
+
+# ggplot(filter(perf_data, Stage==1) , aes(x = Condition, y = Out_sum_tot, shape = factor(Condition))) +
+#   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+#   stat_summary(fun.data = mean_se, geom = "point", size= 4) +
+#   coord_cartesian(ylim = c(15, 20)) +
+#   scale_shape_manual(values=c(16, 1, 15, 0), labels = c("Individual DOT", "Individual NDOT", "Social DOT", "Social NDOT"))+
+#   theme_bw() +
+#   ylab("Number of correct responses") +
+#   theme(panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(), 
+#         axis.line = element_line(colour = "black"),
+#         legend.background = element_rect(linetype = "solid", color = "black"),
+#         legend.title = element_blank(),
+#         legend.key.size = unit(1.5, "cm"),
+#         legend.position = c(0.855, 0.3),
+#         axis.title.x=element_blank(),
+#         axis.text.x=element_blank(),
+#         axis.ticks.x=element_blank())
+
+
+
+
+```
+
+### Stage 3
+
+```{r exp2ana, echo=FALSE, include=FALSE}
+
+
+perf_data %>% # Wrangle data to be suitable for repeated measures ANOVA
+  filter(Stage==3) %>%
+  ungroup() %>%
+  select(-Condition, -Stage, -Out_sum_tot) %>%
+  pivot_wider(id_cols = Subject, 
+              values_from = Out_sum_f5,
+              names_from = c("type_task", "type_out")) %>%
+  select(-Subject) -> wide_xp2
+  
+
+idataxp2 <- data.frame(type_task = c("Individual_", "Individual_", "Social_", "Social_"), type_out = c("DOT", "NDOT", "DOT", "NDOT")) # Create design data frame
+
+
+xp2_f5mod <- lm(as.matrix(wide_xp2) ~ 1) # Create null model
+
+xp2_ana <- car::Anova(xp2_f5mod, idata = idataxp2, idesign = ~type_task * type_out) # Run repeated measures ANOVA
+
+
+xp2stats <- heplots::etasq(xp2_ana, anova = TRUE, partial =TRUE) # Get partial eta squared 
+
+perf_data %>% # Get summary statistics
+  ungroup() %>%
+  filter(Stage==3) %>%
+  select(-Out_sum_tot, -Subject, -Stage, -Condition) %>%
+  group_by(type_out) %>%
+  get_summary_stats()-> xp2_sum_out
+
+
+
+```
+
+```{r figure8, echo=FALSE, out.width='100%', fig.align="center", fig.cap="Transfer of control. Correct choice performance with errorbars from the last block of trials of Stage 1 to the first block of trials in Stage 3 for non-social and social (DOT and Non-DOT) conditions. The more horizontal the line plots, the greater the transfer of control."}
+
+
+ggplot(perf_data, aes(x = factor(Stage), y = Out_sum_f5, shape = type_out)) +
+  facet_wrap(.~type_task) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+  stat_summary(fun="mean", geom="line", aes(group=factor(type_out), linetype = type_out)) +
+  stat_summary(fun.data = mean_se, geom = "point", size= 4) +
+  theme_bw() +
+  ylab("Number of correct responses") +
+  coord_cartesian(ylim = c(2.5, 5)) +
+  scale_x_discrete(labels = c("Stage 1 (last block)", "Stage 3 (first block)")) +
+  scale_linetype_manual(values = c(1, 5)) +
+  scale_shape_manual(values = c(1, 16)) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.background = element_rect(linetype = "solid", color = "black"),
+        legend.title = element_blank(),
+        legend.key.size = unit(1.5, "cm"),
+        legend.position = "top",
+        axis.title.x=element_blank(),
+        strip.background = element_rect(color="black",
+                                        fill="#ffffff"))
+
+
+```
+
+A two-way repeated measures ANOVA was run with factors: *type of outcomes*
+(differential versus non-differential), and *type of task* (social versus non-social). The
+dependent variable was amount of correct responses in the first 5 of 12 possible responses, in Stage 3 and differences is shown in Figure 8.
+A main effect of *type of outcomes* was found, $F$(`r xp2stats["type_out", "num Df"]`, `r xp2stats["type_out", "den Df"]`) = `r xp2stats["type_out", "approx F"] %>% round(3)`, $p=$ `r xp2stats["type_out", "Pr(>F)"] %>% round(3)`, partial $\eta^2 =$ `r xp2stats["type_out", "eta^2"] %>% round(3)`, with the amount of correct responses being higher for the differential outcomes ($M =$ `r xp2_sum_out["1", "mean"] %>% round(2)`, $SD =$ `r xp2_sum_out["1", "sd"] %>% round(3)` correct responses) than the non-differential outcomes ($M =$ `r xp2_sum_out["2", "mean"] %>% round(3)`, $SD =$ `r xp2_sum_out["2", "sd"] %>% round(3)` correct responses). No significant effect of *type of task* was found, $F$(`r xp2stats["type_task", "num Df"]`, `r xp2stats["type_task", "den Df"]`) = `r xp2stats["type_task", "approx F"] %>% round(3)`, $p =$ `r xp2stats["type_task", "Pr(>F)"] %>% round(3)`, partial $\eta^2 =$ `r xp2stats["type_task", "eta^2"] %>% round(3)` and there was no significant 
+two-way interaction between *type of task* and *type of outcomes*, 
+$F$(`r xp2stats["type_task:type_out", "num Df"]`, `r xp2stats["type_task:type_out", "den Df"]`) = `r xp2stats["type_task:type_out", "approx F"] %>% round(3)`, $p =$ `r xp2stats["type_task:type_out", "Pr(>F)"] %>% round(3)`, partial $\eta^2 =$ `r xp2stats["type_task:type_out", "eta^2"] %>% round(3)`.
+
+
+### Stage 2 analysis - EEG activity
+
+```{r eeganalysis, echo=FALSE}
+
+data_eeg <- read.csv("data/exp2_data.csv", sep = ";")
+
+data_eeg %>%                                   # Select summarised eeg (8-12 Hz) data from full dataset
+  select(Subject, starts_with("X8")) -> eeg
+names(eeg) = sub("........","",names(eeg))
+
+mu_test <- with(eeg, t.test(C_Soc, C_NSoc,     # Perform t-test for mu
+                            paired = T, 
+                            alternative = "two.sided"))
+
+fpo_test <- with(eeg,                          # Perform t-test for the average of the rest of the electrodes
+                 t.test(rowMeans(data.frame(Fp_Soc, P_Soc, O_Soc)),
+                        rowMeans(data.frame(Fp_NSoc, P_NSoc, O_NSoc)),
+                        paired = T, alternative = "two.sided"))
+
+mu_desc <- with(eeg, data.frame(              # Get descriptive stats for mu
+  Soc = c(mean(C_Soc, na.rm = T), sd(C_Soc, na.rm = T)),
+  NSoc =c(mean(C_NSoc, na.rm = T), sd(C_NSoc, na.rm = T)),
+  row.names = c("Mean", "SD")))
+
+
+fpo_desc <- with(eeg, data.frame(             # Get descriptive stats for the rest
+  Soc = c(mean(rowMeans(data.frame(Fp_Soc, P_Soc, O_Soc)), na.rm = T),
+               sd(rowMeans(data.frame(Fp_Soc, P_Soc, O_Soc)), na.rm = T)),
+  NSoc =c(mean(rowMeans(data.frame(Fp_NSoc, P_NSoc, O_NSoc)), na.rm = T),
+               sd(rowMeans(data.frame(Fp_NSoc, P_NSoc, O_NSoc)), na.rm = T)),
+               row.names = c("Mean", "SD")))
+
+mu_effect <- with(eeg,                       # Get mu effect size
+                  cohensD(C_Soc, C_NSoc, 
+                          method = 'paired'))
+
+fpo_effect <- with(eeg,                      # Get effect size for the average of the rest
+                  cohensD(rowMeans(data.frame(Fp_Soc, P_Soc, O_Soc)),
+                          rowMeans(data.frame(Fp_NSoc, P_NSoc, O_NSoc)), 
+                          method = 'paired'))
+
+
+```
+
+
+A paired-samples *t*-test was used to determine whether there was a significant mean
+difference in participants’ mu band power between the social and non-social videos over
+electrode C3 and C4. Participants showed an unexpected increase in mu band power when
+observing the social videos ($M =$ `r round(mu_desc[1,1], 3)`, $SD =$ `r round(mu_desc[2,1], 3)` 
+power spectral density) compared to
+the non-social videos ($M =$ `r mu_desc[1,2] %>% round(3)`, $SD =$ `r mu_desc[2,2] %>% round(3)` 
+power spectral density), a statistically significant mean increase of 0.29 in power spectral density was found, 95% CI [`r mu_test[["conf.int"]][1] %>% round(3)`, `r mu_test[["conf.int"]][2]%>% round(3)`], $t$( `r mu_test[["parameter"]][["df"]]`) = `r mu_test[["statistic"]][["t"]] %>% round(3)`, $p$ = `r mu_test[["p.value"]] %>% round(3)`, $d =$ `r mu_effect %>% round(3)`.
+Furthermore, to potentially explain the unexpected
+direction of the mu effect, a paired-samples *t*-test was used to determine whether there
+was a significant mean difference between social and non-social videos in 8-12 Hz (alpha
+band frequency range) amplitude averaged over the remaining electrodes, that is Fp1,
+Fp2, P7, P8, O1 and O2. Participants showed an increase in the alpha band frequency
+range when observing the social videos 
+($M =$ `r fpo_desc[1,1] %>% round(3)`, $SD =$ `r fpo_desc[2,1] %>% round(3)` 
+power spectral density) as compared to the non-social videos 
+($M =$  `r fpo_desc[1,2] %>% round(3)`, $SD =$ `r fpo_desc[2,2] %>% round(3)` 
+power spectral density), a statistically significant mean increase of `r (fpo_desc[1,1] - fpo_desc[1,2])%>% round(3)`
+in power spectral density, 
+95% CI [`r fpo_test[["conf.int"]][1]%>% round(3)`, `r fpo_test[["conf.int"]][2]%>% round(3)`], $t$(`r fpo_test[["parameter"]][["df"]]`) = `r fpo_test[["statistic"]][["t"]]%>% round(3)`, $p$ = `r fpo_test[["p.value"]] %>% round(3)`, $d$ = `r fpo_effect %>% round(3)`.
+
+### Subjective report
+
+```{r subrep, echo=FALSE, include=FALSE}
+
+cron_alpha <- psych::alpha(exp2_quest, check.keys = TRUE)$total$std.alpha
+
+```
+
+
+Questionnaires on a 7-point Likert scale were provided to participants to assess the extent
+of perceived emotional engagement in the task and also whether they experienced the
+presence of the confederate participant (social condition). Appendix B provides the
+results in full for the 14 questions administered and *t*-test statistical differences from the
+‘baseline’ score of 4. Due to a relatively low internal consistency 
+(Cronbach's alpha = `r round(cron_alpha, 3)`), these results are interpreted cautiously. Admittedly
+it would be of interest to factorise the items in the questionnaire and regress the number of correct responses
+in Stage 3 on factor scores for "emotional" items. However, due to the low internal consistency and a poor
+sampling adequacy ($KMO=$ `r KMO(exp2_quest)[["MSA"]] %>% round(3)`) we could not justify such approach. 
+
+## Discussion
+
+The results indicate that, as for Experiment 1, a transfer of control for differential
+outcomes based training in a social context occurs. This conclusion is based on the
+significant difference in forced choice performance in the test phase (Stage 3) of the
+differential outcomes conditions versus the non-differential outcomes condition where no
+interaction effect of sociality (social versus non-social conditions) was found. In this
+experiment, therefore, participants appear to have been able to learn from the affective
+expression of the confederate the value of the novel stimuli and transfer this knowledge
+as well as that of E-R based associations learned in Stage 1 to the test phase Stage 3.
+Again, participants, at the beginning of Stage 3, have had no exposure to the particular
+SR pairings that are relevant to obtain the rewarding outcomes. The EEG findings, relevant
+to providing a measure of perceived social presence in participants, require some
+interpretation. The finding of an increase in mu band power was the opposite of that
+hypothesized, however, a possible explanation for this might be inadequate separation
+from alpha indicated by the subsequent alpha analysis. It is therefore important to
+interpret these results in the context of the social versus non-social conditions and what
+cognitive and affective resources may have been brought to bear. The video (social versus
+non-social) independent variable had no significant effect on the amount of correct
+responses, also as expected. The subjective report (questionnaire) findings also lend
+support to participants either cognitively or emotionally empathizing with the
+confederate. Whilst it was not explicitly asked of participants whether they apprehended
+that the confederate was indeed a confederate – for fear of affecting future data collection
+– no impressions were given by the participants that they considered the ‘other’
+participant to be inauthentic. Expressions of the confederates (particularly the confederate
+used in Stage 2 of the Experiment, as opposed to the training phase) did not, therefore,
+appear to be perceived as ‘socialized’ (e.g. non-Duchenne smile) or fake.
+
+General Discussion
+============
+
+The present article presents work aimed at evaluating whether the differential outcomes
+based transfer of control effect^[This concerns transferring knowledge from previous task 
+stages to a third stage without the requirement of new learning.] (ToC) as predicted by the
+Associative Two-Process theory [@trapold1970expectancies; @urcuioli2005behavioral] could apply
+in social contexts. The social contextsexperimentally evaluated how a perceived other’s outcomes
+might be inferred: i) through direct presentation of stimulus-outcome contingencies, ii) through
+indirect presentation of outcomes as conveyed by the other’s affective facial expression. The main
+finding of our investigation was that the ToC effect can apply in social contexts and was robust to
+the change in contingencies (i. and ii. above) as manipulated in the two experimental
+conditions reported here.
+
+We have considered a hypothesis and explanation for this *social* ToC according to
+vicarious value learning [@lowe2016minimalist; @ruff2014neurobiology] whereby through
+evaluating another’s rewarding outcomes, the perceiver updates his/her own value
+function – effectively putting him/herself in the shoes of the other. This was manipulated
+to occur either through direct perception of the other’s (differential) outcomes (as in
+Experiment 1), or through cognitive or emotional empathizing [@drimalla2019face] via
+affective processing of the facial expression of other (Experiment 2). In the latter case,
+facial expressions corresponded to the differential outcomes, or rather reactions to them.
+
+A main source of interest was to consider to what extent the participants viewed the
+participating other (confederate) as being present and as the context thereby being
+“social”. In Experiment 1 and 2 we evaluated this through the use of questionnaires
+whereby participant subjective reporting provided some evidence of vicarious value
+learning. The Social Affective-Associative Two Process hypothesis [@lowe2016minimalist]
+posits that in non-competitive situations an individual may learn the value function of
+another vicariously through emotional contagion as a result of observing the affective
+expression of the other. A reinforcement learning model was described that has been
+successfully deployed to explain transfer of control (ToC) performance in individual
+subjects (pigeons, rats) in non-social settings [@lowe2017affective; @lowe2017affective1].
+Although the computational model has not so far been used to model the current data it
+is expected that according to the vicarious value learning perspective it should replicate
+the qualitative performance of the individual ToC. This would be the case simply because
+individuals are hypothesized to use the same value function to valuate stimuli presented
+to them as they would stimuli presented to the other. A ToC should not result if a separate
+value function for other is represented (e.g. in a competitive context, see @suzuki2012learning, for an example reinforcement learning model).
+
+The task was deliberately set up to require participants to produce fast responses (time
+out and negative reward was presented for slow responding). The aim here was to
+promote learning by subconscious associative processes rather than by any other such
+cognitive strategies. However, we cannot rule out that such cognitive strategies were
+being used at least by a subset of the participants some of the time. Participants may have
+been using a type of cognitive empathy ([@drimalla2019face]) whereby the affective
+expressions of the confederate other were evaluated and understood but not in a manner
+that directly tapped into vicarious value learning (e.g. through emotional contagion). 
+
+The uncovering of a social presence signal – mu suppression – as an indicator of mirror neuron
+activity would have provided evidence for a vicarious value learning strategy, however
+in Experiment 2 the opposite result was found. It is suggested that this effect is a product
+of inconsistent set-up of the EEG-headset and that it was not really mu rhythmicity that
+was detected at all. @oberman2007human, for example, suggested that their detection of
+mu, recorded at C3, Cz and C4, might be contaminated by posterior alpha activity since
+the two bands overlap, even though they took effort to control for this. @klimesch2007eeg
+proposed that during action observation mu rhythm should desynchronise but that
+areas involved in action planning such as the supplementary motor area (SMA), adjacent
+to the pre- and primary motor cortex, should exhibit increased synchronisation. Findings
+from @muthukumaraswamy2004changes and @muthukumaraswamy2004mu
+provide some support for this claim as they recorded 8-12 Hz desynchronizations over
+sensory-motor areas, and indeed, a synchronisation of alpha over SMA during action
+observation. 
+
+We postulate, therefore, that the synchronisation of mu over C3 and C4 has
+to do with the inconsistent set-up of the headset which possibly resulted in the
+contamination of alpha synchronisation from SMA consistent with the possibility of
+suppression of egocentric activity (self-planning) during perceived other responseoutcome 
+events. In the present research increased alpha band power was found in the
+social conditions as compared to the non-social (baseline) conditions. An implication of
+this is that measuring alpha synchronisation over SMA could constitute a neural signature
+for the processing of social stimuli. However, further research, in combination with
+simultaneous mu (de)synchronization effects is necessary to be carried out. The presence
+of both would provide stronger evidence for the existence of vicarious value learning
+according to emotional contagion.
+
+Future study is aimed at testing further the existence of vicarious value learning through
+Social Affective-Associative Two Process hypothesis, e.g. in competitive versus 
+noncompetitive contexts. We are also interested in using computational models of this
+process for synthetic studies, i.e. human-robot interaction (see @lowe2009dual; @lowe2013exploring;
+@kiryazov2013role; @alenljung2017user; @andreasson2018affective; @lowe2019vicarious; for examples)
+as a further means of apprehending the validity of such
+affective-cognitive processing and in the context of ‘minimalist’ joint activity (or joint
+action) research [@vesper2010minimal], which focuses on the use of associative mechanisms
+to produce intelligent collaborative behaviour.
+
+# Competing Interests Statement
+
+The authors are not aware of any competing interests that publication of this article would
+result in.
+
+# Informed consent
+
+All human participants were informed of their right to withdraw from the experiments at
+any time and gave approval to our right to publish (anonymously) their data. The actress
+(confederate) used in experiment 2 also gave written consent for us to use images of her.
+
+References {#references .unnumbered}
+==========
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup
+
+# Appendix
+## A
+
+Questionnaire for experiment 1.
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline & \text { Question } & M & \text { Md } & S D & \text { Different from 3 } \\
+\hline 
+\text { Q1 } & \text { Iunderstood which options were the most rewarding } & 4 & 4 & 0.882 &\cellcolor{orange!15}t(18)=4.943, p<.001 \\
+\hline 
+\text { Q2 } & \text { I found the game engaging } & 3.63 & 4 & 0.761 &\cellcolor{orange!15}t(18)=3.618, p=.002  \\
+\hline 
+\text { Q3 } & \text { I experienced anxiety while playing the game } & 2.58 & 2 & 1.121 & t(18)=-1.637, p=.119 \\
+\hline 
+\text { Q4 } & \text { I experienced fustration while playing the game } & 2.74 & 3 & 1.327 &  t(18) =0.865, p=.399 \\
+\hline 
+\text { Q5 } & \text { I experienced excitement while playing the game } & 3.58 & 4 & 0.769 &\cellcolor{orange!15}t(18) =3.284, p=.004 \\
+\hline 
+\text { Q6 } & \text { I experienced happiness while playing the game } & 3.26 & 3 & 0.806 &  t(18)=1.424, p=.172  \\
+\hline 
+\text { Q7 } & \text { I experienced that the other person participated in the activity } & 3.53 & 4 & 1.219 &  t(18)=1.882, p=.076 \\
+\hline 
+\text { Q8 } & \text { I understood what the other person was doing } & 3.53 & 4 & 1.264 & t(18)=1.816, p=.086 \\
+\hline 
+\text { Q9 } & \text { I experienced the other person's goals } & 3.74 & 4 & 1.240 &\cellcolor{orange!15}t(18)=2.590, p=.018 \\
+\hline
+\text { Q10 } & \text { I knew what the other person felt } & 2.89 & 3 & 1.1 & t(18)=0.417, p=.682 \\
+\hline 
+\text { Q11 } & \text { I experienced the other person's emotions } & 2.53 & 3 & 1.124 & t(18)=1.837, p=.083 \\
+\hline
+\end{tabular}}\end{figure}
+
+## B
+
+Questionnaire for experiment 2. As in Study 1, a post-study questionnaire was used. Questions 1 to 11 were improved by slight reformulations and three additional questions were added (see Appendix A). The answering scale used was a 7-point Likert scale. 
+
+\begin{figure}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline 
+& Question & M & Md & SD & Different from 4  \\
+&  &  &  &  & (bonferroni adjusted) \\
+\hline 
+Q1 & I understood which options were the most rewarding & 4.79 & 5 & 1.364 &\cellcolor{orange!15}t(32)=3.319, p=.032 \\
+\hline 
+Q2 & I found the task engaging & 5.27 & 6 & 1.376 &\cellcolor{orange!15}t(32)=5.315, p<.001 \\
+\hline 
+Q3 & Iexperienced anxiety while performing the task & 3.15 & 3 & 1.752 & t(32)=2.782, p=1.00 \\
+\hline 
+Q4 & I experienced frustration while performing the task & 3.7 & 4 & 1.811 & t(32)=0.961, p=1.00 \\
+\hline 
+Q5 & I experienced exciterment while performing the task & 5 & 5 & 1.346 &\cellcolor{orange!15}t(32)=4.267, p=.002 \\
+\hline 
+Q6 & I experienced happiness while performing the task & 4.48 & 5 & 1.439 & t(32)=1.9366, p=.865 \\
+\hline 
+Q7 & I experienced that the other participant was involved in the activity & 4.61 & 5 & 1.936 & t(32)=1.799, p=1.00 \\
+\hline 
+Q8 & I understood what the other participant was doing & 4.3 & 4 & 1.667 & t(32)=1.044, p=1.00 \\
+\hline 
+Q9 & I did not experience the other participant's goals & 3.73 & 4 & 1.547 & t(32)=1.0449, p=1.00 \\
+\hline 
+Q10 & I recognized what the other participant felt & 5.61 & 6 & 1.116 &\cellcolor{orange!15}t(32)=8.265, p<.001 \\
+\hline 
+Q11 & I experienced the other participant's emotions & 5.12 & 5 & 1.516 &\cellcolor{orange!15}t(32)=4.249, p=0.02 \\
+\hline 
+Q12 & I did not experience the animation as an active agent & 5.27 & 5 & 1.719 &\cellcolor{orange!15}t(32)-4.554, p=.002 \\
+\hline 
+Q13 & I could draw the connections between what occurred in the animation and the pictures presented & 3.21 & 2 & 2.027 &  t(32)=-2.233, p=1.00 \\	
+\hline 
+Q14 & I could draw the connections between the other participant's reactions and the pictures presented & 4.09 & 4 & 1.792 & t(32)=0.291, p=1.00   \\
+\hline
+\end{tabular}}
+\end{figure}
