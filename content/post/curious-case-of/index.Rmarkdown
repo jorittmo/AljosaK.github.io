@@ -54,7 +54,7 @@ To demonstrate this it is useful to look at how such overestimation will affect 
 ![](single_case.png)
 
 Assume a deficit on a this reaction time of ~2 SD caused by some lesion – this means that in this lesioned population, a deficit will only be found 50 % of the time, as can be seen in the above illustration. That is, the power of detecting this deficit will *never* exceed 50 %. A deficit of 2 &sigma; can never cross the critical value if a patient had a premorbid ability above the mean (&sigma; is here the standard deviation).
-The problem of premorbid ability generalises to group lesion studies as well, but more in the sense that it increases variability that can cloud inferences. This calls for the need of increasing sample sizes which often is cumbersome and, in some cases, impossible in the lesioned populations. So, what would this lead to in the long run? By running simulations of studies (in hundreds of thousands) one can approximate how such bias would affect the overall estimation given specific parameters like the size of the deficit and the number of people in the control sample, I will include my code below:
+The problem of premorbid ability generalises to group lesion studies as well, but more in the sense that it increases variability that can cloud inferences. This calls for the need of increasing sample sizes which often is cumbersome and, in some cases, impossible in the lesioned populations. So, what would this lead to in the long run? By running simulations of studies (in hundreds of thousands) one can approximate how such bias would affect the overall estimation given specific parameters, like the size of the deficit and the number of people in the control sample. I will include my code below:
 
 ```{r sim_snippet, echo=TRUE, eval=FALSE}
 win_sim <- function (nsim, deficit, ncon) {
@@ -81,8 +81,7 @@ win_sim <- function (nsim, deficit, ncon) {
 }
 ```
 
-This simulation returns the median overestimation of as many studies as you choose. If you run it for several different parameter combinations (number of controls and size of deficit)
-
+This simulation returns the median overestimation of as many studies as you choose. If you run it for several different parameter combinations (number of controls and size of deficit). In the graph below I have taken the median of 1000 000 simulated single case studies over functional deficits ranging from 1 to 4 standard deviations for 4 different sizes of control groups. 
 
 ```{r standard-plot, out.width='100%', fig.cap='Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.', fig.align='left', fig.height=5, echo=FALSE}
 load("C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/wc_def_ncon5-70.RData")
@@ -104,4 +103,9 @@ ggplot(wc, aes(x = deficit, y = ave_over_est, color=ncon)) +
                      direction = -1)
 ```
 
+What becomes evident here is that even with a deficit of 2 &sigma; where we would expect a probability of 50 %, we would get a "general" overestimation of this defict of about 0.6 &sigma; (which is quite alot). This is due to the fact that we cannot detect the people that have a premobrbid ability above the population mean, if not our control sample *by chance* happens to be drawn from the "right side" side of the distribution (that is we draw a control sample with high reaction time abilities). This also explains the curious case when we have a small control sample and a small effect size - yielding a lower overestimation, even though we technically should have lower power. It is easier for a small sample to have a mean that differs from the population mean (think again about the IMDB score), meaning that they can be both higher and lower in an equally distributed manner. However, since our simulated patient solely is diagnosed with a deficit if they have a reaction time that is lower than the control sample mean, this will bias the result in favour of when the control sample are drawn from the right side of the distribution - making it easier to detect smaller deficits and hence the overestimation is lowered. 
+
+What else is evident is that the difference in overestimation between a control sample size of 15 and that of 70 is marginal. Meaning that single case reearchers would waste their resources collecting data from larger control sample sizes, given that they want to minimise overestimation. 
+
+This is just one problem that low power yields and in a very specific field. In the next post I will simulate the effects in more general experiments and talk about other issues, such as positive predictive values in fields. However, I hope that by showing you this, it is clear that low power is not only bad because it will become harder for you to obtain significance in your undergrad thesis. It is bad because, in the long run, it can invalidate our field. 
 
