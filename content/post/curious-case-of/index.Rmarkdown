@@ -49,8 +49,39 @@ Yes, it is true that significance in a small sample would speak to the large eff
 
 But why does not the effect we have found in the sample generalise to the population just because we have low power? Well, intuitively, which score on an IMDB film rating would you rather trust, an average of 9/10 given by 5 people or an average of 6/10 given by 100 people? My guess is that most would say the latter - because we put trust in numbers. In science the above example translates to a phenomenon called the winner's curse. That is the tendency to over estimate the effect size in under powered studies, due to the fact that only the studies that happen to draw a *sample* with a large effect will obtain a significant result. Together with publication biases (i.e. significant studies to a higher extent get published) this can yield a serious inflation of what is thought to be population effect sizes.
 
-To demonstrate this it is useful to look at how such overestimation will affect a field "in the long run". 
+To demonstrate this it is useful to look at how such overestimation will affect a field "in the long run". If we for example look at the inherently low powered field of single case neuropsychology. That is when you compare a single person (often a patient with some brain lesion) against a normative control group, on some normally distributed function - let's say reaction time. What we want to do is to say whether or not this person has a deficit on this function. Naturally, the probability of detecting such a deficit depends on where in the distribution this patient was located prior to the lesion, i.e. the premorbid ability. Look at the expertly drawn picture below for an example:
 
+![](single_case.png)
+
+Assume a deficit on a this reaction time of ~2 SD caused by some lesion – this means that in this lesioned population, a deficit will only be found 50 % of the time, as can be seen in the above illustration. That is, the power of detecting this deficit will *never* exceed 50 %. A deficit of 2 &sigma; can never cross the critical value if a patient had a premorbid ability above the mean (&sigma; is here the standard deviation).
+The problem of premorbid ability generalises to group lesion studies as well, but more in the sense that it increases variability that can cloud inferences. This calls for the need of increasing sample sizes which often is cumbersome and, in some cases, impossible in the lesioned populations. So, what would this lead to in the long run? By running simulations of studies (in hundreds of thousands) one can approximate how such bias would affect the overall estimation given specific parameters like the size of the deficit and the number of people in the control sample, I will include my code below:
+
+```{r sim_snippet, echo=TRUE, eval=FALSE}
+win_sim <- function (nsim, deficit, ncon) {
+# Matrix where each row represents observations
+# on a variable from controls plus a patient
+  ranmat <- matrix(rnorm((ncon + 1) * nsim), 
+                   nrow = nsim,
+                   ncol = ncon + 1)
+# Induce a deficit on the first obs of each row
+# and compare to the other obs on that row.
+# Save the median of all found deficits.
+  med_def <- median(
+    apply(cl, ranmat, 1, 
+       function(x) {if (pt(
+              ((x[1] - def) - mean(x[2:ncon+1]))
+              /(sd(x[2:ncon+1])*sqrt(length(x)
+                                /(length(x) - 1))),
+             df =  length(x) - 2)<0.05) {
+             (x[1] - def)
+                   } else { NA } }), 
+              na.rm = TRUE)
+# Return the average overestimation
+  return(- def -med_def) 
+}
+```
+
+This simulation returns the median overestimation of as many studies as you choose. If you run it for several different parameter combinations (number of controls and size of deficit)
 
 
 ```{r standard-plot, out.width='100%', fig.cap='Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.', fig.align='left', fig.height=5, echo=FALSE}

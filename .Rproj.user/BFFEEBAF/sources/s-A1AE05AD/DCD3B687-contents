@@ -1,0 +1,220 @@
+---
+main_topsize: 0.16 #percent coverage of the poster
+main_bottomsize: 0.1
+#ESSENTIALS
+title: '**Single case neuropsychology:** </br> Validity and reliability in a power-wise pinioned field' 
+author:
+  - name: '**Jonathan Ö. Rittmo**'
+    affil: 1
+    main: true
+    orcid: '0000-0002-1099-3857'
+    email: ""
+  - name: Supervised by Robert McIntosh
+    affil: 1
+    main: false
+affiliation:
+  - num: 1
+    address: School of Philosophy, Psychology and Language Sciences, University of Edinburgh
+main_findings:
+  - "Taking the pulse on **single case** neuropsychology"
+  
+#"Life or death for **single case** neuropsychology?"
+logoleft_name: https&#58;//i.ibb.co/jbK3F76/UOE-logo.png
+logoright_name: https&#58;//i.ibb.co/jbK3F76/UOE-logo.png
+# pbs.twimg.com/profile_images/894558384535502848/vycYwQWf.jpg
+# logocenter_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/qr-code-black.png
+columnline_style: dashed
+output: 
+  posterdown::posterdown_betterport:
+    self_contained: false
+    pandoc_args: --mathjax
+    number_sections: false
+    dev: 'svg'
+bibliography: poster_refs.bib
+link-citations: true
+primary_colour: "#497a7b"
+secondary_colour: "#1b4747"
+header-includes:
+  - \usepackage{amsmath}
+title_textsize: "105pt"
+knit: pagedown::chrome_print
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      message = FALSE,
+                      fig.align = 'center',
+                      out.width = "100%")
+options(knitr.table.format = "html") 
+library(tidyverse)
+library(cowplot)
+```
+
+# Introduction
+
+- Single case research in neuropsychology.
+  - Functional deficits or dissociations in brain damaged patients.
+    - Only valid way to map functions to brain areas?
+  - Inherently low power which gives rise to:
+    - Low probability of finding an effect.
+    - Decrease in positive predictive value.
+    - The winner's curse.
+      - This is an overestimation of effect sizes stemming from only the studies that by chance draws a sample with a large effect will be able to detect it.
+
+## Gaps in the literature
+
+- Little work has been done on evaluating power for the statistical methods used in single case research.
+- The extent of the winner's curse in single case research has not been evaluated. 
+- Multivariate methods are known for their higher power and reliability for explaining latent functions (e.g. intelligence).
+  - No standard for such methods has been proposed.
+
+
+## Outline
+
+Evaluate power of tests for discovering deficits and dissociations with regards to sample sizes, effect sizes and correlations between functions.
+$$\downarrow$$
+Evaluate the extent to which single case studies are affected by the winner's curse and possible ways to compensate for this overestimation. 
+$$\downarrow$$
+Construct and evaluate single case multivariate approaches and compare power and usability to simpler but possibly less valid univariate methods. 
+$$\downarrow$$
+Judge whether the confirmatory crown of single case neuropsychology can be retained.
+
+# Method and Results
+
+- Power evaluation can be done in two ways:
+  - Analytically (symbol manipulation), which is exact.
+  - Numerically (e.g. simulations), which is approximate.
+    - Simulations provide an intuition of how statistical issues will affect a field "in the long run".
+      - Winner's curse - especially suited for this approach.
+      - See example code below and results in figure \@ref(fig:standard-plot).
+
+```{r sim_snippet, echo=TRUE, eval=FALSE}
+win_sim <- function (nsim, deficit, ncon) {
+# Matrix where each row represents observations
+# on a variable from controls plus a patient
+  ranmat <- matrix(rnorm((ncon + 1) * nsim), 
+                   nrow = nsim,
+                   ncol = ncon + 1)
+# Induce a deficit on the first obs of each row
+# and compare to the other obs on that row.
+# Save the median of all found deficits.
+  med_def <- median(
+    apply(cl, ranmat, 1, 
+       function(x) {if (pt(
+              ((x[1] - def) - mean(x[2:ncon+1]))
+              /(sd(x[2:ncon+1])*sqrt(length(x)
+                                /(length(x) - 1))),
+             df =  length(x) - 2)<0.05) {
+             (x[1] - def)
+                   } else { NA } }), 
+              na.rm = TRUE)
+# Return the average overestimation
+  return(- def -med_def) 
+}
+```
+
+```{r standard-plot, out.width='100%', fig.cap='Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.', fig.align='left', fig.height=5}
+load("C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/wc_def_ncon5-70.RData")
+
+# , dev.args = list(type = 'cairo')
+
+wc <- win_curse_tidy_def %>% filter(ncon == "ncon_5" | ncon == "ncon_15" | ncon == "ncon_25" | ncon == "ncon_70")   
+
+ggplot(wc, aes(x = deficit, y = ave_over_est, color=ncon)) +
+  geom_line(size = 0.8) +
+  labs(x = "Deficit (in SD)", y = "Average overestimation (median)") +
+  theme_classic() +
+  theme(legend.position=c(0.5, 0.98),
+        legend.direction = "horizontal") +
+  scale_color_brewer(name = "Control sample size",
+                       limits = c("ncon_5", "ncon_15", "ncon_25", "ncon_70"),
+                       labels = c("5", "15", "25", "70"),
+                     palette = 2,
+                     direction = -1)
+```
+
+### Test construction
+
+- The test used in the simulation above by @crawford_comparing_1998 can be seen in eq. \@ref(eq:ttest).
+- Building on this I successfully generalised it for multivariate use, as outlined below.
+\begin{equation}
+t_{n-1}=\frac{X^*-\overline{X}}{s\sqrt{\frac{n+1}{n}}}
+(\#eq:ttest)
+\end{equation}
+Where $X^*$ is the patient score, $\overline{X}$, $s$ and $n$ the mean, standard deviation and size of the control sample, i.e. a two sample t test with $n_1=1$. The multivariate generalisation of a two sample t test is the Hotelling's $t^2$ test:
+\begin{equation}
+t^2=\frac{n_{x}n_{y}}{n_{x}+n_{y}}(\bar{\pmb {x}}-\bar{\pmb {y}})'{\hat{\pmb{\Sigma}}}^{-1}_{p}(\bar{\pmb {x}}-\bar{\pmb {y}})
+(\#eq:hot)
+\end{equation}
+<!-- \sim T^{2}(p,n_{x}+n_{y}-2) -->
+$\bar{\pmb {x}}$ and $\bar{\pmb {y}}$ being the mean *vectors* of the two groups and ${\hat{\pmb{\Sigma}}_{p}}$ the unbiased pooled covariance *matrix* and, if we let $p=no. \: of\: variates$, where
+\begin{equation}
+\frac {n_{x}+n_{y}-p-1}{(n_{x}+n_{y}-2)p} t^{2} \sim F(p,n_{x}+n_{y}-1-p)
+(\#eq:fdist)
+\end{equation}
+It should be possible to generalise eq. \@ref(eq:ttest) *p* number of variates as follows:
+\begin{equation}
+t^2=\frac{n}{n+1}(\pmb{x}^* - \bar{\pmb{x}})'{\hat{\pmb{\Sigma}}}^{-1}(\pmb {x}^* -\bar{\pmb {x}})
+(\#eq:singhot)
+\end{equation}
+Where $\pmb{x}^*$ is a vector of observations on each variate from the individual of interest, $\bar{\pmb{x}}$,  ${\hat{\pmb{\Sigma}}}$ and $n$ the mean vector, covariance matrix and size of the control sample. Simulations for evaluation of Type I errors and power is seen in figure \@ref(fig:singhot)
+
+```{r singhot, out.width='100%', fig.cap='Power for single case Hotellings t^2^ over correlation, 10^5^ simulations for every combination. Deficits in standard deviations. Type I errors when deficit X=0 and deficit Y=0', fig.align='left', fig.height=6}
+load("C:/Users/jritt/Google Drive/Skola/Edinburgh/Dissertation/R/Simuations - winners curse/singhot_100Ksim_esxy.Rdata")
+
+a <-ggplot(filter(singhot_dat_tidy, esy == 0 | esy ==1), aes(x = r, y = power, color=esx)) +
+  geom_line(size = 0.8) +
+  labs(x = "Correlation", y = "Power") +
+  facet_grid(cols = vars(esy),
+             labeller=labeller(esy = c("0"="Deficit Y: 0 (SD)", "1"="Deficit Y: 1 (SD)"))) +
+  theme_classic() +
+  theme(legend.position="top", #c(0.5, 1.17),
+        legend.direction = "horizontal",
+        legend.background = element_rect(fill=alpha(0)),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        plot.margin = margin(0.7, 0, 0, 0, "cm"))+
+  ylim(0, 1) +
+  scale_color_brewer(name = "Deficit X (SD)",
+                       limits = c("esxy0", "esxy1", "esxy2", "esxy3"),
+                       labels = c("0", "1", "2", "3"),
+                    palette = 2,
+                    direction = -1)
+
+
+b <- ggplot(filter(singhot_dat_tidy, esy == 2 | esy == 3), aes(x = r, y = power, color=esx)) +
+  geom_line(size = 0.8) +
+  labs(x = "Correlation", y = "Power") +
+  facet_grid(cols = vars(esy),
+             labeller=labeller(esy = c("2"="Deficit Y: 2 (SD)", "3"="Deficit Y: 3 (SD)"))) +
+  theme_classic() +
+  theme(legend.position="",
+        legend.direction = "horizontal",
+        legend.background = element_rect(fill=alpha(0)),
+        plot.margin = margin(0, 0, 0, 0, "cm")) +
+  ylim(0, 1) +
+  scale_color_brewer(name = "Deficit X (SD)",
+                     limits = c("esxy0", "esxy1", "esxy2", "esxy3"),
+                     labels = c("0", "1", "2", "3"),
+                     palette = 2,
+                     direction = -1)
+
+plot_grid(a, b, nrow = 2)
+```
+
+# Next Steps
+
+- Not only functional deficits but importantly *dissociations* are of interest
+  - Evaluation of power and winner's curse
+  - Construction of multivariate methods.
+- Compare reliability of the multivariate tests with univariate counterparts.
+- Development of R package ("singcar"). 
+
+### Acknowledgements
+
+Poster created with posterdown [@R-posterdown].
+
+# References
