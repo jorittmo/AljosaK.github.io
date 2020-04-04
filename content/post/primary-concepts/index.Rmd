@@ -281,3 +281,26 @@ Now, this looks more like it! If you compare the analytical power curve with thi
 Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don't have to be a mathematician to start out with your a priori power calcs!
 
 Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!
+
+P.S. If you want to know how tripling the sample size would effect the curve - have a look below:
+
+```{r echo=F}
+load("pwr_10k_n150.Rdata")
+
+
+ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just as we did analytically
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype ="dashed", color = "darkblue") +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab("Power") +
+  ggtitle("n1 = n2 = 75") +
+  annotate(geom = "text", x = 0.3, y = 0.08, 
+           label = "alpha", 
+           parse = T, 
+           color = "darkblue", 
+           size = 5) +
+  theme_classic()
+
+```
+
