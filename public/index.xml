@@ -13,6 +13,196 @@
     </image>
     
     <item>
+      <title>Primary Concepts of Power Curves</title>
+      <link>/post/primary-concepts-of-power-curves/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/primary-concepts-of-power-curves/</guid>
+      <description>
+
+
+
+&lt;!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! --&gt;
+&lt;p&gt;As the image above (probably abused by me) clearly states: “the abuse of power comes as no surprise”. Whether intentional or not, ingorance of a priori power calculations have been prominent in psychology and related fields.&lt;/p&gt;
+&lt;p&gt;But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually is quite easy! So here goes:&lt;/p&gt;
+&lt;p&gt;The power function for a hypothesis test is defined as the following:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) =\mathbb{P}[\text{reject} \: H_0 \: \text{for a given} \: \theta]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is a given effect size, &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}\)&lt;/span&gt; probability and &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; the null hypothesis. In more general terms it is defined (the vertical bar is read “given”):&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power =\mathbb{P}[\text{reject} \: H_0\:  | \: H_1 \: \text{is true}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Say that we want to test whether a medication has had some effect on a sample (we measure a continuous dependent variable on the same individuals before and after treatment) and we assume that we know the population standard deviation. If &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}\)&lt;/span&gt; is the average difference between the observations, for each individual then &lt;span class=&#34;math inline&#34;&gt;\(\overline{D} \sim N(\mu, \sigma^2)\)&lt;/span&gt;, meaning that &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}\)&lt;/span&gt; follows the normal distribution with some population mean (&lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;) and variance (&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;). Standardising &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}\)&lt;/span&gt; by centering it around 0 (since we are talking about a difference it is already centered around 0 though) and dividing by the standard error we would have an entitiy that follows the standard normal distribution:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\overline{D}-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}\)&lt;/span&gt; is the average of the differences between the two measurement time points and &lt;span class=&#34;math inline&#34;&gt;\({\sigma}_D\)&lt;/span&gt; the population standard deviation and hence &lt;span class=&#34;math inline&#34;&gt;\({{\sigma}_D}/{\sqrt{n}}\)&lt;/span&gt; the standard error and thus, if we input real values we would get a z-value. The null and alternative hypotheses for this test are &lt;span class=&#34;math inline&#34;&gt;\(H_0:\: \mu_D \: = \: 0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(H_1:\: \mu_D \: \neq \: 0\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(\mu_D\)&lt;/span&gt; is estimated by &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}_n\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;If we set &lt;span class=&#34;math inline&#34;&gt;\(\alpha\:=\:0.05\)&lt;/span&gt; (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}\)&lt;/span&gt;[reject &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; | &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; is true]&lt;span class=&#34;math inline&#34;&gt;\(\:=\:0.05\)&lt;/span&gt;) our critical z-value would be &lt;span class=&#34;math inline&#34;&gt;\(z_{(0.05/2) }=\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(\pm\)&lt;/span&gt; 1.96. If you are unfamilliar with critical values, have a look at the density plot below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/zdist-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;All observed z-values that fall above or below these critical cutoff values are considered significant at the &lt;span class=&#34;math inline&#34;&gt;\(\alpha \: = \: 0.05\)&lt;/span&gt; level. Now suppose that &lt;span class=&#34;math inline&#34;&gt;\(H_1:\: \mu_D \: \neq \: 0\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mu_D =\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. Then we get the power by calculating:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; Z &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(\frac{\overline{D}_n-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\)&lt;/span&gt; we’ll write:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; \frac{\overline{D}_{n}-0}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We’ll subtract and add &lt;span class=&#34;math inline&#34;&gt;\(\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}\)&lt;/span&gt;, i.e. a neutral operation:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; \frac{\overline{D}_{n}\:-\:0\:-\:\theta\:+\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And then move them to the other sides of the inequalities (be careful with the signs!):&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&amp;lt; \frac{\overline{D}_{n}\:-\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}} \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Then we have:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = \mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&amp;lt; Z &amp;lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Which is the same as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = \mathbb{P}[Z &amp;lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}] + \mathbb{P}[Z &amp;gt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Note that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[Z &amp;gt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;also can be written&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[1 \: - \: \mathbb{P}[Z &amp;lt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So now we can write our power function for this test:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = \mathbb{P}[Z &amp;lt; -1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}] + 1 \: - \: \mathbb{P}[Z &amp;lt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The notation &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}[Z &amp;lt; z]\)&lt;/span&gt; is usually written &lt;span class=&#34;math inline&#34;&gt;\(N(z)\)&lt;/span&gt; and denotes the &lt;em&gt;area&lt;/em&gt; under the cumulative distribution function up til the value of &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;This became much more technical than what I imagined when I started out with this post. I might have to push my amateur adventures in 3D visualisation to the next post! Anyway, now we have:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = N(-1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}) + 1 - N(1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;If we assume &lt;span class=&#34;math inline&#34;&gt;\(\sigma_D=1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=25\)&lt;/span&gt; this will give us a single value for each &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; we put in. We can easily calculate this in R and plot the power against possible values of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; - this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; fixed and vary &lt;em&gt;n&lt;/em&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+power_data &amp;lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&amp;gt;% # Create a data frame with a variabl of various theta
+  mutate(power = pnorm(-1.96-theta*sqrt(25)) + (1-pnorm(1.96-theta*sqrt(25)))) # Add a variable that for each theta gives us power, according to the power function above
+
+
+ggplot(power_data, aes(x= theta, y=power)) + # Plot power over theta
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&amp;quot;dashed&amp;quot;, color = &amp;quot;darkblue&amp;quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&amp;quot;Power&amp;quot;) +
+  annotate(geom = &amp;quot;text&amp;quot;, x = 0.3, y = 0.08, 
+           label = &amp;quot;alpha&amp;quot;, 
+           parse = T, 
+           color = &amp;quot;darkblue&amp;quot;, 
+           size = 5) +
+  theme_classic()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/powercurve-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As the true effect becomes bigger in absolute values, power goes to 100%. Optimally one would want a power function that wasn’t curved but instead always rejected &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; whenever it was false, how small the effect may be. I.e. we would want a power function that fulfills:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:1&#34;&gt;\[\begin{equation} 
+  power =\mathbb{P}[\text{reject} \: H_0 \: | \: \text{any} \: \theta \neq 0] = 1
+  \tag{1}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;and&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:2&#34;&gt;\[\begin{equation} 
+  power =\mathbb{P}[\text{reject} \: H_0 \: | \: \theta = 0] = 0
+  \tag{2}
+\end{equation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;However, tests that fufill these are in practice difficult (if not impossible) to find and we must compromise. For example, equation &lt;a href=&#34;#eq:2&#34;&gt;(2)&lt;/a&gt; tells us that we do not ever want to reject the null hypothesis if it is in fact true. The probability of rejecting the null when the null is true is what we usually refer to as our α-level which we most commonly set to &lt;span class=&#34;math inline&#34;&gt;\(0.05\)&lt;/span&gt; in psychology, i.e. it is the probbility of a Type I error (falsely rejecting the null hypothesis). This compromise can be seen in the power curve above. Additionally, the smaller θ gets, the more difficult the effect is to detect, because the areas under the distribution function shrink.&lt;/p&gt;
+&lt;p&gt;When we now know what a power curve is and how it can be derived analytically for a given test, it might be worth mentioning how one can approximate power numerically with simulations. I am not going to use the paired example as I did above, because that requires us to assume some correlation between the measurements. I am going to show the easiest example of simulating power for a t-test between two independent groups, i.e. we assume indpendence between observations.&lt;/p&gt;
+&lt;p&gt;The basic concept behind it is fairly simple, we draw one sample from a normal distributions with a mean of 0 and we draw one sample from a normal distribution with a mean of θ. We then run a t-test to compare the mean differences between the samples to see obtain a p-value. We do this a couple of times and save the p-values for every test. Then we divide the number of significant p-values (p-values &amp;lt; 0.05 in this case) on the total number of tests run and the ratio that we obtain is the power. That is, the power is the number of significant tests, divided by the total number of simulations. The more simulations run, the closer our numerical solution will be to the analytical. Look at the code below.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+power_sim &amp;lt;- function (nsim, theta, n1, n2) {
+
+  sim_mat &amp;lt;- cbind(matrix(rnorm(n1*nsim, mean = theta, sd=1), 
+                   nrow = nsim,
+                   ncol = n1),
+                   matrix(rnorm(n2*nsim, mean = 0, sd=1), 
+                   nrow = nsim,
+                   ncol = n2))
+  
+  p_val &amp;lt;- apply(X = sim_mat, MARGIN =  1, 
+                        function(x) t.test(x = x[1:n1], y = x[(n1+1):(n1+n2)],
+                                           alternative = &amp;quot;two.sided&amp;quot;,
+                                           paired = FALSE)[[&amp;quot;p.value&amp;quot;]]
+                 )
+  
+  power &amp;lt;- sum(p_val &amp;lt; 0.05)/length(p_val)
+  
+  return(power)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Say that we want to see what the power curve would look like over different values of θ, as we did above. We then need to run the simulations for every specified value of θ. This is most easily done in a loop, but you can think of it as if we are running the function above for every θ that are of interest, for example like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;power_sim(nsim = 50, theta = 0.5 , n1 = 25, n2 = 25)
+
+power_sim(nsim = 50, theta = 1.0 , n1 = 25, n2 = 25)
+
+power_sim(nsim = 50, theta = 1.5 , n1 = 25, n2 = 25)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Doing it in a loop however requires a lot less code, so here we specify a θ vector, with every value that we are interested in. The code below does this and then plot the obtained power values over θ for 50 simulations.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+theta &amp;lt;- seq(from = -1.2, to = 1.2, length.out = 50) # Here we specify 50 different values of theta
+
+power &amp;lt;- 0 # We need to define an object outside of the loop to be able to iteratively save the power calculations
+
+for (i in 1:length(theta)) { # This is the loop, which runs the code below and saves the power iteratively
+  power[i] &amp;lt;- power_sim(nsim = 50, theta[i], n1 = 25, n2 = 25)
+}
+
+
+power_data &amp;lt;- as.data.frame(cbind(power, theta)) # Putting the theta vector and power vector into a data frame 
+
+
+ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just as we did analytically
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&amp;quot;dashed&amp;quot;, color = &amp;quot;darkblue&amp;quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&amp;quot;Power&amp;quot;) +
+  annotate(geom = &amp;quot;text&amp;quot;, x = 0.3, y = 0.08, 
+           label = &amp;quot;alpha&amp;quot;, 
+           parse = T, 
+           color = &amp;quot;darkblue&amp;quot;, 
+           size = 5) +
+  theme_classic()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/unnamed-chunk-2-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As can be seen, the general pattern is similar to the analytical solution. But since we only ran 50 simulations for every parameter combination we won’t get very precise estimations. So let’s amp it up to 10,000 simulations:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
+theta &amp;lt;- seq(from = -1.2, to = 1.2, length.out = 50) 
+
+power &amp;lt;- 0 
+
+for (i in 1:length(theta)) { 
+  power[i] &amp;lt;- power_sim(nsim = 10000, theta[i], n1 = 25, n2 = 25)
+}
+
+
+power_data &amp;lt;- as.data.frame(cbind(power, theta)) 
+
+
+ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just as we did analytically
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&amp;quot;dashed&amp;quot;, color = &amp;quot;darkblue&amp;quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&amp;quot;Power&amp;quot;) +
+  annotate(geom = &amp;quot;text&amp;quot;, x = 0.3, y = 0.08, 
+           label = &amp;quot;alpha&amp;quot;, 
+           parse = T, 
+           color = &amp;quot;darkblue&amp;quot;, 
+           size = 5) +
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/unnamed-chunk-4-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now, this looks more like it! If you compare the analytical power curve with this one you may notice that the first one is more steep - that steepness relects the power advantage of doing paired difference tests instead of independent tests, as we did for the simulation.&lt;/p&gt;
+&lt;p&gt;Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!&lt;/p&gt;
+&lt;p&gt;Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Amateur adventures in 3D visualisation for multivariate power curves</title>
+      <link>/post/amateur-adventures-in-3d-visualisation-for-power-curves/</link>
+      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/amateur-adventures-in-3d-visualisation-for-power-curves/</guid>
+      <description>
+
+
+
+&lt;p&gt;When I first started modelling power, less than a year ago, I had very limited experience with data visualisation. In fact, I was completely new to R and had mainly (but limitedly) worked in Stata and SAS - where my goal was to get a hang of the syntax rather than to understand data formats (even though that might have been more important to be honest). However, I decided to switch to R because of the community surrounding the language, the open source and free nature of it and its potential for being one of the handiest tools for transparent research (i.e. its the best and fun and cool).&lt;/p&gt;
+&lt;p&gt;Anyways, I was trying to model power for multivariate hypothesis testing. In the simplest of cases such test only includes two groups and two dependent variables - so this was what I set out to try to model and visualise. The power function for a hypothesis test is defined as the following:&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>fMRI - fraudulent or functional for real?</title>
+      <link>/post/fmri-funky-or-fraudulent/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/fmri-funky-or-fraudulent/</guid>
+      <description>
+
+
+&lt;p&gt;We have all seen the colourful dashing pictures of the brain at work. For example the one below from [this and this study]. The most widley used technique to produce these pictures are functional magnetic resonance imaging (fMRI). But what does the coloured pixels actually mean and can they really tell us anything about the cognitive processes going on? Do we give dashes and blobs of colours unreasonably high inferential value just because they are painted on a picture of a brain?&lt;/p&gt;
+&lt;p&gt;In this blog post I will give a brief background on how these blobs come about and the inferential caveats that might arise. As an example I will use&lt;/p&gt;
+&lt;p&gt;Despite its title, this blog post is not really to conclude one or the other, but rather introduce and line up the caveats of drawing inferences from fMRI data - both for my own sake and anyone interested in this stuff.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The Curious Case of the Winner&#39;s Curse</title>
       <link>/post/the-curious-case-of-the-winner-s-curse/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
@@ -69,8 +259,8 @@ The problem of premorbid ability generalises to group lesion studies as well, bu
 &lt;/div&gt;
 &lt;p&gt;What becomes evident here is that even with a deficit of 2 σ where we would expect a probability of 50 %, we would get a &amp;ldquo;general&amp;rdquo; overestimation of this deficit of about 0.6 σ (which is quite alot). This is due to the fact that we cannot detect the people that have a premobrbid ability above the population mean, if not our control sample &lt;em&gt;by chance&lt;/em&gt; happens to be drawn from the &amp;ldquo;right side&amp;rdquo; side of the distribution (that is we draw a control sample with high reaction time abilities).&lt;/p&gt;
 &lt;p&gt;This also explains the curious case when we have a small control sample and a small effect size - yielding a lower overestimation, even though we technically should have lower power. It is easier for a small sample to have a mean that differs from the population mean (think again about the IMDB score), meaning that they can be both higher and lower in an equally distributed manner. However, since our simulated patient solely is diagnosed with a deficit if they have a reaction time that is lower than the control sample mean, this will bias the result in favour of when the control sample are drawn from the right side of the distribution - making it easier to detect smaller deficits and hence the overestimation is lowered.&lt;/p&gt;
-&lt;p&gt;What else is evident is that the difference in overestimation between a control sample size of 15 and that of 70 is marginal. Meaning that single case reearchers would waste their resources collecting data from larger control sample sizes, given that they want to minimise overestimation.&lt;/p&gt;
-&lt;p&gt;This is just one problem that low power yields, and in a very specific field. In the next post I will simulate the effects in more general experiments and talk about other power issues, such as positive predictive values. However, I hope that by showing you this, it is clear that low power is not only bad because it will become harder for you to obtain significance in your undergrad thesis. It is bad because, in the long run, it can invalidate our field.&lt;/p&gt;
+&lt;p&gt;What else is evident is that the difference in overestimation between a control sample size of 15 and that of 70 is marginal. Meaning that single case researchers would waste their resources collecting data from larger control sample sizes, given that they want to minimise overestimation.&lt;/p&gt;
+&lt;p&gt;This is just one problem that low power yields, and in a very specific field. In the next post I will simulate the effects in more general experiments and talk about other power issues, such as how the positive predictive value is affected. However, I hope that by showing you this, it is clear that low power is not only bad because it will become harder for you to obtain significance in your undergrad thesis. It is bad because, in the long run, it can invalidate our field.&lt;/p&gt;
 </description>
     </item>
     

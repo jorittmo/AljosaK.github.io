@@ -1,0 +1,79 @@
+konpowMAN<- function (corr, es1, es2, nos){
+  library(MASS)
+  group<-c(rep(0,25),rep(1,25))
+  P<-0
+  for (i in 1:nos){
+    z1<-mvrnorm(length(group),0,1)
+    z2<-(corr*z1)+(sqrt(1-(corr^2)))*mvrnorm(length(group),0,1)
+    
+    y1<-ifelse(group>0,0+(1*z1),es1+(1*z1))
+    y2<-ifelse(group>0,(0+(1*z2)),es2+(1*z2))
+    
+    res.manova <- manova(cbind(y1,y2)~group)
+    P[i]<-as.numeric(summary(res.manova)$stats[1,"Pr(>F)"])
+  }
+  
+  pwr<-(length(which(P<0.05))/length(P))
+  return(pwr)
+  
+}
+
+konpowMAN(0,0,0,100)
+
+powergraf<- function(nos){
+  eff1<-rep(seq(0, 1, length.out = 10), each=100)
+  eff2<-rep(rep(seq(-1, 1, length.out = 10), each= 10))
+  corr<-rep(seq(-0.9, 0.9, length.out = 10),100)
+  pwr<-0
+  for (i in 1:100){
+    pwr<-c(pwr, konpowMAN(corr[i],eff1[i],eff1[i],nos))
+  }
+  pwr<-pwr[-1]
+  pwr_frame<-data.frame("Power"=pwr, "Corr"=corr, "Effect"=eff1)
+  
+  library(plotly)
+  
+#  axx <- list(title = "Korrelation")
+#  axy <- list(title = "Effektstorlek")
+#  axz <- list(title = "Power")
+  
+#  steps <- list(
+#    list(args = list("marker.color", "red"), 
+#         label = "Red", 
+#         method = "restyle", 
+#         value = "1"
+#    ),
+#    list(args = list("marker.color", "green"), 
+#         label = "Green", 
+#         method = "restyle", 
+#         value = "2"
+ #   ),
+#    list(args = list("marker.color", "blue"), 
+#         label = "Blue", 
+#         method = "restyle", 
+#         value = "3"
+#    )
+#  )
+  
+  p <- plot_ly(x = ~corr, y = ~eff1, z = ~pwr, type = "mesh3d") #%>%
+   # layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz), title = "MANPOW",
+   #        sliders = list(
+    #         list(
+    #           active = 1, 
+    #           currentvalue = list(prefix = "Color: "), 
+    #           pad = list(t = 60), 
+    #           steps = steps)))
+  p
+  print(pwr)
+  print(length(unique(pwr)))
+}
+
+powergraf(10)
+
+
+
+
+for (i in 1:10) {
+x[i]<-  konpowMAN(corr[i], eff1[i], eff2[i], 10)
+}
+x

@@ -1,0 +1,3 @@
+"0","knitr::opts_chunk$set(collapse = TRUE)"
+"0","options(knitr.table.format = ""html"") "
+"0","library(tidyverse)"

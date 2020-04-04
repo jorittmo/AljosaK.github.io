@@ -1,0 +1,26 @@
+---
+title: fMRI - fraudulent or functional for real?
+draft: true
+author: Jonathan Rittmo
+date: '2020-04-02'
+slug: fmri-funky-or-fraudulent
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-04-02T16:29:45+01:00'
+featured: no
+image:
+  caption: 'Image credit: [**Image by ElisaRiva from Pixabay**](https://pixabay.com/users/elisariva-1348268/)'
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+We have all seen the colourful dashing pictures of the brain at work. For example the one below from [this and this study]. The most widley used technique to produce these pictures are functional magnetic resonance imaging (fMRI). But what does the coloured pixels actually mean and can they really tell us anything about the cognitive processes going on? Do we give dashes and blobs of colours unreasonably high inferential value just because they are painted on a picture of a brain?
+
+In this blog post I will give a brief background on how these blobs come about and the inferential caveats that might arise. As an example I will use 
+
+
+Despite its title, this blog post is not really to conclude one or the other, but rather introduce and line up the caveats of drawing inferences from fMRI data - both for my own sake and anyone interested in this stuff. 

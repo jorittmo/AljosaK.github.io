@@ -1,0 +1,198 @@
+library(plotly)
+rm(list=ls())
+
+
+
+load("C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/10000 sim manova&anova.Rdata")
+for ( i in 1:length(ls_data)){
+  ls_data[[i]][["eff1"]] <- unique(ls_data[[i]][["eff1"]])
+  ls_data[[i]][["corr"]] <- unique(ls_data[[i]][["corr"]])
+  ls_data[[i]][["pwr"]] <- matrix(ls_data[[i]][["pwr"]], nrow=11, ncol=11)
+  
+}
+surface_data <- ls_data
+switched_corr <- surface_data
+corr <- seq(-0.99, 0.99, length.out = 11)
+eff2 <- eff2<-seq(-1, 1, length.out = 11)
+eff2 <- eff2<-seq(-1, 1, length.out = 11)
+
+for (i in 1:11) {
+  switched_corr[[i]][['corr']] <- corr[i]
+  switched_corr[[i+11]][['corr']] <- corr[i]
+  
+  switched_corr[[i]][['eff2']] <- eff2
+  switched_corr[[i+11]][['eff2']] <- eff2
+  
+  for (j in 1:11) {
+    switched_corr[[i]][["pwr"]][j,] <- surface_data[[j]][["pwr"]][i,]
+    switched_corr[[i+11]][["pwr"]][j,] <- surface_data[[j+11]][["pwr"]][i,]
+  }
+}
+
+for (i in 1:22) {
+  switched_corr[[i]][["pwr"]] <- t(switched_corr[[i]][["pwr"]])
+}
+
+manpwrOG <- c(surface_data[[12]][["pwr"]][5,],surface_data[[13]][["pwr"]][5,],surface_data[[14]][["pwr"]][5,],
+              surface_data[[15]][["pwr"]][5,],surface_data[[16]][["pwr"]][5,],surface_data[[17]][["pwr"]][5,],
+              surface_data[[18]][["pwr"]][5,],surface_data[[19]][["pwr"]][5,],surface_data[[20]][["pwr"]][5,],
+              surface_data[[21]][["pwr"]][5,],surface_data[[22]][["pwr"]][5,])
+manpwrOG <- matrix(manpwrOG, nrow=11, ncol=11)
+manpwrSW <- switched_corr[[16]][["pwr"]]
+identical(manpwrOG, manpwrSW)
+
+aovpwrOG <- c(surface_data[[1]][["pwr"]][5,],surface_data[[2]][["pwr"]][5,],surface_data[[3]][["pwr"]][5,],
+              surface_data[[5]][["pwr"]][5,],surface_data[[6]][["pwr"]][5,],surface_data[[7]][["pwr"]][5,],
+              surface_data[[8]][["pwr"]][5,],surface_data[[9]][["pwr"]][5,],surface_data[[10]][["pwr"]][5,],
+              surface_data[[11]][["pwr"]][5,],surface_data[[12]][["pwr"]][5,])
+
+aovpwrOG <- matrix(manpwrOG, nrow=11, ncol=11, byrow=TRUE)
+aovpwrSW <- switched_corr[[5]][["pwr"]]
+identical(aovpwrOG, aovpwrSW)
+
+
+
+
+p <- plot_ly()
+
+p <-  add_trace(p, x = switched_corr[[13]][["corr"]],
+                y = switched_corr[[13]][["eff1"]],
+                z=switched_corr[[13]][["pwr"]],
+                # name = switched_corr[1][[1]][["name"]],
+                hoverinfo = 'z',
+                visible = ifelse(i==6 | i==17, TRUE, FALSE),
+                type= 'surface',
+                showscale = FALSE,
+                colorscale = list(c(0, 1), c("tan", "red"))
+)
+p
+
+
+plot_fast <- function(){
+  library(plotly)
+  load("C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/10000 sim manova&anova.Rdata")
+  for ( i in 1:length(ls_data)){
+    ls_data[[i]][["eff1"]] <- unique(ls_data[[i]][["eff1"]])
+    ls_data[[i]][["corr"]] <- unique(ls_data[[i]][["corr"]])
+    ls_data[[i]][["pwr"]] <- matrix(ls_data[[i]][["pwr"]], nrow=11, ncol=11)
+    
+  }
+  surface_data <- ls_data
+  switched_corr <- surface_data
+  corr <- seq(-0.99, 0.99, length.out = 11)
+  eff2 <- eff2<-seq(-1, 1, length.out = 11)
+  eff2 <- eff2<-seq(-1, 1, length.out = 11)
+  
+  for (i in 1:11) {
+    switched_corr[[i]][['corr']] <- corr[i]
+    switched_corr[[i+11]][['corr']] <- corr[i]
+    
+    switched_corr[[i]][['eff2']] <- eff2
+    switched_corr[[i+11]][['eff2']] <- eff2
+    
+    for (j in 1:11) {
+      switched_corr[[i]][["pwr"]][j,] <- surface_data[[j]][["pwr"]][i,]
+      switched_corr[[i+11]][["pwr"]][j,] <- surface_data[[j+11]][["pwr"]][i,]
+    }
+  }
+  
+  # for (i in 1:22) {
+  #   switched_corr[[i]][["pwr"]] <- t(switched_corr[[i]][["pwr"]])
+  # }
+  
+  eff2<-seq(-1, 1, length.out = 11)
+  steps <- list()
+  p <- plot_ly()
+  
+  
+  
+  #Create steps that inhibit visuality of steps
+  for (i in 1:11) {
+    step <- list(args = list('visible', rep(FALSE, 11)),
+                 method = 'restyle', label=paste0(switched_corr[[i]][["corr"]]))
+    step$args[[2]][i] = TRUE
+    #step$args[[2]][i+11] = TRUE
+    steps[[i]] <- step
+  }
+  
+  
+  AOVstep<-list()
+  for (i in 1:11) {
+    steg <- list(args = list('visible', rep(FALSE, length(switched_corr))),
+                 method ='restyle', label=paste0(switched_corr[[i]][["corr"]]))
+    steg$args[[2]][i] = TRUE
+    AOVstep[[i]] <- steg
+  }
+  
+  
+  MANstep<-list()
+  for (i in 1:11) {
+    steg <- list(args = list('visible', rep(FALSE, length(switched_corr))),
+                 method ='restyle', label=paste0(switched_corr[[i]][["corr"]]))
+    steg$args[[2]][i+11] = TRUE
+    MANstep[[i]] <- steg
+  }
+  
+  
+  p <-  plot_ly()
+  
+  for  (i in 1:11){
+    p <-  add_trace(p, x = switched_corr[[i]][["eff2"]],
+                    y = switched_corr[[i]][["eff1"]],
+                    z=switched_corr[[i]][["pwr"]],
+                    # name = switched_corr[1][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = ifelse(i==6 | i==17, TRUE, FALSE),
+                    type= 'surface',
+                    showscale = FALSE
+    )
+    
+  }
+  
+  for  (i in 12:22){
+    p <-  add_trace(p, x = switched_corr[[i]][["eff2"]],
+                    y = switched_corr[[i]][["eff1"]],
+                    z=switched_corr[[i]][["pwr"]],
+                    # name = switched_corr[1][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = ifelse(i==6 | i==17, TRUE, FALSE),
+                    type= 'surface',
+                    showscale = FALSE,
+                    colorscale = list(c(0, 1), c("tan", "red"))
+    )
+    
+  }
+  
+  
+  # Create lists for axes
+  axy <- list(title = "Effect Y" #, autorange = FALSE,  range = range(switched_corr[1][[1]]$eff2)
+              )
+  axx <- list(title = "Effect X" #, autorange = FALSE,  range = range(switched_corr[1][[1]]$eff1)
+              )
+  axz <- list(title = "Power", autorange = FALSE, range = c(0,1))
+  
+  
+  # add slider control to plot and edit axes and stuff
+  p <- p %>%
+    layout(sliders = list(list(active = 5,
+                               currentvalue = list(prefix = 'Both, corr(x, Y):'),
+                               pad = list(t = 20),
+                               steps = steps),
+                          list(active = 5,
+                               currentvalue = list(prefix = "MANOVA, corr(X, Y): "),
+                               pad = list(t = 100, r = 400),
+                               steps = MANstep),
+                          list(active = 5,
+                               currentvalue = list(prefix = "ANOVA, corr(x, Y): "),
+                               pad = list(t = 100, l = 400),
+                               steps = AOVstep)),
+           scene = list(xaxis=axx,yaxis=axy,zaxis=axz, aspectmode='manual', 
+                        aspectratio =list(x=2, 
+                                          y=2, 
+                                          z=1)),
+           title='AVP of ANOVA & MANOVA - Two IV'
+    )
+  
+  p
+}
+plot_fast()

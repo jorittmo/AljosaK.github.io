@@ -1,0 +1,177 @@
+---
+title: Primary Concepts of Power Curves
+author: Jonathan Rittmo
+date: '2020-04-04'
+slug: primary-concepts-of-power-curves
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-04-04T14:32:54+01:00'
+featured: no
+output:
+  blogdown::html_page:
+    dev: "svg"
+image:
+  caption: 'Image credit: [**Photo by Samantha Sophia on Unsplash**](https://unsplash.com/photos/zFIKq7VEk1o)'
+  focal_point: ''
+  preview_only: no
+projects: []
+header-includes:
+ - \usepackage{amssymb}
+---
+
+
+
+
+<!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! -->
+<p>As the image above (probably abused by me) clearly states: “the abuse of power comes as no surprise”. Whether intentional or not, ingorance of a priori power calculations have been prominent in psychology and related fields.</p>
+<p>But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually is quite easy! So here goes:</p>
+<p>The power function for a hypothesis test is defined as the following:</p>
+<p><span class="math display">\[power(\theta) =\mathbb{P}[\text{reject} \: H_0 \: \text{for a given} \: \theta]\]</span></p>
+<p>Where <span class="math inline">\(\theta\)</span> is a given effect size, <span class="math inline">\(\mathbb{P}\)</span> probability and <span class="math inline">\(H_0\)</span> the null hypothesis. In more general terms it is defined (the vertical bar is read “given”):</p>
+<p><span class="math display">\[power =\mathbb{P}[\text{reject} \: H_0\:  | \: H_1 \: \text{is true}]\]</span></p>
+<p>Say that we want to test whether a medication has had some effect on a sample (we measure a continuous dependent variable on the same individuals before and after treatment) and we assume that we know the population standard deviation. If <span class="math inline">\(\overline{D}\)</span> is the average difference between the observations, for each individual then <span class="math inline">\(\overline{D} \sim N(\mu, \sigma^2)\)</span>, meaning that <span class="math inline">\(\overline{D}\)</span> follows the normal distribution with some population mean (<span class="math inline">\(\mu\)</span>) and variance (<span class="math inline">\(\sigma^2\)</span>). Standardising <span class="math inline">\(\overline{D}\)</span> by centering it around 0 (since we are talking about a difference it is already centered around 0 though) and dividing by the standard error we would have an entitiy that follows the standard normal distribution:</p>
+<p><span class="math display">\[\frac{\overline{D}-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\]</span></p>
+<p>Where <span class="math inline">\(\overline{D}\)</span> is the average of the differences between the two measurement time points and <span class="math inline">\({\sigma}_D\)</span> the population standard deviation and hence <span class="math inline">\({{\sigma}_D}/{\sqrt{n}}\)</span> the standard error and thus, if we input real values we would get a z-value. The null and alternative hypotheses for this test are <span class="math inline">\(H_0:\: \mu_D \: = \: 0\)</span> and <span class="math inline">\(H_1:\: \mu_D \: \neq \: 0\)</span> where <span class="math inline">\(\mu_D\)</span> is estimated by <span class="math inline">\(\overline{D}_n\)</span>.</p>
+<p>If we set <span class="math inline">\(\alpha\:=\:0.05\)</span> (i.e. <span class="math inline">\(\mathbb{P}\)</span>[reject <span class="math inline">\(H_0\)</span> | <span class="math inline">\(H_0\)</span> is true]<span class="math inline">\(\:=\:0.05\)</span>) our critical z-value would be <span class="math inline">\(z_{(0.05/2) }=\)</span> <span class="math inline">\(\pm\)</span> 1.96. If you are unfamilliar with critical values, have a look at the density plot below.</p>
+<p><img src="/post/primary-concepts/index_files/figure-html/zdist-1.svg" width="672" /></p>
+<p>All observed z-values that fall above or below these critical cutoff values are considered significant at the <span class="math inline">\(\alpha \: = \: 0.05\)</span> level. Now suppose that <span class="math inline">\(H_1:\: \mu_D \: \neq \: 0\)</span>, i.e. <span class="math inline">\(\mu_D =\)</span> <span class="math inline">\(\theta\)</span>. Then we get the power by calculating:</p>
+<p><span class="math display">\[\mathbb{P}[1.96 &lt; Z &lt; -1.96 \; | \; \mu_D =\theta]\]</span></p>
+<p>Since <span class="math inline">\(\frac{\overline{D}_n-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\)</span> we’ll write:</p>
+<p><span class="math display">\[\mathbb{P}[1.96 &lt; \frac{\overline{D}_{n}-0}{{{\sigma}_D}/{\sqrt{n}}} &lt; -1.96 \; | \; \mu_D =\theta]\]</span></p>
+<p>We’ll subtract and add <span class="math inline">\(\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}\)</span>, i.e. a neutral operation:</p>
+<p><span class="math display">\[\mathbb{P}[1.96 &lt; \frac{\overline{D}_{n}\:-\:0\:-\:\theta\:+\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &lt; -1.96 \; | \; \mu_D =\theta]\]</span></p>
+<p>And then move them to the other sides of the inequalities (be careful with the signs!):</p>
+<p><span class="math display">\[\mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&lt; \frac{\overline{D}_{n}\:-\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}} \; | \; \mu_D =\theta]\]</span></p>
+<p>Then we have:</p>
+<p><span class="math display">\[power(\theta) = \mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&lt; Z &lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]</span></p>
+<p>Which is the same as:</p>
+<p><span class="math display">\[power(\theta) = \mathbb{P}[Z &lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}] + \mathbb{P}[Z &gt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]</span></p>
+<p>Note that</p>
+<p><span class="math display">\[\mathbb{P}[Z &gt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]</span></p>
+<p>also can be written</p>
+<p><span class="math display">\[1 \: - \: \mathbb{P}[Z &lt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]</span></p>
+<p>So now we can write our power function for this test:</p>
+<p><span class="math display">\[power(\theta) = \mathbb{P}[Z &lt; -1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}] + 1 \: - \: \mathbb{P}[Z &lt; 1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]</span></p>
+<p>The notation <span class="math inline">\(\mathbb{P}[Z &lt; z]\)</span> is usually written <span class="math inline">\(N(z)\)</span> and denotes the <em>area</em> under the cumulative distribution function up til the value of <span class="math inline">\(z\)</span>.</p>
+<p>This became much more technical than what I imagined when I started out with this post. I might have to push my amateur adventures in 3D visualisation to the next post! Anyway, now we have:</p>
+<p><span class="math display">\[power(\theta) = N(-1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}) + 1 - N(1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}})\]</span></p>
+<p>If we assume <span class="math inline">\(\sigma_D=1\)</span> and <span class="math inline">\(n=25\)</span> this will give us a single value for each <span class="math inline">\(\theta\)</span> we put in. We can easily calculate this in R and plot the power against possible values of <span class="math inline">\(\theta\)</span> - this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold <span class="math inline">\(\theta\)</span> fixed and vary <em>n</em>.</p>
+<pre class="r"><code>
+power_data &lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&gt;% # Create a data frame with a variabl of various theta
+  mutate(power = pnorm(-1.96-theta*sqrt(25)) + (1-pnorm(1.96-theta*sqrt(25)))) # Add a variable that for each theta gives us power, according to the power function above
+
+
+ggplot(power_data, aes(x= theta, y=power)) + # Plot power over theta
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&quot;dashed&quot;, color = &quot;darkblue&quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&quot;Power&quot;) +
+  annotate(geom = &quot;text&quot;, x = 0.3, y = 0.08, 
+           label = &quot;alpha&quot;, 
+           parse = T, 
+           color = &quot;darkblue&quot;, 
+           size = 5) +
+  theme_classic()</code></pre>
+<p><img src="/post/primary-concepts/index_files/figure-html/powercurve-1.svg" width="672" /></p>
+<p>As the true effect becomes bigger in absolute values, power goes to 100%. Optimally one would want a power function that wasn’t curved but instead always rejected <span class="math inline">\(H_0\)</span> whenever it was false, how small the effect may be. I.e. we would want a power function that fulfills:</p>
+<p><span class="math display" id="eq:1">\[\begin{equation} 
+  power =\mathbb{P}[\text{reject} \: H_0 \: | \: \text{any} \: \theta \neq 0] = 1
+  \tag{1}
+\end{equation}\]</span></p>
+<p><strong>and</strong></p>
+<p><span class="math display" id="eq:2">\[\begin{equation} 
+  power =\mathbb{P}[\text{reject} \: H_0 \: | \: \theta = 0] = 0
+  \tag{2}
+\end{equation}\]</span></p>
+<p>However, tests that fufill these are in practice difficult (if not impossible) to find and we must compromise. For example, equation <a href="#eq:2">(2)</a> tells us that we do not ever want to reject the null hypothesis if it is in fact true. The probability of rejecting the null when the null is true is what we usually refer to as our α-level which we most commonly set to <span class="math inline">\(0.05\)</span> in psychology, i.e. it is the probbility of a Type I error (falsely rejecting the null hypothesis). This compromise can be seen in the power curve above. Additionally, the smaller θ gets, the more difficult the effect is to detect, because the areas under the distribution function shrink.</p>
+<p>When we now know what a power curve is and how it can be derived analytically for a given test, it might be worth mentioning how one can approximate power numerically with simulations. I am not going to use the paired example as I did above, because that requires us to assume some correlation between the measurements. I am going to show the easiest example of simulating power for a t-test between two independent groups, i.e. we assume indpendence between observations.</p>
+<p>The basic concept behind it is fairly simple, we draw one sample from a normal distributions with a mean of 0 and we draw one sample from a normal distribution with a mean of θ. We then run a t-test to compare the mean differences between the samples to see obtain a p-value. We do this a couple of times and save the p-values for every test. Then we divide the number of significant p-values (p-values &lt; 0.05 in this case) on the total number of tests run and the ratio that we obtain is the power. That is, the power is the number of significant tests, divided by the total number of simulations. The more simulations run, the closer our numerical solution will be to the analytical. Look at the code below.</p>
+<pre class="r"><code>
+power_sim &lt;- function (nsim, theta, n1, n2) {
+
+  sim_mat &lt;- cbind(matrix(rnorm(n1*nsim, mean = theta, sd=1), 
+                   nrow = nsim,
+                   ncol = n1),
+                   matrix(rnorm(n2*nsim, mean = 0, sd=1), 
+                   nrow = nsim,
+                   ncol = n2))
+  
+  p_val &lt;- apply(X = sim_mat, MARGIN =  1, 
+                        function(x) t.test(x = x[1:n1], y = x[(n1+1):(n1+n2)],
+                                           alternative = &quot;two.sided&quot;,
+                                           paired = FALSE)[[&quot;p.value&quot;]]
+                 )
+  
+  power &lt;- sum(p_val &lt; 0.05)/length(p_val)
+  
+  return(power)
+}
+</code></pre>
+<p>Say that we want to see what the power curve would look like over different values of θ, as we did above. We then need to run the simulations for every specified value of θ. This is most easily done in a loop, but you can think of it as if we are running the function above for every θ that are of interest, for example like this:</p>
+<pre class="r"><code>power_sim(nsim = 50, theta = 0.5 , n1 = 25, n2 = 25)
+
+power_sim(nsim = 50, theta = 1.0 , n1 = 25, n2 = 25)
+
+power_sim(nsim = 50, theta = 1.5 , n1 = 25, n2 = 25)</code></pre>
+<p>Doing it in a loop however requires a lot less code, so here we specify a θ vector, with every value that we are interested in. The code below does this and then plot the obtained power values over θ for 50 simulations.</p>
+<pre class="r"><code>
+theta &lt;- seq(from = -1.2, to = 1.2, length.out = 50) # Here we specify 50 different values of theta
+
+power &lt;- 0 # We need to define an object outside of the loop to be able to iteratively save the power calculations
+
+for (i in 1:length(theta)) { # This is the loop, which runs the code below and saves the power iteratively
+  power[i] &lt;- power_sim(nsim = 50, theta[i], n1 = 25, n2 = 25)
+}
+
+
+power_data &lt;- as.data.frame(cbind(power, theta)) # Putting the theta vector and power vector into a data frame 
+
+
+ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just as we did analytically
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&quot;dashed&quot;, color = &quot;darkblue&quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&quot;Power&quot;) +
+  annotate(geom = &quot;text&quot;, x = 0.3, y = 0.08, 
+           label = &quot;alpha&quot;, 
+           parse = T, 
+           color = &quot;darkblue&quot;, 
+           size = 5) +
+  theme_classic()</code></pre>
+<p><img src="/post/primary-concepts/index_files/figure-html/unnamed-chunk-2-1.svg" width="672" /></p>
+<p>As can be seen, the general pattern is similar to the analytical solution. But since we only ran 50 simulations for every parameter combination we won’t get very precise estimations. So let’s amp it up to 10,000 simulations:</p>
+<pre class="r"><code>
+theta &lt;- seq(from = -1.2, to = 1.2, length.out = 50) 
+
+power &lt;- 0 
+
+for (i in 1:length(theta)) { 
+  power[i] &lt;- power_sim(nsim = 10000, theta[i], n1 = 25, n2 = 25)
+}
+
+
+power_data &lt;- as.data.frame(cbind(power, theta)) 
+
+
+ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just as we did analytically
+  geom_line(size=1) +
+  geom_hline(yintercept = 0.05, linetype =&quot;dashed&quot;, color = &quot;darkblue&quot;) +
+  geom_vline(xintercept = 0) +
+  xlab(expression(paste(theta))) +
+  ylab(&quot;Power&quot;) +
+  annotate(geom = &quot;text&quot;, x = 0.3, y = 0.08, 
+           label = &quot;alpha&quot;, 
+           parse = T, 
+           color = &quot;darkblue&quot;, 
+           size = 5) +
+  theme_classic()
+</code></pre>
+<p><img src="/post/primary-concepts/index_files/figure-html/unnamed-chunk-4-1.svg" width="672" /></p>
+<p>Now, this looks more like it! If you compare the analytical power curve with this one you may notice that the first one is more steep - that steepness relects the power advantage of doing paired difference tests instead of independent tests, as we did for the simulation.</p>
+<p>Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!</p>
+<p>Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!</p>
