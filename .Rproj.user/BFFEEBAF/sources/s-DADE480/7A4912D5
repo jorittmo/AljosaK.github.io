@@ -1,20 +1,20 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1586008045940.000,
+    "created" : 1586015550210.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "60919791",
-    "id" : "D785A709",
-    "lastKnownWriteTime" : 1586012183,
-    "last_content_update" : 1586012183742,
+    "hash" : "2035690810",
+    "id" : "7A4912D5",
+    "lastKnownWriteTime" : 1586015585,
+    "last_content_update" : 1586015585189,
     "path" : "C:/Users/jritt/Google Drive/Website/AljosaK.github.io/content/post/primary-concepts/index.Rmd",
     "project_path" : "content/post/primary-concepts/index.Rmd",
     "properties" : {
-        "cursorPosition" : "198,218",
+        "cursorPosition" : "75,66",
         "last_setup_crc32" : "DADE48057747066",
-        "scrollLine" : "190"
+        "scrollLine" : "50"
     },
     "read_only" : false,
     "read_only_alternatives" : [
