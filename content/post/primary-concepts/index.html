@@ -117,7 +117,7 @@ power_sim &lt;- function (nsim, theta, n1, n2) {
 power_sim(nsim = 50, theta = 1.0 , n1 = 25, n2 = 25)
 
 power_sim(nsim = 50, theta = 1.5 , n1 = 25, n2 = 25)</code></pre>
-<p>Doing it in a loop however requires a lot less code, so here we specify a θ vector, with every value that we are interested in and iteratively run the power simulation function we created for each of those values. The code below does this and then plot the obtained power values over θ for 50 simulations.</p>
+<p>Doing it in a loop however requires a lot less code, so we specify a θ vector, with every value that we are interested in and iteratively run the power simulation function we created for each of those values. The code below does this and then plot the obtained power values over θ for 50 simulations.</p>
 <pre class="r"><code>
 theta &lt;- seq(from = -1.2, to = 1.2, length.out = 50) # Here we specify 50 different values of theta
 
