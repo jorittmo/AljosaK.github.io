@@ -73,7 +73,7 @@ ggplot(Z_dist, aes(x = Z,
 ```
 
 
-All observed z-values that fall above or below these critical cutoff values are considered significant at the $\alpha \: =  \: 0.05$ level. Now suppose that $H_1:\: \mu_D \: \neq \: 0$, i.e. $\mu_D =$ $\theta$. Then we get the power by calculating:
+All observed z-values that fall above or below these critical cutoff values are considered significant at the $\alpha \: =  \: 0.05$ level. Now suppose that $\mu_D \: \neq \: 0$, i.e. $\mu_D =$ $\theta$. Then we get the power by calculating:
 
 $$\mathbb{P}[1.96 < Z < -1.96 \; | \; \mu_D =\theta]$$
 
@@ -156,7 +156,7 @@ As the true effect becomes bigger in absolute values, power goes to 100%. Optima
 
 However, tests that fufill these are in practice difficult (if not impossible) to find and we must compromise. For example, equation \@ref(eq:2) tells us that we do not ever want to reject the null hypothesis if it is in fact true. The probability of rejecting the null when the null is true is what we usually refer to as our &alpha;-level which we most commonly set to $0.05$ in psychology, i.e. it is the probbility of a Type I error (falsely rejecting the null hypothesis). This compromise can be seen in the power curve above. Additionally, the smaller &theta; gets, the more difficult the effect is to detect, because the areas under the distribution function shrink.
 
-When we now know what a power curve is and how it can be derived analytically for a given test, it might be worth mentioning how one can approximate power numerically with simulations. I am not going to use the paired example as I did above, because that requires us to assume some correlation between the measurements. I am going to show the easiest example of simulating power for a t-test between two independent groups, i.e. we assume indpendence between observations. 
+When we now know what a power curve is and how it can be derived analytically for a given test, it might be worth mentioning how one can approximate power numerically with simulations. I am not going to use the paired example as I did above, because that requires us to assume some correlation between the measurements. I am going to show the easiest example of simulating power for a t-test between two independent groups, i.e. we assume independence between observations. 
 
 The basic concept behind it is fairly simple, we draw one sample from a normal distributions with a mean of 0 and we draw one sample from a normal distribution with a mean of &theta;. We then run a t-test to compare the mean differences between the samples to see obtain a p-value. We do this a couple of times and save the p-values for every test. Then we divide the number of significant p-values (p-values < 0.05 in this case) on the total number of tests run and the ratio that we obtain is the power. That is, the power is the number of significant tests, divided by the total number of simulations. The more simulations run, the closer our numerical solution will be to the analytical. Look at the code below.
 
