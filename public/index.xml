@@ -41,7 +41,7 @@
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; \frac{\overline{D}_{n}-0}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;We’ll subtract and add &lt;span class=&#34;math inline&#34;&gt;\(\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}\)&lt;/span&gt;, i.e. a neutral operation:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; \frac{\overline{D}_{n}\:-\:0\:-\:\theta\:+\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;And then move them to the other sides of the inequalities (be careful with the signs!):&lt;/p&gt;
+&lt;p&gt;And then move &lt;span class=&#34;math inline&#34;&gt;\(+\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}\)&lt;/span&gt; to the other sides of the inequalities (be careful with the signs!):&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&amp;lt; \frac{\overline{D}_{n}\:-\:\theta}{{{\sigma}_D}/{\sqrt{n}}} &amp;lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}} \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Then we have:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = \mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}&amp;lt; Z &amp;lt; -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}]\]&lt;/span&gt;&lt;/p&gt;
