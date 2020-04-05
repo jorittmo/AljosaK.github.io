@@ -1,24 +1,24 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1585902467482.000,
+    "created" : 1585902356606.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2567578122",
-    "id" : "4D356117",
-    "lastKnownWriteTime" : 1586008296,
-    "last_content_update" : 1586008297194,
-    "path" : "C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/Surfaceplot.R",
+    "hash" : "0",
+    "id" : "C8382C3",
+    "lastKnownWriteTime" : 1566664278,
+    "last_content_update" : 1566664278,
+    "path" : "C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/Surfaceplot med loop.R",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "324,0",
+        "cursorPosition" : "111,0",
         "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
     ],
-    "relative_order" : 7,
+    "relative_order" : 6,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"

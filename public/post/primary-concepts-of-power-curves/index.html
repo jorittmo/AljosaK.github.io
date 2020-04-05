@@ -781,8 +781,7 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
   theme_classic()
 </code></pre>
 <p><img src="/post/primary-concepts/index_files/figure-html/unnamed-chunk-4-1.svg" width="672" /></p>
-<p>Now, this looks more like it! If you compare the analytical power curve with this one you may notice that the first one is more steep - that steepness relects the power advantage of doing paired difference tests instead of independent tests, as we did for the simulation.</p>
-<p>Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!</p>
+<p>Now, this looks more like it! This approach is a useful tool for a priori power calculations when an anlytical solution is too difficult (sometimes it’s even impossible) to find. But naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!</p>
 <p>Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!</p>
 <!-- P.S. If you want to know how tripling the sample size would effect the curve - have a look below: -->
 

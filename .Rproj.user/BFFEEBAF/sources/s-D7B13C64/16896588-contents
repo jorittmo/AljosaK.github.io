@@ -313,7 +313,7 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
   theme_classic()
 ```
 
-Now, this looks more like it! This approach is useful tool for a priori power calculations when an anlytical solution is too difficult (sometimes it's even impossible) to find. But naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don't have to be a mathematician to start out with your a priori power calcs!
+Now, this looks more like it! This approach is a useful tool for a priori power calculations when an anlytical solution is too difficult (sometimes it's even impossible) to find. But naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don't have to be a mathematician to start out with your a priori power calcs!
 
 Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!
 
