@@ -18,12 +18,14 @@
       <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
       <guid>/post/primary-concepts-of-power-curves/</guid>
       <description>
-
+&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! --&gt;
 &lt;p&gt;As the image above (probably abused by me) clearly states: “the abuse of power comes as no surprise”. Whether intentional or not, ingorance of a priori power calculations have been prominent in psychology and related fields.&lt;/p&gt;
-&lt;p&gt;But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually is quite easy! So here goes:&lt;/p&gt;
+&lt;p&gt;But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually are quite easy! So here goes:&lt;/p&gt;
 &lt;p&gt;The power function for a hypothesis test is defined as the following:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) =\mathbb{P}[\text{reject} \: H_0 \: \text{for a given} \: \theta]\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; is a given effect size, &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}\)&lt;/span&gt; probability and &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; the null hypothesis. In more general terms it is defined (the vertical bar is read “given”):&lt;/p&gt;
@@ -54,9 +56,8 @@
 &lt;p&gt;The notation &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}[Z &amp;lt; z]\)&lt;/span&gt; is usually written &lt;span class=&#34;math inline&#34;&gt;\(N(z)\)&lt;/span&gt; and denotes the &lt;em&gt;area&lt;/em&gt; under the cumulative distribution function up til the value of &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;This became much more technical than what I imagined when I started out with this post. I might have to push my amateur adventures in 3D visualisation to the next post! Anyway, now we have:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[power(\theta) = N(-1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}) + 1 - N(1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}})\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;If we assume &lt;span class=&#34;math inline&#34;&gt;\(\sigma_D=1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=25\)&lt;/span&gt; this will give us a single value for each &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; we put in. We can easily calculate this in R and plot the power against possible values of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; - this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; fixed and vary &lt;em&gt;n&lt;/em&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
-power_data &amp;lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&amp;gt;% # Create a data frame with a variabl of various theta
+&lt;p&gt;If we assume &lt;span class=&#34;math inline&#34;&gt;\(\sigma_D=1\)&lt;/span&gt; and some sample size this will give us a single value for each &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; we put in. We can easily calculate this in R and plot the power against possible values of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; – this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; fixed and vary &lt;em&gt;n&lt;/em&gt;. Below I show the code for for how to calculate and draw the power curve via this function in R for a specified sample size of &lt;span class=&#34;math inline&#34;&gt;\(n=25\)&lt;/span&gt;. In the interactive graph below though, you can adjust the sample size yourself and see how that affects power.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;power_data &amp;lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&amp;gt;% # Create a data frame with a variabl of various theta
   mutate(power = pnorm(-1.96-theta*sqrt(25)) + (1-pnorm(1.96-theta*sqrt(25)))) # Add a variable that for each theta gives us power, according to the power function above
 
 
@@ -66,13 +67,15 @@ ggplot(power_data, aes(x= theta, y=power)) + # Plot power over theta
   geom_vline(xintercept = 0) +
   xlab(expression(paste(theta))) +
   ylab(&amp;quot;Power&amp;quot;) +
-  annotate(geom = &amp;quot;text&amp;quot;, x = 0.3, y = 0.08, 
-           label = &amp;quot;alpha&amp;quot;, 
-           parse = T, 
-           color = &amp;quot;darkblue&amp;quot;, 
+  annotate(geom = &amp;quot;text&amp;quot;, x = 0.3, y = 0.08,
+           label = &amp;quot;alpha&amp;quot;,
+           parse = T,
+           color = &amp;quot;darkblue&amp;quot;,
            size = 5) +
-  theme_classic()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/powercurve-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+  theme_classic()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/primary-concepts/index_files/figure-html//widgets/widget_powercurve.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
 &lt;p&gt;As the true effect becomes bigger in absolute values, power goes to 100%. Optimally one would want a power function that wasn’t curved but instead always rejected &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; whenever it was false, how small the effect may be. I.e. we would want a power function that fulfills:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:1&#34;&gt;\[\begin{equation} 
   power =\mathbb{P}[\text{reject} \: H_0 \: | \: \text{any} \: \theta \neq 0] = 1
@@ -171,8 +174,7 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
 &lt;p&gt;Now, this looks more like it! If you compare the analytical power curve with this one you may notice that the first one is more steep - that steepness relects the power advantage of doing paired difference tests instead of independent tests, as we did for the simulation.&lt;/p&gt;
 &lt;p&gt;Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!&lt;/p&gt;
 &lt;p&gt;Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!&lt;/p&gt;
-&lt;p&gt;P.S. If you want to know how tripling the sample size would effect the curve - have a look below:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/unnamed-chunk-5-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;!-- P.S. If you want to know how tripling the sample size would effect the curve - have a look below: --&gt;
 </description>
     </item>
     

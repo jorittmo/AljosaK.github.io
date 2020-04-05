@@ -22,12 +22,14 @@ header-includes:
  - \usepackage{amssymb}
 ---
 
-
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
 
 
 <!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! -->
 <p>As the image above (probably abused by me) clearly states: “the abuse of power comes as no surprise”. Whether intentional or not, ingorance of a priori power calculations have been prominent in psychology and related fields.</p>
-<p>But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually is quite easy! So here goes:</p>
+<p>But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually are quite easy! So here goes:</p>
 <p>The power function for a hypothesis test is defined as the following:</p>
 <p><span class="math display">\[power(\theta) =\mathbb{P}[\text{reject} \: H_0 \: \text{for a given} \: \theta]\]</span></p>
 <p>Where <span class="math inline">\(\theta\)</span> is a given effect size, <span class="math inline">\(\mathbb{P}\)</span> probability and <span class="math inline">\(H_0\)</span> the null hypothesis. In more general terms it is defined (the vertical bar is read “given”):</p>
@@ -58,9 +60,8 @@ header-includes:
 <p>The notation <span class="math inline">\(\mathbb{P}[Z &lt; z]\)</span> is usually written <span class="math inline">\(N(z)\)</span> and denotes the <em>area</em> under the cumulative distribution function up til the value of <span class="math inline">\(z\)</span>.</p>
 <p>This became much more technical than what I imagined when I started out with this post. I might have to push my amateur adventures in 3D visualisation to the next post! Anyway, now we have:</p>
 <p><span class="math display">\[power(\theta) = N(-1.96 +\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}) + 1 - N(1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}})\]</span></p>
-<p>If we assume <span class="math inline">\(\sigma_D=1\)</span> and <span class="math inline">\(n=25\)</span> this will give us a single value for each <span class="math inline">\(\theta\)</span> we put in. We can easily calculate this in R and plot the power against possible values of <span class="math inline">\(\theta\)</span> - this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold <span class="math inline">\(\theta\)</span> fixed and vary <em>n</em>.</p>
-<pre class="r"><code>
-power_data &lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&gt;% # Create a data frame with a variabl of various theta
+<p>If we assume <span class="math inline">\(\sigma_D=1\)</span> and some sample size this will give us a single value for each <span class="math inline">\(\theta\)</span> we put in. We can easily calculate this in R and plot the power against possible values of <span class="math inline">\(\theta\)</span> – this is what is known as a power curve. If we instead are interested in seeing how sample size affect power, we hold <span class="math inline">\(\theta\)</span> fixed and vary <em>n</em>. Below I show the code for for how to calculate and draw the power curve via this function in R for a specified sample size of <span class="math inline">\(n=25\)</span>. In the interactive graph below though, you can adjust the sample size yourself and see how that affects power.</p>
+<pre class="r"><code>power_data &lt;- data.frame(theta = seq(from = -1.2, to = 1.2, length.out = 100)) %&gt;% # Create a data frame with a variabl of various theta
   mutate(power = pnorm(-1.96-theta*sqrt(25)) + (1-pnorm(1.96-theta*sqrt(25)))) # Add a variable that for each theta gives us power, according to the power function above
 
 
@@ -70,13 +71,15 @@ ggplot(power_data, aes(x= theta, y=power)) + # Plot power over theta
   geom_vline(xintercept = 0) +
   xlab(expression(paste(theta))) +
   ylab(&quot;Power&quot;) +
-  annotate(geom = &quot;text&quot;, x = 0.3, y = 0.08, 
-           label = &quot;alpha&quot;, 
-           parse = T, 
-           color = &quot;darkblue&quot;, 
+  annotate(geom = &quot;text&quot;, x = 0.3, y = 0.08,
+           label = &quot;alpha&quot;,
+           parse = T,
+           color = &quot;darkblue&quot;,
            size = 5) +
-  theme_classic()</code></pre>
-<p><img src="/post/primary-concepts/index_files/figure-html/powercurve-1.svg" width="672" /></p>
+  theme_classic()
+</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/primary-concepts/index_files/figure-html//widgets/widget_powercurve.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 <p>As the true effect becomes bigger in absolute values, power goes to 100%. Optimally one would want a power function that wasn’t curved but instead always rejected <span class="math inline">\(H_0\)</span> whenever it was false, how small the effect may be. I.e. we would want a power function that fulfills:</p>
 <p><span class="math display" id="eq:1">\[\begin{equation} 
   power =\mathbb{P}[\text{reject} \: H_0 \: | \: \text{any} \: \theta \neq 0] = 1
@@ -175,5 +178,4 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
 <p>Now, this looks more like it! If you compare the analytical power curve with this one you may notice that the first one is more steep - that steepness relects the power advantage of doing paired difference tests instead of independent tests, as we did for the simulation.</p>
 <p>Naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!</p>
 <p>Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!</p>
-<p>P.S. If you want to know how tripling the sample size would effect the curve - have a look below:</p>
-<p><img src="/post/primary-concepts/index_files/figure-html/unnamed-chunk-5-1.svg" width="672" /></p>
+<!-- P.S. If you want to know how tripling the sample size would effect the curve - have a look below: -->
