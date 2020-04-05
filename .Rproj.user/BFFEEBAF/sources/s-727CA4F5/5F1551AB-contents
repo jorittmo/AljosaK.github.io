@@ -87,7 +87,7 @@ We'll subtract and add $\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}$, i.e. a neutral 
 
 $$\mathbb{P}[1.96 < \frac{\overline{D}_{n}\:-\:0\:-\:\theta\:+\:\theta}{{{\sigma}_D}/{\sqrt{n}}} < -1.96 \; | \; \mu_D =\theta]$$
 
-And then move them to the other sides of the inequalities (be careful with the signs!):
+And then move $+\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}$ to the other sides of the inequalities (be careful with the signs!):
 
 $$\mathbb{P}[1.96\: - \frac{\theta}{{{\sigma}_D}/{\sqrt{n}}}< \frac{\overline{D}_{n}\:-\:\theta}{{{\sigma}_D}/{\sqrt{n}}} < -1.96 -\frac{\theta}{{{\sigma}_D}/{\sqrt{n}}} \; | \; \mu_D =\theta]$$ 
 
