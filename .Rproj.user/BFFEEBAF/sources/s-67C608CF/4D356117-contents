@@ -1,0 +1,324 @@
+library(plotly)
+rm(list=ls())
+
+load("C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/10000 sim manova&anova.Rdata")
+eff2<-seq(-1, 1, length.out = 11)
+
+
+for ( i in 1:length(ls_data)){
+ls_data[[i]][["eff1"]] <- unique(ls_data[[i]][["eff1"]])
+ls_data[[i]][["corr"]] <- unique(ls_data[[i]][["corr"]])
+ls_data[[i]][["pwr"]] <- matrix(ls_data[[i]][["pwr"]], nrow=11, ncol=11)
+
+}
+surface_data <- ls_data
+
+py <- plot_ly()
+py <- add_trace(py, x = surface_data[[6]][["eff1"]],
+                              y = surface_data[[7]][["corr"]],
+                              z=surface_data[[7]][["pwr"]],
+                              type= 'surface',
+                              showscale = FALSE,
+                              colorscale = 'orange')
+py
+
+
+
+
+plot_fast <- function(){
+  library(plotly)
+  load("C:/Users/jritt/Google Drive/Skola/Statistik/MANOVA-projekt/R/10000 sim manova&anova.Rdata")
+  for ( i in 1:length(ls_data)){
+    ls_data[[i]][["eff1"]] <- unique(ls_data[[i]][["eff1"]])
+    ls_data[[i]][["corr"]] <- unique(ls_data[[i]][["corr"]])
+    ls_data[[i]][["pwr"]] <- matrix(ls_data[[i]][["pwr"]], nrow=11, ncol=11)
+    
+  }
+  surface_data <- ls_data
+  eff2<-seq(-1, 1, length.out = 11)
+  steps <- list()
+  p <- plot_ly()
+  
+  
+  
+  #Create steps that inhibit visuality of steps
+  for (i in 1:11) {
+    step <- list(args = list('visible', rep(FALSE, 11)),
+                 method = 'restyle', label=paste0(surface_data[[i]][["eff2"]]))
+    step$args[[2]][i] = TRUE
+    #step$args[[2]][i+11] = TRUE
+    steps[[i]] <- step
+  }
+  
+  
+  AOVstep<-list()
+  for (i in 1:11) {
+    steg <- list(args = list('visible', rep(FALSE, length(surface_data))),
+                 method ='restyle', label=paste0(surface_data[[i]][["eff2"]]))
+    steg$args[[2]][i] = TRUE
+    AOVstep[[i]] <- steg
+  }
+
+
+  MANstep<-list()
+  for (i in 1:11) {
+    steg <- list(args = list('visible', rep(FALSE, length(surface_data))),
+                 method ='restyle', label=paste0(surface_data[[i]][["eff2"]]))
+    steg$args[[2]][i+11] = TRUE
+    MANstep[[i]] <- steg
+  }
+
+  
+  p <-  plot_ly()
+    
+    p <-  add_trace(p, x = surface_data[[1]][["corr"]],
+                    y = surface_data[[1]][["eff1"]],
+                    z=surface_data[[1]][["pwr"]],
+                   # name = surface_data[1][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                    type= 'surface',
+                    showscale = FALSE
+                   )
+    p <-  add_trace(p, x = surface_data[[2]][["corr"]],
+                    y = surface_data[[2]][["eff1"]],
+                    z=surface_data[[2]][["pwr"]],
+                    # name = surface_data[2][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                    type= 'surface',
+                    showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[3]][["corr"]],
+                         y = surface_data[[3]][["eff1"]],
+                         z=surface_data[[3]][["pwr"]],
+                    # name = surface_data[3][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[4]][["corr"]],
+                         y = surface_data[[4]][["eff1"]],
+                         z=surface_data[[4]][["pwr"]],
+                    # name = surface_data[4][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[5]][["corr"]],
+                         y = surface_data[[5]][["eff1"]],
+                         z=surface_data[[5]][["pwr"]],
+                    # name = surface_data[5][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[6]][["corr"]],
+                         y = surface_data[[6]][["eff1"]],
+                         z=surface_data[[6]][["pwr"]],
+                    # name = surface_data[6][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = TRUE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[7]][["corr"]],
+                         y = surface_data[[7]][["eff1"]],
+                         z=surface_data[[7]][["pwr"]],
+                    # name = surface_data[7][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[8]][["corr"]],
+                         y = surface_data[[8]][["eff1"]],
+                         z=surface_data[[8]][["pwr"]],
+                    # name = surface_data[8][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[9]][["corr"]],
+                         y = surface_data[[9]][["eff1"]],
+                         z=surface_data[[9]][["pwr"]],
+                    # name = surface_data[9][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[10]][["corr"]],
+                         y = surface_data[[10]][["eff1"]],
+                         z=surface_data[[10]][["pwr"]],
+                    # name = surface_data[10][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[11]][["corr"]],
+                         y = surface_data[[11]][["eff1"]],
+                         z=surface_data[[11]][["pwr"]],
+                    # name = surface_data[11][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                         showscale = FALSE
+                    
+    )    
+    p <-  add_trace(p, x = surface_data[[12]][["corr"]],
+                         y = surface_data[[12]][["eff1"]],
+                         z=surface_data[[12]][["pwr"]],
+                    # name = surface_data[12][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                        colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[13]][["corr"]],
+                         y = surface_data[[13]][["eff1"]],
+                         z=surface_data[[13]][["pwr"]],
+                    # name = surface_data[13][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[14]][["corr"]],
+                         y = surface_data[[14]][["eff1"]],
+                         z=surface_data[[14]][["pwr"]],
+                    # name = surface_data[14][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[15]][["corr"]],
+                         y = surface_data[[15]][["eff1"]],
+                         z=surface_data[[15]][["pwr"]],
+                    # name = surface_data[15][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[16]][["corr"]],
+                         y = surface_data[[16]][["eff1"]],
+                         z=surface_data[[16]][["pwr"]],
+                    # name = surface_data[16][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[17]][["corr"]],
+                         y = surface_data[[17]][["eff1"]],
+                         z=surface_data[[17]][["pwr"]],
+                    # name = surface_data[1][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = TRUE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )   
+    p <-  add_trace(p, x = surface_data[[18]][["corr"]],
+                         y = surface_data[[18]][["eff1"]],
+                         z=surface_data[[18]][["pwr"]],
+                    # name = surface_data[17][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )   
+    p <-  add_trace(p, x = surface_data[[19]][["corr"]],
+                         y = surface_data[[19]][["eff1"]],
+                         z=surface_data[[19]][["pwr"]],
+                    # name = surface_data[19][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )   
+    p <-  add_trace(p, x = surface_data[[20]][["corr"]],
+                         y = surface_data[[20]][["eff1"]],
+                         z=surface_data[[20]][["pwr"]],
+                    # name = surface_data[20][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[21]][["corr"]],
+                         y = surface_data[[21]][["eff1"]],
+                         z=surface_data[[21]][["pwr"]],
+                    # name = surface_data[21][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )    
+    p <-  add_trace(p, x = surface_data[[22]][["corr"]],
+                         y = surface_data[[22]][["eff1"]],
+                         z=surface_data[[22]][["pwr"]],
+                    # name = surface_data[22][[1]][["name"]],
+                    hoverinfo = 'z',
+                    visible = FALSE,
+                         type= 'surface',
+                    colorscale = 'orange',
+                         showscale = FALSE
+    )
+    
+  
+  
+  
+  
+  # Create lists for axes
+  axy <- list(title = "Correlation", autorange = FALSE, range = range(surface_data[1][[1]]$corr))
+  axx <- list(title = "Effect X", autorange = FALSE, range = range(surface_data[1][[1]]$eff1))
+  axz <- list(title = "Power", autorange = FALSE, range = c(0,1))
+  
+  
+  # add slider control to plot and edit axes and stuff
+  p <- p %>%
+    layout(sliders = list(list(active = 5,
+                               currentvalue = list(prefix = 'Both, FX Y:'),
+                               pad = list(t = 20),
+                               steps = steps),
+                          list(active = 5,
+                               currentvalue = list(prefix = "MANOVA, FX Y: "),
+                               pad = list(t = 100, r = 300),
+                               steps = MANstep),
+                          list(active = 5,
+                               currentvalue = list(prefix = "ANOVA, FX Y: "),
+                               pad = list(t = 100, l = 300),
+                               steps = AOVstep)),
+           scene = list(xaxis=axx,yaxis=axy,zaxis=axz, aspectmode='manual', 
+                        aspectratio =list(x=2, 
+                                          y=2, 
+                                          z=1)),
+           title='AVP of ANOVA & MANOVA - Two IV'
+    )
+  
+  p
+}
+plot_fast()
+
+
+
+
+
+

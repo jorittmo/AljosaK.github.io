@@ -3,5 +3,5 @@ header:
   caption: ""
   image: ""
 title: dissertations
-view: 4
+view: 3
 ---
