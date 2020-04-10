@@ -7,9 +7,6 @@ education:
   - course: M.Sc. in Human Cognitive Neuropsychology (August)
     institution: Univeristy of Edinburgh
     year: 2020
-  - course: B.Sc. in Statistics (April)
-    institution: University of Gothenburg
-    year: 2020
   - course: B.Sc. in Cognitive Science
     institution: University of Gothenburg
     year: 2018
