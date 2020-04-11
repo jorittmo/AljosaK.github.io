@@ -1,5 +1,5 @@
 ---
-abstract: "The findings of differential outcomes training procedures in controlled stimulusresponse
+abstract: "The findings of differential outcomes training procedures in controlled stimulus response
  learning settings have been explained through theorizing two processes
  of response control. These processes concern: i) a stimulus-response route, and,
  ii) an outcome expectancy route through which valuations of stimuli (typically
