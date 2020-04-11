@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dissertations | Jonathan Ö. Rittmo || Blog</title>
+    <link>/diss-old/</link>
+      <atom:link href="/diss-old/index.xml" rel="self" type="application/rss+xml" />
+    <description>dissertations</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>dissertations</title>
+      <link>/diss-old/</link>
+    </image>
+    
+    <item>
+      <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
+      <link>/diss-old/neuropsychdiss/</link>
+      <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/diss-old/neuropsychdiss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MANOVA and its contingencies: on the relation between power and correlation - Can the utilisation of multivariate analyses alleviate the power crisis in neuropsychology?</title>
+      <link>/diss-old/statthesis/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/diss-old/statthesis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect</title>
+      <link>/diss-old/cogdiss/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>/diss-old/cogdiss/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dissertations | Jonathan Ö. Rittmo || Blog</title>
+    <title>publications | Jonathan Ö. Rittmo || Blog</title>
     <link>/publication/</link>
       <atom:link href="/publication/index.xml" rel="self" type="application/rss+xml" />
-    <description>dissertations</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <description>publications</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
-      <title>dissertations</title>
+      <title>publications</title>
       <link>/publication/</link>
     </image>
+    
+    <item>
+      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task (accepted with revisions)</title>
+      <link>/publication/vic_value/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/vic_value/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>

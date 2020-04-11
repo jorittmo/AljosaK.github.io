@@ -2,6 +2,6 @@
 header:
   caption: ""
   image: ""
-title: dissertations
+title: publications
 view: 3
 ---
