@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Winner&#39;s Curse | Jonathan Ö. Rittmo || Blog</title>
-    <link>/tags/winners-curse/</link>
-      <atom:link href="/tags/winners-curse/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://jorittmo.rbind.io/tags/winners-curse/</link>
+      <atom:link href="https://jorittmo.rbind.io/tags/winners-curse/index.xml" rel="self" type="application/rss+xml" />
     <description>Winner&#39;s Curse</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Winner&#39;s Curse</title>
-      <link>/tags/winners-curse/</link>
+      <link>https://jorittmo.rbind.io/tags/winners-curse/</link>
     </image>
     
     <item>
       <title>The Curious Case of the Winner&#39;s Curse</title>
-      <link>/post/the-curious-case-of-the-winner-s-curse/</link>
+      <link>https://jorittmo.rbind.io/post/the-curious-case-of-the-winner-s-curse/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/post/the-curious-case-of-the-winner-s-curse/</guid>
+      <guid>https://jorittmo.rbind.io/post/the-curious-case-of-the-winner-s-curse/</guid>
       <description>&lt;p&gt;Key concepts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Power = the probability of finding an effect if the effect is true&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Have you ever been at a psychology stats lecture listening to your teacher rambling about &amp;ldquo;power&amp;rdquo;, talking about its importance for your experiment to yield a significant result but without really explaining the &amp;ldquo;why&amp;rdquo; of it all? Well, so have I. It is usually easy enough to grasp that low power = bad, high power = good - it&amp;rsquo;s name kind of gives it away. And given that significance is often treated as the holy grail in psychology most students would want a high probability to obtain it. The advice is often to calculate a sample size based on some previous (or just predicted) effect. However, for a two group experiment with a between group design and expected medium effect (which arguably could be seen as optimistic) we would need 64 participants if we want a probability of 0.8 of detecting the effect.&lt;/p&gt;
 &lt;p&gt;For many undergraduate students (and researchers in genereal) this is just not plausible. Yet, a lot of studies and dissertations projects obtain significance anyway. In my undergrad stats course I was told that this is evidence for the great magnitude of the effect, i.e. because the power of a test mainly is influenced by the number of participants and the size of the effect, if one is low in a significant study the other must be high - right? In fact this has been the predominant view by some scholars. Recently I stumbled upon 
-&lt;a href=&#34;/pdf/Wuensch.pdf&#34;&gt;this document&lt;/a&gt;, a handout by Karl Wuensch, a psychology professor at East Carolina University from his statistics courses in which he states (note that this is dated 2016):&lt;/p&gt;
+&lt;a href=&#34;https://jorittmo.rbind.io/pdf/Wuensch.pdf&#34;&gt;this document&lt;/a&gt;, a handout by Karl Wuensch, a psychology professor at East Carolina University from his statistics courses in which he states (note that this is dated 2016):&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&amp;hellip;If you were to find a significant effect of the drug with only 25 participants, that would speak to
 the large effect of the drug. In this case you should not be hesitant to seek publication of your
@@ -64,7 +64,7 @@ The problem of premorbid ability generalises to group lesion studies as well, bu
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This simulation returns the median overestimation of as many studies as you choose. If you run it for several different parameter combinations (number of controls and size of deficit). In the graph below I have taken the median of 1000 000 simulated single case studies over functional deficits ranging from 1 to 4 standard deviations for 4 different sizes of control groups.&lt;/p&gt;
 &lt;div class=&#34;figure&#34; style=&#34;text-align: left&#34;&gt;
-&lt;img src=&#34;/post/curious-case-of/index_files/figure-html/standard-plot-1.svg&#34; alt=&#34;Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;https://jorittmo.rbind.io/post/curious-case-of/index_files/figure-html/standard-plot-1.svg&#34; alt=&#34;Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&#34; width=&#34;100%&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Figure 1: Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;What becomes evident here is that even with a deficit of 2 σ where we would expect a probability of 50 %, we would get a &amp;ldquo;general&amp;rdquo; overestimation of this deficit of about 0.6 σ (which is quite alot). This is due to the fact that we cannot detect the people that have a premobrbid ability above the population mean, if not our control sample &lt;em&gt;by chance&lt;/em&gt; happens to be drawn from the &amp;ldquo;right side&amp;rdquo; side of the distribution (that is we draw a control sample with high reaction time abilities).&lt;/p&gt;
@@ -76,9 +76,9 @@ The problem of premorbid ability generalises to group lesion studies as well, bu
     
     <item>
       <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
-      <link>/publication/neuropsychdiss/</link>
+      <link>https://jorittmo.rbind.io/publication/neuropsychdiss/</link>
       <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/neuropsychdiss/</guid>
+      <guid>https://jorittmo.rbind.io/publication/neuropsychdiss/</guid>
       <description></description>
     </item>
     

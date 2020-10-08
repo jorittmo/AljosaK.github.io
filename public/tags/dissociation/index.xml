@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dissociation | Jonathan Ö. Rittmo || Blog</title>
-    <link>/tags/dissociation/</link>
-      <atom:link href="/tags/dissociation/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://jorittmo.rbind.io/tags/dissociation/</link>
+      <atom:link href="https://jorittmo.rbind.io/tags/dissociation/index.xml" rel="self" type="application/rss+xml" />
     <description>Dissociation</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Dissociation</title>
-      <link>/tags/dissociation/</link>
+      <link>https://jorittmo.rbind.io/tags/dissociation/</link>
     </image>
     
     <item>
       <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
-      <link>/publication/neuropsychdiss/</link>
+      <link>https://jorittmo.rbind.io/publication/neuropsychdiss/</link>
       <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/neuropsychdiss/</guid>
+      <guid>https://jorittmo.rbind.io/publication/neuropsychdiss/</guid>
       <description></description>
     </item>
     

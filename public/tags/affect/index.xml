@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>affect | Jonathan Ö. Rittmo || Blog</title>
-    <link>/tags/affect/</link>
-      <atom:link href="/tags/affect/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://jorittmo.rbind.io/tags/affect/</link>
+      <atom:link href="https://jorittmo.rbind.io/tags/affect/index.xml" rel="self" type="application/rss+xml" />
     <description>affect</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>affect</title>
-      <link>/tags/affect/</link>
+      <link>https://jorittmo.rbind.io/tags/affect/</link>
     </image>
     
     <item>
       <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task (accepted with revisions)</title>
-      <link>/publication/vic_value/</link>
+      <link>https://jorittmo.rbind.io/publication/vic_value/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/vic_value/</guid>
+      <guid>https://jorittmo.rbind.io/publication/vic_value/</guid>
       <description></description>
     </item>
     
