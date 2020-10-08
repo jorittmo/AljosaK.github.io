@@ -31,7 +31,7 @@ library(widgetframe)
 
 <!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! -->
 
-As the image above (probably abused by me) clearly states: "the abuse of power comes as no surprise". Whether intentional or not, insurance of a priori power calculations have been prominent in psychology and related fields. 
+As the image above (probably abused by me) clearly states: "the abuse of power comes as no surprise". Whether intentional or not, ignorance of a priori power calculations have been prominent in psychology and related fields. 
 
 But this is not surprising, because it is difficult to grasp what a power calculation actually is. In this post I will walk through some of the basic calculations behind deriving the power function for a paired samples z-test analytically (that is obtaining an exact mathematical function) and how you can calculate power for an independent two sample t-test, by simulations in R. Hopefully this will show that the basic concepts of power calculations and power curves actually are quite easy! So here goes:
 
