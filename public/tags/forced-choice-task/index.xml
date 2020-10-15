@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Forced Choice task | Jonathan Ö. Rittmo || Blog</title>
-    <link>https://jorittmo.rbind.io/tags/forced-choice-task/</link>
-      <atom:link href="https://jorittmo.rbind.io/tags/forced-choice-task/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/forced-choice-task/</link>
+      <atom:link href="/tags/forced-choice-task/index.xml" rel="self" type="application/rss+xml" />
     <description>Forced Choice task</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Forced Choice task</title>
-      <link>https://jorittmo.rbind.io/tags/forced-choice-task/</link>
+      <link>/tags/forced-choice-task/</link>
     </image>
     
     <item>
       <title>Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect</title>
-      <link>https://jorittmo.rbind.io/publication/cogdiss/</link>
+      <link>/publication/cogdiss/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/cogdiss/</guid>
+      <guid>/publication/cogdiss/</guid>
       <description></description>
     </item>
     

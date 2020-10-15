@@ -2,21 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>inference | Jonathan Ö. Rittmo || Blog</title>
-    <link>https://jorittmo.rbind.io/tags/inference/</link>
-      <atom:link href="https://jorittmo.rbind.io/tags/inference/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/inference/</link>
+      <atom:link href="/tags/inference/index.xml" rel="self" type="application/rss+xml" />
     <description>inference</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 15 Oct 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>inference</title>
-      <link>https://jorittmo.rbind.io/tags/inference/</link>
+      <link>/tags/inference/</link>
     </image>
     
     <item>
-      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task (accepted with revisions)</title>
-      <link>https://jorittmo.rbind.io/publication/vic_value/</link>
-      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/vic_value/</guid>
+      <title>Power calculations in single-case neuropsychology: a practical primer</title>
+      <link>/publication/power_primer/</link>
+      <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/power_primer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task</title>
+      <link>/publication/vic_value/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/vic_value/</guid>
       <description></description>
     </item>
     

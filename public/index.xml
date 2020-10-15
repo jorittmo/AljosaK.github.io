@@ -2,23 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jonathan Ö. Rittmo || Blog</title>
-    <link>https://jorittmo.rbind.io/</link>
-      <atom:link href="https://jorittmo.rbind.io/index.xml" rel="self" type="application/rss+xml" />
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Jonathan Ö. Rittmo || Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 28 Jun 2018 00:00:00 +0100</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Jonathan Ö. Rittmo || Blog</title>
-      <link>https://jorittmo.rbind.io/</link>
+      <link>/</link>
     </image>
     
     <item>
+      <title>Power calculations in single-case neuropsychology: a practical primer</title>
+      <link>/publication/power_primer/</link>
+      <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/power_primer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task</title>
+      <link>/publication/vic_value/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/vic_value/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Perception, Psychosis and Hellblade</title>
-      <link>https://jorittmo.rbind.io/post/perception-and-psychosis/</link>
+      <link>/post/perception-and-psychosis/</link>
       <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/post/perception-and-psychosis/</guid>
+      <guid>/post/perception-and-psychosis/</guid>
       <description>
-&lt;script src=&#34;https://jorittmo.rbind.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- Imagine that you one day wake up, everything appears normal but when you meet your family for breakfast you appear to speak a different language. No matter how hard you try, they cannot understand you. In fact, it is not only the language - you do not seem to share any common ground. When you are asking for the butter knife they hand you a glass of orange juice. The thought is unsettling, and unfortunately the reality for some. It is not difficult to imagine that if your idea of the world, your picture of what is going on, is unshared, that is a very isolating and terrifying experience. --&gt;
@@ -57,23 +73,15 @@
     </item>
     
     <item>
-      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task (accepted with revisions)</title>
-      <link>https://jorittmo.rbind.io/publication/vic_value/</link>
-      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/vic_value/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Primary Concepts of Power Curves</title>
-      <link>https://jorittmo.rbind.io/post/primary-concepts-of-power-curves/</link>
+      <link>/post/primary-concepts-of-power-curves/</link>
       <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/post/primary-concepts-of-power-curves/</guid>
+      <guid>/post/primary-concepts-of-power-curves/</guid>
       <description>
-&lt;script src=&#34;https://jorittmo.rbind.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://jorittmo.rbind.io/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://jorittmo.rbind.io/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://jorittmo.rbind.io/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/widgetframe-binding/widgetframe.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- This post did not at all become what I thought it would when I started writing it. I was going to write about visualisation of multivariate power curves, but halfway through of explaining what a power curve is I realised that it probably would be better to split the post into two. So here comes the first half! --&gt;
@@ -87,7 +95,7 @@
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\overline{D}-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Where &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}\)&lt;/span&gt; is the average of the differences between the two measurement time points and &lt;span class=&#34;math inline&#34;&gt;\({\sigma}_D\)&lt;/span&gt; the population standard deviation and hence &lt;span class=&#34;math inline&#34;&gt;\({{\sigma}_D}/{\sqrt{n}}\)&lt;/span&gt; the standard error and thus, if we input real values we would get a z-value. The null and alternative hypotheses for this test are &lt;span class=&#34;math inline&#34;&gt;\(H_0:\: \mu_D \: = \: 0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(H_1:\: \mu_D \: \neq \: 0\)&lt;/span&gt; where &lt;span class=&#34;math inline&#34;&gt;\(\mu_D\)&lt;/span&gt; is estimated by &lt;span class=&#34;math inline&#34;&gt;\(\overline{D}_n\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;If we set &lt;span class=&#34;math inline&#34;&gt;\(\alpha\:=\:0.05\)&lt;/span&gt; (i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}\)&lt;/span&gt;[reject &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; | &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; is true]&lt;span class=&#34;math inline&#34;&gt;\(\:=\:0.05\)&lt;/span&gt;) our critical z-value would be &lt;span class=&#34;math inline&#34;&gt;\(z_{(0.05/2) }=\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(\pm\)&lt;/span&gt; 1.96. If you are unfamiliar with critical values, have a look at the density plot below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://jorittmo.rbind.io/post/primary-concepts/index_files/figure-html/zdist-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/zdist-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;All observed z-values that fall above the upper or below the lower critical cutoff values are considered significant at the &lt;span class=&#34;math inline&#34;&gt;\(\alpha \: = \: 0.05\)&lt;/span&gt; level. Now suppose that &lt;span class=&#34;math inline&#34;&gt;\(\mu_D \: \neq \: 0\)&lt;/span&gt;, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mu_D =\)&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. Then we get the power by calculating:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathbb{P}[1.96 &amp;lt; Z &amp;lt; -1.96 \; | \; \mu_D =\theta]\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(\frac{\overline{D}_n-0}{{{\sigma}_D}/{\sqrt{n}}}\sim Z\)&lt;/span&gt; we’ll write:&lt;/p&gt;
@@ -195,7 +203,7 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
            color = &amp;quot;darkblue&amp;quot;, 
            size = 5) +
   theme_classic()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jorittmo.rbind.io/post/primary-concepts/index_files/figure-html/unnamed-chunk-2-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/unnamed-chunk-2-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, the general pattern is similar to the analytic solution. But since we only ran 50 simulations for every parameter combination we won’t get very precise estimations. So let’s amp it up to 10,000 simulations:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;
 theta &amp;lt;- seq(from = -1.2, to = 1.2, length.out = 50) 
@@ -223,7 +231,7 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
            size = 5) +
   theme_classic()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://jorittmo.rbind.io/post/primary-concepts/index_files/figure-html/unnamed-chunk-4-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/primary-concepts/index_files/figure-html/unnamed-chunk-4-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now, this looks more like it! This approach is a useful tool for a priori power calculations when an analytic solution is too difficult (sometimes it’s even impossible) to find. But naturally, when our designs get more complex it will be more difficult to calculate power either analytically or with simulations. But I hope that this post at least showed that you don’t have to be a mathematician to start out with your a priori power calcs!&lt;/p&gt;
 &lt;p&gt;Next up: amateur adventures in 3D visualisation of multivariable/variate power curves!&lt;/p&gt;
 &lt;!-- P.S. If you want to know how tripling the sample size would effect the curve - have a look below: --&gt;
@@ -231,17 +239,46 @@ ggplot(power_data, aes(x= theta, y=power)) +  # Plotting power over theta, just 
     </item>
     
     <item>
+      <title>Amateur adventures in 3D visualisation for multivariate power curves</title>
+      <link>/post/amateur-adventures-in-3d-visualisation-for-power-curves/</link>
+      <pubDate>Fri, 03 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/amateur-adventures-in-3d-visualisation-for-power-curves/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;When I first started modelling power, less than a year ago, I had very limited experience with data visualisation. In fact, I was completely new to R and had mainly (but limitedly) worked in Stata and SAS - where my goal was to get a hang of the syntax rather than to understand data formats (even though that might have been more important to be honest). However, I decided to switch to R because of the community surrounding the language, the open source and free nature of it and its potential for being one of the handiest tools for transparent research (i.e. its the best and fun and cool).&lt;/p&gt;
+&lt;p&gt;Anyways, I was trying to model power for multivariate hypothesis testing. In the simplest of cases such test only includes two groups and two dependent variables - so this was what I set out to try to model and visualise. The power function for a hypothesis test is defined as the following:&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>fMRI - fraudulent or functional for real?</title>
+      <link>/post/fmri-funky-or-fraudulent/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/fmri-funky-or-fraudulent/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;We have all seen the colourful dashing pictures of the brain at work. For example the one below from [this and this study]. The most widley used technique to produce these pictures are functional magnetic resonance imaging (fMRI). But what does the coloured pixels actually mean and can they really tell us anything about the cognitive processes going on? Do we give dashes and blobs of colours unreasonably high inferential value just because they are painted on a picture of a brain?&lt;/p&gt;
+&lt;p&gt;In this blog post I will give a brief background on how these blobs come about and the inferential caveats that might arise. As an example I will use&lt;/p&gt;
+&lt;p&gt;Despite its title, this blog post is not really to conclude one or the other, but rather introduce and line up the caveats of drawing inferences from fMRI data - both for my own sake and anyone interested in this stuff.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The Curious Case of the Winner&#39;s Curse</title>
-      <link>https://jorittmo.rbind.io/post/the-curious-case-of-the-winner-s-curse/</link>
+      <link>/post/the-curious-case-of-the-winner-s-curse/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/post/the-curious-case-of-the-winner-s-curse/</guid>
+      <guid>/post/the-curious-case-of-the-winner-s-curse/</guid>
       <description>&lt;p&gt;Key concepts:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Power = the probability of finding an effect if the effect is true&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Have you ever been at a psychology stats lecture listening to your teacher rambling about &amp;ldquo;power&amp;rdquo;, talking about its importance for your experiment to yield a significant result but without really explaining the &amp;ldquo;why&amp;rdquo; of it all? Well, so have I. It is usually easy enough to grasp that low power = bad, high power = good - it&amp;rsquo;s name kind of gives it away. And given that significance is often treated as the holy grail in psychology most students would want a high probability to obtain it. The advice is often to calculate a sample size based on some previous (or just predicted) effect. However, for a two group experiment with a between group design and expected medium effect (which arguably could be seen as optimistic) we would need 64 participants if we want a probability of 0.8 of detecting the effect.&lt;/p&gt;
 &lt;p&gt;For many undergraduate students (and researchers in genereal) this is just not plausible. Yet, a lot of studies and dissertations projects obtain significance anyway. In my undergrad stats course I was told that this is evidence for the great magnitude of the effect, i.e. because the power of a test mainly is influenced by the number of participants and the size of the effect, if one is low in a significant study the other must be high - right? In fact this has been the predominant view by some scholars. Recently I stumbled upon 
-&lt;a href=&#34;https://jorittmo.rbind.io/pdf/Wuensch.pdf&#34;&gt;this document&lt;/a&gt;, a handout by Karl Wuensch, a psychology professor at East Carolina University from his statistics courses in which he states (note that this is dated 2016):&lt;/p&gt;
+&lt;a href=&#34;/pdf/Wuensch.pdf&#34;&gt;this document&lt;/a&gt;, a handout by Karl Wuensch, a psychology professor at East Carolina University from his statistics courses in which he states (note that this is dated 2016):&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&amp;hellip;If you were to find a significant effect of the drug with only 25 participants, that would speak to
 the large effect of the drug. In this case you should not be hesitant to seek publication of your
@@ -282,7 +319,7 @@ The problem of premorbid ability generalises to group lesion studies as well, bu
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This simulation returns the median overestimation of as many studies as you choose. If you run it for several different parameter combinations (number of controls and size of deficit). In the graph below I have taken the median of 1000 000 simulated single case studies over functional deficits ranging from 1 to 4 standard deviations for 4 different sizes of control groups.&lt;/p&gt;
 &lt;div class=&#34;figure&#34; style=&#34;text-align: left&#34;&gt;
-&lt;img src=&#34;https://jorittmo.rbind.io/post/curious-case-of/index_files/figure-html/standard-plot-1.svg&#34; alt=&#34;Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&#34; width=&#34;100%&#34; /&gt;
+&lt;img src=&#34;/post/curious-case-of/index_files/figure-html/standard-plot-1.svg&#34; alt=&#34;Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&#34; width=&#34;100%&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Figure 1: Median overestimation with Crawford and Howell (1998) method, 10^6^ simulations for every parameter combination.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;What becomes evident here is that even with a deficit of 2 σ where we would expect a probability of 50 %, we would get a &amp;ldquo;general&amp;rdquo; overestimation of this deficit of about 0.6 σ (which is quite alot). This is due to the fact that we cannot detect the people that have a premobrbid ability above the population mean, if not our control sample &lt;em&gt;by chance&lt;/em&gt; happens to be drawn from the &amp;ldquo;right side&amp;rdquo; side of the distribution (that is we draw a control sample with high reaction time abilities).&lt;/p&gt;
@@ -293,26 +330,44 @@ The problem of premorbid ability generalises to group lesion studies as well, bu
     </item>
     
     <item>
-      <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
-      <link>https://jorittmo.rbind.io/publication/neuropsychdiss/</link>
+      <title>Single case neuropsychology: Validity of hypothesis testing in a power-wise pinioned field</title>
+      <link>/publication/neuropsychdiss/</link>
       <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/neuropsychdiss/</guid>
+      <guid>/publication/neuropsychdiss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MANOVA and its contingencies: on the relation between power and correlation - Can the utilisation of multivariate analyses alleviate the power crisis in neuropsychology?</title>
-      <link>https://jorittmo.rbind.io/publication/statthesis/</link>
+      <link>/publication/statthesis/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/statthesis/</guid>
+      <guid>/publication/statthesis/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Terms</title>
+      <link>/terms/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/terms/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect</title>
-      <link>https://jorittmo.rbind.io/publication/cogdiss/</link>
+      <link>/publication/cogdiss/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/cogdiss/</guid>
+      <guid>/publication/cogdiss/</guid>
       <description></description>
     </item>
     

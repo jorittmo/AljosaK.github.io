@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robert D McIntosh | Jonathan Ö. Rittmo || Blog</title>
+    <link>/authors/robert-d-mcintosh/</link>
+      <atom:link href="/authors/robert-d-mcintosh/index.xml" rel="self" type="application/rss+xml" />
+    <description>Robert D McIntosh</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 15 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Robert D McIntosh</title>
+      <link>/authors/robert-d-mcintosh/</link>
+    </image>
+    
+    <item>
+      <title>Power calculations in single-case neuropsychology: a practical primer</title>
+      <link>/publication/power_primer/</link>
+      <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/power_primer/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

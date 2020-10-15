@@ -4,10 +4,10 @@ authors:
 bio: Interests spanning meta-science &rarr; normal science &rarr; science communication &rarr; poetry &rarr; absurdity.
 education:
   courses:
-  - course: M.Sc. in Human Cognitive Neuropsychology (August)
+  - course: MSc. in Human Cognitive Neuropsychology
     institution: Univeristy of Edinburgh
     year: 2020
-  - course: B.Sc. in Cognitive Science
+  - course: BSc. in Cognitive Science
     institution: University of Gothenburg
     year: 2018
 email: ""
@@ -18,11 +18,11 @@ interests:
 - Methodology
 - Meta-Science
 - Literature
-name: Jonathan Ö. Rittmo
+name: Jonathan Rittmo
 organizations:
 - name: University of Edinburgh
   url: ""
-role: M.Sc. in Human Cognitive Neuropsychology
+role: MSc. in Human Cognitive Neuropsychology
 social:
 - icon: envelope
   icon_pack: fas
@@ -35,7 +35,7 @@ social:
 #  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
 - icon: github
   icon_pack: fab
-  link: https://github.com/AljosjaK
+  link: https://github.com/jorittmo
 superuser: true
 user_groups:
 - Researchers

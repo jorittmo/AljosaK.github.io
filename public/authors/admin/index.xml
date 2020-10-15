@@ -2,45 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jonathan Ö. Rittmo || Blog</title>
-    <link>https://jorittmo.rbind.io/authors/admin/</link>
-      <atom:link href="https://jorittmo.rbind.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <link>/authors/admin/</link>
+      <atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>Jonathan Ö. Rittmo || Blog</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 15 Oct 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Jonathan Ö. Rittmo || Blog</title>
-      <link>https://jorittmo.rbind.io/authors/admin/</link>
+      <link>/authors/admin/</link>
     </image>
     
     <item>
-      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task (accepted with revisions)</title>
-      <link>https://jorittmo.rbind.io/publication/vic_value/</link>
-      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/vic_value/</guid>
+      <title>Power calculations in single-case neuropsychology: a practical primer</title>
+      <link>/publication/power_primer/</link>
+      <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/power_primer/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Single Case Neuropsychology: validity and reliability in a power-wise pinioned field (work in progress)</title>
-      <link>https://jorittmo.rbind.io/publication/neuropsychdiss/</link>
+      <title>Vicarious Value Learning: Knowledge Transfer through Affective Processing on a Social Differential Outcomes Task</title>
+      <link>/publication/vic_value/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/vic_value/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Single case neuropsychology: Validity of hypothesis testing in a power-wise pinioned field</title>
+      <link>/publication/neuropsychdiss/</link>
       <pubDate>Thu, 30 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/neuropsychdiss/</guid>
+      <guid>/publication/neuropsychdiss/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MANOVA and its contingencies: on the relation between power and correlation - Can the utilisation of multivariate analyses alleviate the power crisis in neuropsychology?</title>
-      <link>https://jorittmo.rbind.io/publication/statthesis/</link>
+      <link>/publication/statthesis/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/statthesis/</guid>
+      <guid>/publication/statthesis/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Oscillatory Differences in EEG - An index for social processing? A social affective perspective on the associative two-process theory of the differential outcomes effect</title>
-      <link>https://jorittmo.rbind.io/publication/cogdiss/</link>
+      <link>/publication/cogdiss/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>https://jorittmo.rbind.io/publication/cogdiss/</guid>
+      <guid>/publication/cogdiss/</guid>
       <description></description>
     </item>
     

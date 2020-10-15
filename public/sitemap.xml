@@ -3,212 +3,247 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jorittmo.rbind.io/courses/example/</loc>
+    <loc>/courses/example/</loc>
     <lastmod>2018-09-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/</loc>
+    <loc>/authors/admin/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/2/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/affect/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/differential-outcomes-training/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/inference/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/knowledge-transfer/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/power_primer/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/robert-d-mcintosh/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-10-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/pierre-gander/</loc>
+    <lastmod>2020-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/rickard-carlsson/</loc>
+    <lastmod>2020-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/robert-lowe/</loc>
+    <lastmod>2020-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication/vic_value/</loc>
+    <lastmod>2020-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/perception-and-psychosis/</loc>
     <lastmod>2020-04-11T14:32:54+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/post/perception-and-psychosis/</loc>
+    <loc>/post/</loc>
     <lastmod>2020-04-11T14:32:54+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/post/</loc>
-    <lastmod>2020-04-11T14:32:54+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/authors/admin/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/publication_types/2/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/tags/affect/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/authors/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/tags/differential-outcomes-training/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/tags/inference/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/tags/knowledge-transfer/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/authors/pierre-gander/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/publication_types/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/publication/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/authors/rickard-carlsson/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/authors/robert-lowe/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/tags/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/publication/vic_value/</loc>
-    <lastmod>2020-04-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://jorittmo.rbind.io/post/primary-concepts-of-power-curves/</loc>
+    <loc>/post/primary-concepts-of-power-curves/</loc>
     <lastmod>2020-04-04T14:32:54+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/categories/</loc>
+    <loc>/post/amateur-adventures-in-3d-visualisation-for-power-curves/</loc>
+    <lastmod>2020-04-03T09:55:37+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/fmri-funky-or-fraudulent/</loc>
+    <lastmod>2020-04-02T16:29:45+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/monte-carlo/</loc>
+    <loc>/tags/monte-carlo/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/power/</loc>
+    <loc>/tags/power/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/categories/research/</loc>
+    <loc>/categories/research/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/simulation/</loc>
+    <loc>/tags/simulation/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/post/the-curious-case-of-the-winner-s-curse/</loc>
+    <loc>/post/the-curious-case-of-the-winner-s-curse/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/winners-curse/</loc>
+    <loc>/tags/winners-curse/</loc>
     <lastmod>2020-03-17T14:48:48+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/publication_types/7/</loc>
+    <loc>/publication_types/7/</loc>
     <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/dissociation/</loc>
+    <loc>/tags/monte-carlo-simulations/</loc>
     <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/hottelings-t2/</loc>
+    <loc>/tags/single-case-neuropsychology/</loc>
     <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/monte-carlo-simulations/</loc>
+    <loc>/publication/neuropsychdiss/</loc>
     <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/publication/neuropsychdiss/</loc>
+    <loc>/tags/statistical-power/</loc>
     <lastmod>2020-01-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/manova/</loc>
+    <loc>/tags/winners-curse-bias-correction/</loc>
+    <lastmod>2020-01-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/manova/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/publication/statthesis/</loc>
+    <loc>/publication/statthesis/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/power-analysis/</loc>
+    <loc>/tags/power-analysis/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/courses/</loc>
+    <loc>/courses/</loc>
     <lastmod>2018-09-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/differential-oucomes-effect/</loc>
+    <loc>/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/differential-oucomes-effect/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/eeg/</loc>
+    <loc>/tags/eeg/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/emotional-contagion/</loc>
+    <loc>/tags/emotional-contagion/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/forced-choice-task/</loc>
+    <loc>/tags/forced-choice-task/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/frequency-band-analysis/</loc>
+    <loc>/tags/frequency-band-analysis/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/tags/operant-learning/</loc>
+    <loc>/tags/operant-learning/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jorittmo.rbind.io/publication/cogdiss/</loc>
+    <loc>/publication/cogdiss/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
   </url>
   
