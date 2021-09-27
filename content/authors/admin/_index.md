@@ -32,7 +32,7 @@ role: PhD student
 social:
 - icon: envelope
   icon_pack: fas
-  link: 'j.rittmo@gmail.com'
+  link: mailto:j.rittmo@gmail.com
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/jorittmo
