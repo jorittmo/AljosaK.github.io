@@ -1,6 +1,5 @@
 ---
-title: 'Hands-On ML - Project 2: Image classification (fashion-MNIST) using maximum
-  likelihood'
+title: 'Hands-On ML - Project 2: Image classification in Python using maximum likelihood'
 author: Jonathan Rittmo
 date: '2021-11-27'
 slug: []
@@ -33,7 +32,7 @@ was created to replace the <code>MNIST</code> dataset containing handwritten dig
 (sometimes termed the “hello world” of machine learning) as benchmarking data
 for ML algorithms. The <code>fashion-MNIST</code> is a bit more difficult than the
 original and not as overused. So let’s start by importing it from <code>keras</code>.
-I contains 60k training and 10k testing images of 28x28 pixels. The labels
+It contains 60k training and 10k testing 28x28 images. The labels
 are integers from 0-9 and represents different classes of clothing, which
 can be seen in the code below.</p>
 <pre class="python"><code>import pandas as pd
@@ -51,20 +50,15 @@ test_X = test_X / 255
 train_X = train_X.reshape(60000, 28*28)
 test_X = test_X.reshape(10000, 28*28)
 
-# train_X = train_X[:1000, :]
-# test_X = test_X[:1000, :]
-# train_y = train_y[:1000]
-# test_y = test_y[:1000]
-
 class_names = [&#39;tshirt&#39;, &#39;trouser&#39;, &#39;pullover&#39;, &#39;dress&#39;, &#39;coat&#39;, &#39;sandal&#39;, &#39;shirt&#39;, &#39;sneaker&#39;, &#39;bag&#39;, &#39;boot&#39;]</code></pre>
-<p>In the code above we do two important things. First, since the observations are
-images the pixel intensities are represented in values between 0-255 we
+<p>Here we do two important things. First, since the observations are
+images the pixel intensities are represented in values between 0-255. We
 normalise them by division of the maximum pixel intensity. Then, after loading
 the data, the images are represented in a 3D array where each slice represents a
 single image. However, we are going to use classification based on Gaussian
 likelihood, treating the images as high dimensional observations from a
 multivariate Gaussian distribution - disregarding their spatial structure.
-Therefore we transform them into vectors, each row in the dataset representing
+Therefore we transform them into vectors, each row in a 2D array representing
 one image. In the plot below you can see the first instance of each class in the
 training data:</p>
 <pre class="python"><code>plt.figure(figsize=(10, 5))
@@ -80,12 +74,12 @@ plt.show()</code></pre>
 <p>When using maximum likelihood to estimate parameters (given some assumed
 distribution and observed data) we are saying: which parameters of this
 distribution would maximise the likelihood that we have observed the data we
-have observed? In this case we have 10 <span class="math inline">\(28*28 = 784\)</span> dimensional distributions,
+have observed? In this case we have ten <span class="math inline">\(28*28 = 784\)</span> dimensional distributions,
 assumed to be Gaussian, one for each class of clothing. The maximum likelihood
 estimators of a multivariate Gaussian, are the sample mean vector and the sample
 covariance matrix:</p>
 <p><span class="math display">\[
-\hat \mu =  \frac{1}{m} \sum_{i=1}^m \mathbf{  x^{(i)} } = \mathbf{\bar{x}}, \ \text{and} \\ \hat \Sigma  = \frac{1}{m} \sum_{i=1}^m \mathbf{(x^{(i)} - \hat \mu) (x^{(i)} -\hat  \mu)}&#39; 
+\hat \mu =  \frac{1}{m} \sum_{i=1}^m \mathbf{  x^{(i)} } = \mathbf{\bar{x}}, \ \text{and} \ \hat \Sigma  = \frac{1}{m} \sum_{i=1}^m \mathbf{(x^{(i)} - \hat \mu) (x^{(i)} -\hat  \mu)}&#39; 
 \]</span></p>
 <p>You can derive these estimators by using the log likelihood function
 and taking the derivative w.r.t. each parameter and then equating to zero.
@@ -128,7 +122,7 @@ seen in the plot below). When this happens some eigenvalues of the covariance
 matrix become negative and the covariance matrix is no longer positive semi-definite.
 Similarly, since the determinant of a matrix is the product of it’s eigen values,
 if one eigen value is zero the determinant will be zero and the matrix singular
-(non-invertible). Look for example at the eigen values of covariance matrix for
+(non-invertible). Look for example at the eigen values of the covariance matrix for
 the “dress” class and variances for the pixels:</p>
 <pre class="python"><code>s2=np.diag(cov_hat[&quot;dress&quot;])
 w, v = np.linalg.eig(cov_hat[&quot;dress&quot;])
@@ -158,12 +152,12 @@ matrix is often referred to as the precision.</p>
       precision = np.linalg.inv(Sigma)
     return precision, deter
   </code></pre>
-<p>Note that when calculating the pseudo determinant I can not
-take the product of all eigen values that were strictly &gt; 0. This
+<p>Note that when calculating the pseudo determinant I cannot
+take the product of all eigen values that are strictly &gt; 0. This
 is because we have 784 eigen values, and if the majority are
 below 1 we will end up with an extremely small number, very close
 to 0, which will introduce all the problems we are trying to avoid
-anyway. Here I choose the threshold 0.5 for including an eigen
+anyway. Here I chose the threshold 0.5 for including an eigen
 value in the calculation of the determinant. This is admittedly
 an arbitrary threshold but I found it to work out pretty well
 for these data. The code below calculates the determinant
@@ -174,10 +168,10 @@ for i in range(10):
     prec_deter[format(class_names[i])] = precdet(cov_hat[class_names[i]], 0.5)
     </code></pre>
 <p>Now to the actual classifier! If I would not have had the problem with
-singularity I could have used taken the log of the inbuilt function for the
-multivariate Gaussian density function, like so:
+singularity I could have taken the log of the inbuilt numpy function for the
+multivariate Gaussian PDF, like so:
 <code>ll = np.log(multivariate_normal.pdf(x, mean = mu, cov = Sigma))</code>. However, this
-function does not allow for using the precision directly and would not calculate
+function does not allow using the precision directly and would not calculate
 the pseudo determinant, so we would not get proper estimations. Therefore, I
 define the log likelihood in the code below that takes an observation (an image
 reshaped into a vector), the mean vector, precision and determinant calculated
@@ -187,7 +181,7 @@ observation:</p>
     ll = -0.5*(np.log(deter) + np.dot(np.dot(x-mu, precision), x-mu) + (len(mu)*np.log(2*np.pi)))
     return ll
   </code></pre>
-<p>Then I define a function that call the above function and calculates the
+<p>Then I define a classifier that calls the above function and calculates the
 likelihood of an observation coming from each possible class and returns the
 label of the class with the highest likelihood:</p>
 <pre class="python"><code>def classmle(x):
@@ -241,9 +235,9 @@ plt.yticks(list(range(10)), class_names);
 plt.show()</code></pre>
 <p><img src="staticunnamed-chunk-12-7.png" width="480" /></p>
 <p>Here, all rows represent true classes and all columns represent predictions.
-So, for example, true images of tshirts gets misclassified tshirts and shirts
+So, for example, true images of tshirts gets misclassified shirts and shirts
 gets misclassified as tshirts, but not really to the same extent. We
-can also see that several classes are categorised as shirt as a large portion of
+can also see that several classes are categorised as shirt because a large portion of
 the column is lit, however, since the row for shirt is fairly dark, the model
 seems to be able to classify that category correctly. Classifying sneaker
 as sandal seems to be the most common error of the model. Let’s look at the total
@@ -253,17 +247,17 @@ and the accuracy of each class:</p>
 print(&quot;Training accuracy: &quot;, round(acc_train, 3))</code></pre>
 <pre><code>## Training accuracy:  0.796</code></pre>
 <pre class="python"><code>for i in range(10):
-    print(class_names[i], np.mean(train_y[train_y == i] == train_pred[train_y == i]))</code></pre>
-<pre><code>## tshirt 0.7998333333333333
-## trouser 0.7755
-## pullover 0.5251666666666667
-## dress 0.8845
-## coat 0.6196666666666667
-## sandal 0.9676666666666667
-## shirt 0.8796666666666667
+    print(class_names[i], round(np.mean(train_y[train_y == i] == train_pred[train_y == i]), 3))</code></pre>
+<pre><code>## tshirt 0.8
+## trouser 0.776
+## pullover 0.525
+## dress 0.884
+## coat 0.62
+## sandal 0.968
+## shirt 0.88
 ## sneaker 0.632
-## bag 0.9835
-## boot 0.8936666666666667</code></pre>
+## bag 0.984
+## boot 0.894</code></pre>
 <p>A total training accuracy of 0.796! This is perhaps not a model we would
 put in production but it is far better than chance (which would
 produce an accuracy of 0.10). And remember that this is achieved without any
@@ -382,9 +376,9 @@ acc_test = np.mean(resTest_pred == test_y)
 print(&quot;Testing accuracy: &quot;, round(acc_test, 3))</code></pre>
 <pre><code>## Testing accuracy:  0.753</code></pre>
 <p>However, looking at the performance on the test data, we see that it actually performs
-is better than the full model. This might indicate that the full model slightly
+better than the full model. This might indicate that the full model slightly
 overfit the training data.</p>
 <p>So, to sum up: in this blog post I have shown how you can create an image classification
-model without using really fancy techniques that even performs fairly well given that
+model without using any fancy techniques. The model even performs fairly well given that
 we’re not even taking the structural relationships of the pixels into account. I have
 also demonstrated that reducing dimensionality might help to protect against overfitting.</p>
