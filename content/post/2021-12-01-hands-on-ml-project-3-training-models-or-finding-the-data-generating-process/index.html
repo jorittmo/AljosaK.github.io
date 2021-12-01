@@ -1,0 +1,195 @@
+---
+title: 'Hands-On ML - Project 3: Training models or finding the data generating process?'
+author: Jonathan Rittmo
+date: '2021-12-01'
+slug: []
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2021-12-01T13:28:57+01:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>This is going to be a short post trying to demonstrate what our goal is when
+doing predictive modelling. It can feel quite daunting when first starting to
+think about these concepts, but really it is conceptually quite simple. The
+world generate data all the time, people are born at different lengths and
+sizes, the weather changes from day to day, planets and stars are discovered
+and so on. Exactly how these data are generated is, however, seldom known. That
+is, we rarely know the exact functional form of the data generating process.
+Predictive modelling is nothing other than trying to find the function that has
+generated the data, that’s it.</p>
+<p>Of course, this endeavour is not always easy. However, the concept of what we
+are trying to do as scientist (even if you don’t do predictive modelling)
+became much more clear to me when I realised that most mathematical models
+used in statistics are just ways to imitate data generating processes in the
+real world. And when we fit models to data we are just trying to find the best
+possible guess of what the function that has generated these data might look like.
+See for example the following code:</p>
+<pre class="python"><code>import pandas as pd
+import numpy as np
+def gen_fun(x, c, d):
+  x1 = x[0]; x2 = x[1];
+  c1 = c[0]; c2 = c[1]; d1 = d[0]; d2 = d[1];
+  y = np.exp(-c1/(1+d1*(x1**2)*(x2**2)) -c2/(1+d2*(x1**2)*(x2**2)))
+  return y</code></pre>
+<p>This defines a function
+<span class="math display">\[
+y = exp\left(-\frac{c_1}{1+d_1x_1^2x_2^2}-\frac{c_1}{1+d_1x_1^2/x_2^2} \right)
+\]</span>
+taking two arguments <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, as well as four
+parameters <span class="math inline">\(c_1, \ c_2, \ d_1\)</span> and <span class="math inline">\(d_2\)</span>. Given a set of parameters and some ranges for the arguments,
+we can plot this surface as a function of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Let’s define a grid
+over <span class="math inline">\([0, 1]\times[0.2, 1]\)</span> and plot the surface with parameters
+<span class="math inline">\(d_1 = 0.2, \ d_2 = 0.6, \ c_1 = 0.5, \ c_2 = 0.1\)</span>:</p>
+<pre class="python"><code>import matplotlib.pyplot as plt
+
+xlist = np.linspace(0, 1, 25)
+ylist = np.linspace(0.2, 1, 25)
+X, Y = np.meshgrid(xlist, ylist)
+
+y = gen_fun([X, Y], d = [0.2, 0.6], c = [0.5, 0.1])
+
+fig = plt.figure()
+ax = plt.axes(projection = &#39;3d&#39;)
+surf1 = ax.plot_surface(X, Y, y, rstride=1, cstride=1, 
+                      cmap=&#39;gray&#39;,linewidth=0, antialiased=False)
+plt.show( )                      </code></pre>
+<p><img src="staticunnamed-chunk-2-1.png" width="672" /></p>
+<p>Say that we have observed this data in the world, but don’t know how it
+has been generated. What type of data generating process would be our best guess here?
+It is evident that this surface isn’t linear and there are several ways to model it,
+but a polynomial regression would probably perform fairly well.</p>
+<pre class="python"><code>from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+
+poly_features = PolynomialFeatures(degree=3, include_bias=False)
+grid_df = pd.DataFrame([X.reshape(25*25), Y.reshape(25*25)]).T
+X_poly = poly_features.fit_transform(grid_df)
+
+lin_reg = LinearRegression()
+lin_reg.fit(X_poly, y.reshape(25*25));
+
+y_hat = lin_reg.predict(X_poly)
+y_hat_mat = y_hat.reshape(25, 25)
+
+
+fig = plt.figure()
+ax = plt.axes(projection = &#39;3d&#39;)
+surf1 = ax.plot_surface(X, Y, y_hat_mat, rstride=1, cstride=1, 
+                      cmap=&#39;gray&#39;,linewidth=0, antialiased=False)
+plt.title(&quot;Polynomial fit&quot;)
+plt.show( )                      </code></pre>
+<p><img src="staticunnamed-chunk-3-3.png" width="672" /></p>
+<p>As can be seen, this looks almost identical to the true function, so
+we can be fairly confident of our model choice. However, in reality
+the polynomial regression was not the true data generating process
+which becomes apparent if we try to extrapolate the model to values
+of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> outside of the grid <span class="math inline">\([0, 1]\times[0.2, 1]\)</span> that
+we previously defined, for example <span class="math inline">\([0, 3]\times[0.2, 3]\)</span>:</p>
+<pre class="python"><code>xlist = np.linspace(0, 3, 25)
+ylist = np.linspace(0.2, 3, 25)
+X, Y = np.meshgrid(xlist, ylist)
+
+grid_df = pd.DataFrame([X.reshape(25*25), Y.reshape(25*25)]).T
+X_poly = PolynomialFeatures(degree=3, include_bias=False).fit_transform(grid_df)
+
+y_hat = lin_reg.predict(X_poly)
+y_hat_mat = y_hat.reshape(25, 25)
+
+fig = plt.figure()
+ax = plt.subplot(121, projection = &#39;3d&#39;)
+surf1 = ax.plot_surface(X, Y, y_hat_mat, rstride=1, cstride=1, 
+                        cmap=&#39;gray&#39;,linewidth=0, antialiased=False)
+plt.title(&quot;Polynomial fit&quot;)
+true_ = gen_fun([X, Y], d = [0.2, 0.6], c = [0.5, 0.1])
+ax = plt.subplot(122, projection = &#39;3d&#39;)
+surf2 = ax.plot_surface(X, Y, true_, rstride=1, cstride=1, 
+                        cmap=&#39;gray&#39;,linewidth=0, antialiased=False)
+plt.title(&quot;True function&quot;)
+plt.show( )                      </code></pre>
+<p><img src="staticunnamed-chunk-4-5.png" width="672" /></p>
+<p>These are obviously not the same functions, the polynomial fit just extends the
+same shape of the surface from the <span class="math inline">\([0, 1]\times[0.2, 1]\)</span> grid, while the
+surface from the true data generating process takes on a completely different
+shape for higher values of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. This emphasises the importance of
+never extrapolating outside of the ranges of the training data, because when we
+are doing predictive modelling we are only (most often) simulating the data
+generating process, something we can only do for data that we have observed.</p>
+<p>In the real world data is going to be a lot more noisy than demonstrated here.
+Let us for example generate a few observations, say 200, and add some Gaussian noise
+to the data generated from our function with the same parameters as before:</p>
+<pre class="python"><code>np.random.seed(42)
+X = [np.random.uniform(0, 1, 200), np.random.uniform(0.2, 1, 200)]
+y = gen_fun(X, d = [0.2, 0.6], c = [0.5, 0.1]) + np.random.normal(0, 0.02, 200)
+
+fig = plt.figure()
+ax = fig.add_subplot(projection=&#39;3d&#39;)
+ax.scatter(X[0], X[1], y)
+plt.show()</code></pre>
+<p><img src="staticunnamed-chunk-5-7.png" width="672" /></p>
+<p>Say that we have on good authority what the data generating process is,
+but we don’t know the parameters of the function. We can try to find them
+by defining a loss function, i.e. a function that calculates some form of model error
+and try various parameters until we think that error is as low as it can get. This
+is in essence what we are doing when training a model of any kind.</p>
+<pre class="python"><code>def gen_fun_mse(theta, x, y):
+  d = [theta[0], theta[1]]
+  c = [theta[2], theta[3]]
+  y_hat = gen_fun(x, d = d, c = c)
+  mse = sum(((y_hat - y)**2))/len(y_hat)
+  return mse
+
+theta = [0.5, 0.5, 0.5, 0.5] # Guess 1
+gen_fun_mse(theta, X, y)</code></pre>
+<pre><code>## 0.029273615115557573</code></pre>
+<pre class="python"><code>theta = [0.1, 1.5, 0.0, 0.9] # Guess 2
+gen_fun_mse(theta, X, y)</code></pre>
+<pre><code>## 0.01213406201171027</code></pre>
+<pre class="python"><code>theta = [0.2, 0.6, 0.5, 0.1] # True parameters
+gen_fun_mse(theta, X, y)</code></pre>
+<pre><code>## 0.0003883500216119719</code></pre>
+<p>This search is of course tedious work to do manually, but fortunately
+it is possible to automate. I will go into more detail of these procedures
+in future posts, but to keep this post short I will simply use a predefined
+optimisation routine from <code>scipy</code> called
+<a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">BFGS</a>.
+To initialise the search we start with some uniform random values on <span class="math inline">\([0,2]\)</span>.</p>
+<pre class="python"><code>from scipy.optimize import minimize 
+theta0 = np.random.uniform(0, 2, 4)
+best_params = minimize(gen_fun_mse, theta0, args = (X, y))
+best_params.x</code></pre>
+<pre><code>## array([ 0.28632496,  2.21745009,  0.62274297, -0.02452637])</code></pre>
+<pre class="python"><code>gen_fun_mse(best_params.x, X, y)</code></pre>
+<pre><code>## 0.00038746162301986033</code></pre>
+<p>These are not at all the original parameters! However, the MSE is even lower
+for these parameters than for the true. What I am trying to demonstrate with
+this is that even though we knew the functional form of the data generating process
+we are still just doing function approximation when we are training algorithms like this.
+The power of function approximation is however daunting, as is evident from
+the massive use of deep neural nets we have seen the past decade.
+Because that is just what they neural networks are,
+universal function approximations of data generating processes. Incredible, isn’t it?</p>
+<pre class="python"><code>xlist = np.linspace(0, 1, 25)
+ylist = np.linspace(0.2, 1, 25)
+X_, Y_ = np.meshgrid(xlist, ylist)
+
+y_pred = gen_fun([X_, Y_], d = best_params.x[:2], c = best_params.x[2:])
+
+fig = plt.figure()
+ax = plt.axes(projection = &#39;3d&#39;)
+scat = ax.scatter(X[0], X[1], y)
+surf1 = ax.plot_surface(X_, Y_, y_pred, alpha=0.3, rstride=1, cstride=1, 
+                      cmap=&#39;gray&#39;,linewidth=0, antialiased=False)
+plt.show( )                      </code></pre>
+<p><img src="staticunnamed-chunk-8-9.png" width="672" /></p>
