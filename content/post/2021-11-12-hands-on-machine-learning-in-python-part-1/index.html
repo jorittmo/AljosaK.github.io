@@ -8,7 +8,7 @@ tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2021-11-24'
+lastmod: '2021-12-04'
 featured: no
 image:
   caption: ''
@@ -20,8 +20,8 @@ projects: []
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
-<p>This post is the first in a series that will follow my development of
-machine learning skills in <code>python</code>. It is sort of an experiment to see
+<p>This post is the first in a series that will cover some machine learning basics.
+It is sort of an experiment to see
 how fast I can go cover to cover in the book by Aurélien Géron
 <a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</a>.
 This is my second attempt at fully completing a textbook. My first was
@@ -29,8 +29,7 @@ This is my second attempt at fully completing a textbook. My first was
 a more theoretical nature than what I am planning to do now. Which also means
 that there is more to document. I see this series of posts as a way to
 facilitate my learning and to make sure that I actually complete the challenge.</p>
-<p>I am not new to machine learning which will serve to my advantage. However,
-my experience with <code>python</code> is not at all as extensive as my experience with <code>R</code>.
+<p>I am not new to machine learning which will serve to my advantage.
 Last time I went cover to cover in a textbook it took me more than a month, but
 this time I hope it will go a lot faster.</p>
 <hr />
@@ -292,7 +291,7 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
 <pre class="python"><code>pd.DataFrame(grid_search.cv_results_).loc[:,[&quot;param_prepare__cat&quot;, &quot;mean_fit_time&quot;, &quot;mean_test_score&quot;]].style</code></pre>
 <style type="text/css">
 </style>
-<table id="T_e171c_">
+<table id="T_44829_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -303,22 +302,22 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
   </thead>
   <tbody>
     <tr>
-      <th id="T_e171c_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_e171c_row0_col0" class="data row0 col0" >passthrough</td>
-      <td id="T_e171c_row0_col1" class="data row0 col1" >0.070010</td>
-      <td id="T_e171c_row0_col2" class="data row0 col2" >-29.703213</td>
+      <th id="T_44829_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_44829_row0_col0" class="data row0 col0" >passthrough</td>
+      <td id="T_44829_row0_col1" class="data row0 col1" >0.047637</td>
+      <td id="T_44829_row0_col2" class="data row0 col2" >-29.703213</td>
     </tr>
     <tr>
-      <th id="T_e171c_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_e171c_row1_col0" class="data row1 col0" >drop</td>
-      <td id="T_e171c_row1_col1" class="data row1 col1" >0.042089</td>
-      <td id="T_e171c_row1_col2" class="data row1 col2" >-29.727586</td>
+      <th id="T_44829_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_44829_row1_col0" class="data row1 col0" >drop</td>
+      <td id="T_44829_row1_col1" class="data row1 col1" >0.043405</td>
+      <td id="T_44829_row1_col2" class="data row1 col2" >-29.727586</td>
     </tr>
     <tr>
-      <th id="T_e171c_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_e171c_row2_col0" class="data row2 col0" >OneHotEncoder(handle_unknown='ignore')</td>
-      <td id="T_e171c_row2_col1" class="data row2 col1" >0.756799</td>
-      <td id="T_e171c_row2_col2" class="data row2 col2" >-30.061300</td>
+      <th id="T_44829_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_44829_row2_col0" class="data row2 col0" >OneHotEncoder(handle_unknown='ignore')</td>
+      <td id="T_44829_row2_col1" class="data row2 col1" >0.409136</td>
+      <td id="T_44829_row2_col2" class="data row2 col2" >-30.061300</td>
     </tr>
   </tbody>
 </table>
@@ -358,7 +357,7 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
 <pre class="python"><code>pd.DataFrame(grid_search.cv_results_).loc[:,[&quot;params&quot;, &quot;mean_fit_time&quot;, &quot;mean_test_score&quot;]].style</code></pre>
 <style type="text/css">
 </style>
-<table id="T_8f551_">
+<table id="T_0d7ff_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -369,28 +368,28 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
   </thead>
   <tbody>
     <tr>
-      <th id="T_8f551_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_8f551_row0_col0" class="data row0 col0" >{'prepare__cat': 'drop', 'rf__max_features': 2, 'rf__n_estimators': 50}</td>
-      <td id="T_8f551_row0_col1" class="data row0 col1" >1.381507</td>
-      <td id="T_8f551_row0_col2" class="data row0 col2" >-24.549185</td>
+      <th id="T_0d7ff_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_0d7ff_row0_col0" class="data row0 col0" >{'prepare__cat': 'drop', 'rf__max_features': 2, 'rf__n_estimators': 50}</td>
+      <td id="T_0d7ff_row0_col1" class="data row0 col1" >1.177931</td>
+      <td id="T_0d7ff_row0_col2" class="data row0 col2" >-24.462634</td>
     </tr>
     <tr>
-      <th id="T_8f551_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_8f551_row1_col0" class="data row1 col0" >{'prepare__cat': 'drop', 'rf__max_features': 2, 'rf__n_estimators': 100}</td>
-      <td id="T_8f551_row1_col1" class="data row1 col1" >2.509718</td>
-      <td id="T_8f551_row1_col2" class="data row1 col2" >-23.987213</td>
+      <th id="T_0d7ff_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_0d7ff_row1_col0" class="data row1 col0" >{'prepare__cat': 'drop', 'rf__max_features': 2, 'rf__n_estimators': 100}</td>
+      <td id="T_0d7ff_row1_col1" class="data row1 col1" >2.199517</td>
+      <td id="T_0d7ff_row1_col2" class="data row1 col2" >-24.171679</td>
     </tr>
     <tr>
-      <th id="T_8f551_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_8f551_row2_col0" class="data row2 col0" >{'prepare__cat': 'drop', 'rf__max_features': 10, 'rf__n_estimators': 50}</td>
-      <td id="T_8f551_row2_col1" class="data row2 col1" >3.646021</td>
-      <td id="T_8f551_row2_col2" class="data row2 col2" >-22.322416</td>
+      <th id="T_0d7ff_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_0d7ff_row2_col0" class="data row2 col0" >{'prepare__cat': 'drop', 'rf__max_features': 10, 'rf__n_estimators': 50}</td>
+      <td id="T_0d7ff_row2_col1" class="data row2 col1" >3.422304</td>
+      <td id="T_0d7ff_row2_col2" class="data row2 col2" >-22.606096</td>
     </tr>
     <tr>
-      <th id="T_8f551_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_8f551_row3_col0" class="data row3 col0" >{'prepare__cat': 'drop', 'rf__max_features': 10, 'rf__n_estimators': 100}</td>
-      <td id="T_8f551_row3_col1" class="data row3 col1" >7.150544</td>
-      <td id="T_8f551_row3_col2" class="data row3 col2" >-22.372328</td>
+      <th id="T_0d7ff_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_0d7ff_row3_col0" class="data row3 col0" >{'prepare__cat': 'drop', 'rf__max_features': 10, 'rf__n_estimators': 100}</td>
+      <td id="T_0d7ff_row3_col1" class="data row3 col1" >6.726508</td>
+      <td id="T_0d7ff_row3_col2" class="data row3 col2" >-22.319688</td>
     </tr>
   </tbody>
 </table>
@@ -411,7 +410,7 @@ importance of each included feature:</p>
 pd.DataFrame(sorted(zip(feature_importances, np.array(cnames)), reverse = True)).style</code></pre>
 <style type="text/css">
 </style>
-<table id="T_a179c_">
+<table id="T_65bec_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -421,139 +420,139 @@ pd.DataFrame(sorted(zip(feature_importances, np.array(cnames)), reverse = True))
   </thead>
   <tbody>
     <tr>
-      <th id="T_a179c_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_a179c_row0_col0" class="data row0 col0" >0.243726</td>
-      <td id="T_a179c_row0_col1" class="data row0 col1" >diff_last24and48to24</td>
+      <th id="T_65bec_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_65bec_row0_col0" class="data row0 col0" >0.247427</td>
+      <td id="T_65bec_row0_col1" class="data row0 col1" >diff_last24and48to24</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_a179c_row1_col0" class="data row1 col0" >0.159361</td>
-      <td id="T_a179c_row1_col1" class="data row1 col1" >com_tot_bef</td>
+      <th id="T_65bec_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_65bec_row1_col0" class="data row1 col0" >0.147319</td>
+      <td id="T_65bec_row1_col1" class="data row1 col1" >com_tot_bef</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_a179c_row2_col0" class="data row2 col0" >0.143009</td>
-      <td id="T_a179c_row2_col1" class="data row2 col1" >com_in_first_24h</td>
+      <th id="T_65bec_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_65bec_row2_col0" class="data row2 col0" >0.135651</td>
+      <td id="T_65bec_row2_col1" class="data row2 col1" >com_in_first_24h</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_a179c_row3_col0" class="data row3 col0" >0.120825</td>
-      <td id="T_a179c_row3_col1" class="data row3 col1" >post_length</td>
+      <th id="T_65bec_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_65bec_row3_col0" class="data row3 col0" >0.124644</td>
+      <td id="T_65bec_row3_col1" class="data row3 col1" >post_length</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_a179c_row4_col0" class="data row4 col0" >0.059084</td>
-      <td id="T_a179c_row4_col1" class="data row4 col1" >daily_interest</td>
+      <th id="T_65bec_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_65bec_row4_col0" class="data row4 col0" >0.062517</td>
+      <td id="T_65bec_row4_col1" class="data row4 col1" >com_48to24h_bef</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_a179c_row5_col0" class="data row5 col0" >0.052818</td>
-      <td id="T_a179c_row5_col1" class="data row5 col1" >com_48to24h_bef</td>
+      <th id="T_65bec_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_65bec_row5_col0" class="data row5 col0" >0.058906</td>
+      <td id="T_65bec_row5_col1" class="data row5 col1" >daily_interest</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_a179c_row6_col0" class="data row6 col0" >0.047346</td>
-      <td id="T_a179c_row6_col1" class="data row6 col1" >page_cat</td>
+      <th id="T_65bec_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_65bec_row6_col0" class="data row6 col0" >0.049337</td>
+      <td id="T_65bec_row6_col1" class="data row6 col1" >page_pop</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_a179c_row7_col0" class="data row7 col0" >0.044964</td>
-      <td id="T_a179c_row7_col1" class="data row7 col1" >page_pop</td>
+      <th id="T_65bec_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_65bec_row7_col0" class="data row7 col0" >0.046372</td>
+      <td id="T_65bec_row7_col1" class="data row7 col1" >page_cat</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_a179c_row8_col0" class="data row8 col0" >0.039170</td>
-      <td id="T_a179c_row8_col1" class="data row8 col1" >timegap_pub_base</td>
+      <th id="T_65bec_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_65bec_row8_col0" class="data row8 col0" >0.037853</td>
+      <td id="T_65bec_row8_col1" class="data row8 col1" >timegap_pub_base</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_a179c_row9_col0" class="data row9 col0" >0.023485</td>
-      <td id="T_a179c_row9_col1" class="data row9 col1" >page_checkin</td>
+      <th id="T_65bec_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_65bec_row9_col0" class="data row9 col0" >0.024769</td>
+      <td id="T_65bec_row9_col1" class="data row9 col1" >page_checkin</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row10" class="row_heading level0 row10" >10</th>
-      <td id="T_a179c_row10_col0" class="data row10 col0" >0.008506</td>
-      <td id="T_a179c_row10_col1" class="data row10 col1" >com_24h</td>
+      <th id="T_65bec_level0_row10" class="row_heading level0 row10" >10</th>
+      <td id="T_65bec_row10_col0" class="data row10 col0" >0.012120</td>
+      <td id="T_65bec_row10_col1" class="data row10 col1" >com_24h</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row11" class="row_heading level0 row11" >11</th>
-      <td id="T_a179c_row11_col0" class="data row11 col0" >0.006994</td>
-      <td id="T_a179c_row11_col1" class="data row11 col1" >pub_tuesday</td>
+      <th id="T_65bec_level0_row11" class="row_heading level0 row11" >11</th>
+      <td id="T_65bec_row11_col0" class="data row11 col0" >0.005722</td>
+      <td id="T_65bec_row11_col1" class="data row11 col1" >base_tuesday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row12" class="row_heading level0 row12" >12</th>
-      <td id="T_a179c_row12_col0" class="data row12 col0" >0.006922</td>
-      <td id="T_a179c_row12_col1" class="data row12 col1" >base_tuesday</td>
+      <th id="T_65bec_level0_row12" class="row_heading level0 row12" >12</th>
+      <td id="T_65bec_row12_col0" class="data row12 col0" >0.005415</td>
+      <td id="T_65bec_row12_col1" class="data row12 col1" >pub_tuesday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row13" class="row_heading level0 row13" >13</th>
-      <td id="T_a179c_row13_col0" class="data row13 col0" >0.006132</td>
-      <td id="T_a179c_row13_col1" class="data row13 col1" >pub_thursday</td>
+      <th id="T_65bec_level0_row13" class="row_heading level0 row13" >13</th>
+      <td id="T_65bec_row13_col0" class="data row13 col0" >0.004674</td>
+      <td id="T_65bec_row13_col1" class="data row13 col1" >pub_thursday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row14" class="row_heading level0 row14" >14</th>
-      <td id="T_a179c_row14_col0" class="data row14 col0" >0.004131</td>
-      <td id="T_a179c_row14_col1" class="data row14 col1" >pub_sunday</td>
+      <th id="T_65bec_level0_row14" class="row_heading level0 row14" >14</th>
+      <td id="T_65bec_row14_col0" class="data row14 col0" >0.004128</td>
+      <td id="T_65bec_row14_col1" class="data row14 col1" >base_sunday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row15" class="row_heading level0 row15" >15</th>
-      <td id="T_a179c_row15_col0" class="data row15 col0" >0.004127</td>
-      <td id="T_a179c_row15_col1" class="data row15 col1" >base_wednesday</td>
+      <th id="T_65bec_level0_row15" class="row_heading level0 row15" >15</th>
+      <td id="T_65bec_row15_col0" class="data row15 col0" >0.003883</td>
+      <td id="T_65bec_row15_col1" class="data row15 col1" >pub_saturday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row16" class="row_heading level0 row16" >16</th>
-      <td id="T_a179c_row16_col0" class="data row16 col0" >0.003914</td>
-      <td id="T_a179c_row16_col1" class="data row16 col1" >base_sunday</td>
+      <th id="T_65bec_level0_row16" class="row_heading level0 row16" >16</th>
+      <td id="T_65bec_row16_col0" class="data row16 col0" >0.003864</td>
+      <td id="T_65bec_row16_col1" class="data row16 col1" >h_collecting</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row17" class="row_heading level0 row17" >17</th>
-      <td id="T_a179c_row17_col0" class="data row17 col0" >0.003654</td>
-      <td id="T_a179c_row17_col1" class="data row17 col1" >base_thursday</td>
+      <th id="T_65bec_level0_row17" class="row_heading level0 row17" >17</th>
+      <td id="T_65bec_row17_col0" class="data row17 col0" >0.003826</td>
+      <td id="T_65bec_row17_col1" class="data row17 col1" >base_wednesday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row18" class="row_heading level0 row18" >18</th>
-      <td id="T_a179c_row18_col0" class="data row18 col0" >0.003422</td>
-      <td id="T_a179c_row18_col1" class="data row18 col1" >h_collecting</td>
+      <th id="T_65bec_level0_row18" class="row_heading level0 row18" >18</th>
+      <td id="T_65bec_row18_col0" class="data row18 col0" >0.003799</td>
+      <td id="T_65bec_row18_col1" class="data row18 col1" >pub_sunday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row19" class="row_heading level0 row19" >19</th>
-      <td id="T_a179c_row19_col0" class="data row19 col0" >0.003376</td>
-      <td id="T_a179c_row19_col1" class="data row19 col1" >pub_monday</td>
+      <th id="T_65bec_level0_row19" class="row_heading level0 row19" >19</th>
+      <td id="T_65bec_row19_col0" class="data row19 col0" >0.003535</td>
+      <td id="T_65bec_row19_col1" class="data row19 col1" >base_thursday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row20" class="row_heading level0 row20" >20</th>
-      <td id="T_a179c_row20_col0" class="data row20 col0" >0.003280</td>
-      <td id="T_a179c_row20_col1" class="data row20 col1" >pub_saturday</td>
+      <th id="T_65bec_level0_row20" class="row_heading level0 row20" >20</th>
+      <td id="T_65bec_row20_col0" class="data row20 col0" >0.003217</td>
+      <td id="T_65bec_row20_col1" class="data row20 col1" >pub_friday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row21" class="row_heading level0 row21" >21</th>
-      <td id="T_a179c_row21_col0" class="data row21 col0" >0.003063</td>
-      <td id="T_a179c_row21_col1" class="data row21 col1" >base_friday</td>
+      <th id="T_65bec_level0_row21" class="row_heading level0 row21" >21</th>
+      <td id="T_65bec_row21_col0" class="data row21 col0" >0.003140</td>
+      <td id="T_65bec_row21_col1" class="data row21 col1" >pub_monday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row22" class="row_heading level0 row22" >22</th>
-      <td id="T_a179c_row22_col0" class="data row22 col0" >0.002963</td>
-      <td id="T_a179c_row22_col1" class="data row22 col1" >pub_wednesday</td>
+      <th id="T_65bec_level0_row22" class="row_heading level0 row22" >22</th>
+      <td id="T_65bec_row22_col0" class="data row22 col0" >0.003048</td>
+      <td id="T_65bec_row22_col1" class="data row22 col1" >base_friday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row23" class="row_heading level0 row23" >23</th>
-      <td id="T_a179c_row23_col0" class="data row23 col0" >0.002706</td>
-      <td id="T_a179c_row23_col1" class="data row23 col1" >base_monday</td>
+      <th id="T_65bec_level0_row23" class="row_heading level0 row23" >23</th>
+      <td id="T_65bec_row23_col0" class="data row23 col0" >0.002289</td>
+      <td id="T_65bec_row23_col1" class="data row23 col1" >pub_wednesday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row24" class="row_heading level0 row24" >24</th>
-      <td id="T_a179c_row24_col0" class="data row24 col0" >0.002219</td>
-      <td id="T_a179c_row24_col1" class="data row24 col1" >pub_friday</td>
+      <th id="T_65bec_level0_row24" class="row_heading level0 row24" >24</th>
+      <td id="T_65bec_row24_col0" class="data row24 col0" >0.001962</td>
+      <td id="T_65bec_row24_col1" class="data row24 col1" >base_monday</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row25" class="row_heading level0 row25" >25</th>
-      <td id="T_a179c_row25_col0" class="data row25 col0" >0.000803</td>
-      <td id="T_a179c_row25_col1" class="data row25 col1" >share_count</td>
+      <th id="T_65bec_level0_row25" class="row_heading level0 row25" >25</th>
+      <td id="T_65bec_row25_col0" class="data row25 col0" >0.000583</td>
+      <td id="T_65bec_row25_col1" class="data row25 col1" >share_count</td>
     </tr>
     <tr>
-      <th id="T_a179c_level0_row26" class="row_heading level0 row26" >26</th>
-      <td id="T_a179c_row26_col0" class="data row26 col0" >0.000000</td>
-      <td id="T_a179c_row26_col1" class="data row26 col1" >is_promoted</td>
+      <th id="T_65bec_level0_row26" class="row_heading level0 row26" >26</th>
+      <td id="T_65bec_row26_col0" class="data row26 col0" >0.000000</td>
+      <td id="T_65bec_row26_col1" class="data row26 col1" >is_promoted</td>
     </tr>
   </tbody>
 </table>
@@ -603,7 +602,7 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
 <pre class="python"><code>pd.DataFrame(grid_search.cv_results_).loc[: ,[&quot;params&quot;, &quot;mean_fit_time&quot;, &quot;mean_test_score&quot;]].style</code></pre>
 <style type="text/css">
 </style>
-<table id="T_353d6_">
+<table id="T_6bc9b_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -614,22 +613,22 @@ grid_search.fit(fbdat_trainx, fbdat_trainy)</code></pre>
   </thead>
   <tbody>
     <tr>
-      <th id="T_353d6_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_353d6_row0_col0" class="data row0 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 10}</td>
-      <td id="T_353d6_row0_col1" class="data row0 col1" >6.421480</td>
-      <td id="T_353d6_row0_col2" class="data row0 col2" >-22.631368</td>
+      <th id="T_6bc9b_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_6bc9b_row0_col0" class="data row0 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 10}</td>
+      <td id="T_6bc9b_row0_col1" class="data row0 col1" >12.276127</td>
+      <td id="T_6bc9b_row0_col2" class="data row0 col2" >-22.674210</td>
     </tr>
     <tr>
-      <th id="T_353d6_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_353d6_row1_col0" class="data row1 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 20}</td>
-      <td id="T_353d6_row1_col1" class="data row1 col1" >4.240782</td>
-      <td id="T_353d6_row1_col2" class="data row1 col2" >-22.580045</td>
+      <th id="T_6bc9b_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_6bc9b_row1_col0" class="data row1 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 20}</td>
+      <td id="T_6bc9b_row1_col1" class="data row1 col1" >10.522145</td>
+      <td id="T_6bc9b_row1_col2" class="data row1 col2" >-22.218293</td>
     </tr>
     <tr>
-      <th id="T_353d6_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_353d6_row2_col0" class="data row2 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 28}</td>
-      <td id="T_353d6_row2_col1" class="data row2 col1" >3.670672</td>
-      <td id="T_353d6_row2_col2" class="data row2 col2" >-22.421161</td>
+      <th id="T_6bc9b_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_6bc9b_row2_col0" class="data row2 col0" >{'prepare__cat': 'drop', 'var_select__no_vars': 28}</td>
+      <td id="T_6bc9b_row2_col1" class="data row2 col1" >8.256074</td>
+      <td id="T_6bc9b_row2_col2" class="data row2 col2" >-22.335480</td>
     </tr>
   </tbody>
 </table>
@@ -650,7 +649,7 @@ final_preds = grid_search.best_estimator_.predict(fbdat_testx)
 
 rmse = np.sqrt(np.mean((final_preds - fbdat_testy)**2)) # Root mean square error
 round(rmse, 3)</code></pre>
-<pre><code>## 92.422</code></pre>
+<pre><code>## 93.504</code></pre>
 <p>Unfortunately this is pretty bad, on average our model is off by almost 100
 comments! This indicates that the model severely overfit the training data. If
 this was a real project we would probably need to collect more data at this

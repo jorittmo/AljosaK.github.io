@@ -24,8 +24,8 @@ reticulate::use_condaenv("handsOnML")
 ```
 
 
-This post is the first in a series that will follow my development of 
-machine learning skills in `python`. It is sort of an experiment to see
+This post is the first in a series that will cover some machine learning basics.
+It is sort of an experiment to see
 how fast I can go cover to cover in the book by Aurélien Géron 
 [Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/). 
 This is my second attempt at fully completing a textbook. My first was 
@@ -34,8 +34,7 @@ a more theoretical nature than what I am planning to do now. Which also means
 that there is more to document. I see this series of posts as a way to 
 facilitate my learning and to make sure that I actually complete the challenge.
 
-I am not new to machine learning which will serve to my advantage. However, 
-my experience with `python` is not at all as extensive as my experience with `R`.
+I am not new to machine learning which will serve to my advantage.
 Last time I went cover to cover in a textbook it took me more than a month, but
 this time I hope it will go a lot faster.
 
