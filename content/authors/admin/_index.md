@@ -48,7 +48,9 @@ user_groups:
 - Visitors
 ---
 
-Brain damaged brain student researching and writing about methodological and statistical issues in cognitive neuroscience, 
-as well as other related topics. If I feel inclined I might write more technical blog
-posts and if you're real unlucky there might even slip in some fiction book reviews. I will only post
-about my mental fatigue when I have the energy. 
+Brain damaged brain student researching methodological and statistical issues in
+cognitive neuroscience. Interested in how to use data ranging in size from very
+small to very large for understanding human behaviour and experience. My posts
+here are as much a digital garden as it is a blog, hopefully it will thrive with
+me, along with both technical proficiency and personal growth. 
+
