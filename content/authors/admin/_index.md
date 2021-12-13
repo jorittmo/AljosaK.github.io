@@ -48,7 +48,7 @@ user_groups:
 - Visitors
 ---
 
-Brain damaged brain student researching methodological and statistical issues in
+Data and Cognitive scientist researching methodological and statistical issues in
 cognitive neuroscience. Interested in how to use data ranging in size from very
 small to very large for understanding human behaviour and experience. My posts
 here are as much a digital garden as it is a blog, hopefully it will thrive with
