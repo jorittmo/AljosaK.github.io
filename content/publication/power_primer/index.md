@@ -14,12 +14,12 @@ abstract: "Researchers and clinicians in neuropsychology often compare
 authors:
 - Robert D McIntosh
 - admin
-date: "2020-10-15T00:00:00Z"
-doi: "10.31234/osf.io/fxz49"
+date: "2020-11-15T00:00:00Z"
+doi: "https://doi.org/10.1016/j.cortex.2020.11.005"
 featured: false
 links:
 projects:
-publication: "*PsyArXiv*"
+publication: "*Cortex*"
 publication_short: ""
 publication_types:
 - "2"
@@ -27,10 +27,11 @@ publishDate: "2020-09-03T00:00:00Z"
 slides: ""
 summary: ""
 tags:
-- affect
-- differential outcomes training
-- inference
-- knowledge transfer
+- Single-case
+- Deficit
+- Dissociation
+- Power
+- Statistical methods 
 title: 'Power calculations in single-case neuropsychology: a practical primer'
 url_code: ""
 url_dataset: ""

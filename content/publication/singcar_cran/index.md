@@ -17,23 +17,24 @@ abstract: "Case-control comparisons are a class of statistical tests allowing re
 authors:
 - admin
 - Robert D McIntosh
-date: ""
+date: "2021-12-30T00:00:00Z"
+doi: "https://doi.org/10.21105/joss.03887"
 featured: false
 links:
-projects:
-publication: "*The Comprehensive R Archive Network*"
+projects: ""
+publication: "*Journal of Open Source Software*"
 publication_short: ""
 publication_types:
 - "2"
 publishDate: ""
 slides: ""
 summary: ""
-title: 'The R package singcar'
+title: 'singcar: Comparing single cases to small samples in R'
 url_code: ""
 url_dataset: ""
 url_pdf: ""
 url_poster: ""
-url_project: "https://CRAN.R-project.org/package=singcar"
+url_project: "https://jorittmo.rbind.io/project/singcar"
 url_slides: ""
 url_source: ""
 url_video: ""
