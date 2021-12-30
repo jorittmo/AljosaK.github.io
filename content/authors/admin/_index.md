@@ -19,10 +19,12 @@ education:
 email: ""
 interests:
 - Applied Statistics
+- Predictive Modelling
 - Neuropsychology
-- Transparent Research
+- Cognitive Psychology
 - Methodology
 - Meta-Science
+- Visualisation
 - Literature
 name: Jonathan Rittmo
 organizations:
