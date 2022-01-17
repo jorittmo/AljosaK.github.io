@@ -1,5 +1,5 @@
 ---
-title: 'Hands-On Machine Learning in Python - Project 1: Predicting post comment volume'
+title: 'Hands-On ML - Project 1: Predicting post comment volume'
 author: Jonathan Rittmo
 date: '2021-11-24'
 slug: []
@@ -34,10 +34,6 @@ a more theoretical nature than what I am planning to do now. Which also means
 that there is more to document. I see this series of posts as a way to 
 facilitate my learning and to make sure that I actually complete the challenge.
 
-I am not new to machine learning which will serve to my advantage.
-Last time I went cover to cover in a textbook it took me more than a month, but
-this time I hope it will go a lot faster.
-
 -------------------------------
 
 As a statistics MSc I have always been a little bit wary of the hype machine learning
@@ -48,14 +44,6 @@ and therefore made the decision to go on a machine learning journey. I'm going r
 [Hands-On Machine learning with Scikit-learn, Keras and Tensorflow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/) by
 Aurélien Géron and document my learning by, for each chapter, write up a small project as 
 a blog post.
-
-I have some experience with machine learning from the several statistics courses
-I've taken throughout the years, but focus has always been more theoretical -- I
-chose this book because of its focus on the practical. And also because it would
-give me more training in `Python`. Coming mostly from `R` I thought it would
-pose a nice challenge. I love the tidymodels framework (and `R` in general) so
-it will be interesting to see if I can get the same love for model building in
-`Python`.
 
 Since the first chapter mainly is a general introduction this first blog post is
 based on the second chapter in the book called "End-to-End Machine Learning
