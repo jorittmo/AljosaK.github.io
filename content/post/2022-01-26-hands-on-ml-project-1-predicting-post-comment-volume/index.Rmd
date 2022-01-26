@@ -8,7 +8,7 @@ tags: []
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '`r Sys.Date()`'
+#lastmod: '2022-01-26T10:47:09+01:00'
 featured: no
 image:
   caption: ''
@@ -19,8 +19,8 @@ projects: []
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.path = "static")
-Sys.setenv(RETICULATE_PYTHON="C:/Users/jritt/anaconda3/envs/handsOnML/python.exe")
-reticulate::use_condaenv("handsOnML")
+Sys.setenv(RETICULATE_PYTHON="C:/Users/jritt/anaconda3/envs/tf/python.exe")
+reticulate::use_condaenv("tf")
 ```
 
 
@@ -32,7 +32,7 @@ This is my second attempt at fully completing a textbook. My first was
 "Fundamental Neuroscience" by Squire et al., however that text book was of
 a more theoretical nature than what I am planning to do now. Which also means
 that there is more to document. I see this series of posts as a way to 
-facilitate my learning and to make sure that I actually complete the challenge.
+facilitate my learning and to make sure that I actually complete the challenge. 
 
 -------------------------------
 
@@ -44,6 +44,7 @@ and therefore made the decision to go on a machine learning journey. I'm going r
 [Hands-On Machine learning with Scikit-learn, Keras and Tensorflow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/) by
 Aurélien Géron and document my learning by, for each chapter, write up a small project as 
 a blog post.
+
 
 Since the first chapter mainly is a general introduction this first blog post is
 based on the second chapter in the book called "End-to-End Machine Learning
@@ -484,14 +485,5 @@ this was a real project we would probably need to collect more data at this
 point since we cannot try to tweak the model to fit the test data better as that
 would bias its performance. Buuut, since this is not a real project I'll just
 leave it at that.
-
-
-
-
-
-
-
-
-
 
 

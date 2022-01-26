@@ -21,10 +21,10 @@ interests:
 - Applied Statistics
 - Predictive Modelling
 - Neuropsychology
+- Data Visualisation
 - Cognitive Psychology
 - Methodology
 - Meta-Science
-- Visualisation
 - Literature
 name: Jonathan Rittmo
 organizations:
