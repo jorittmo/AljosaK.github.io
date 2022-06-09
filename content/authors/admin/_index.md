@@ -50,16 +50,12 @@ user_groups:
 - Visitors
 ---
 
-Data and Cognitive scientist researching methodological and statistical issues in
-cognitive neuroscience. Interested in how to use data ranging in size from very
-small to very large for understanding human behaviour and experience.
-My posts here serve as a digital garden and it will hopefully thrive and prosper
-along with my own growth. Posts might include theory, code or best practices. 
-Most probably, though, a mixture of the three. If you are really unlucky I'll let
-some of my short stories slip in. I am enthusiastic about the power of predictive
-modelling but also wary of its limitations. Let us responsibly see what the
-future might bring!
-
+Data and Cognitive scientist researching methodological and statistical issues
+in cognitive neuroscience. Interested in how to use data ranging in size from
+very small to very large for understanding human behaviour and experience. I'll
+probably write most about technical stuff but if you are really unlucky I'll let
+some of my short stories slip in. I am enthusiastic about the power of
+predictive modelling but also wary of its limitations.
 
 
 
